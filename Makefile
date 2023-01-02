@@ -58,7 +58,8 @@ DARK_YELLOW =	\033[38;5;143m
 ### OBJECTS
 ################################################################################
 
-SRC_FILES	=
+SRC_FILES	= 	main.c \
+				parsing.c
 
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
