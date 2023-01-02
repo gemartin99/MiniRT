@@ -15,4 +15,22 @@
 
 #include "defines.h"
 
+void parsing(char *file_name);
+
+//INIT
+
+void	init_al(t_mrt *mrt, char *line);
+void	init_cam(t_mrt *mrt, char *line);
+void	init_lp(t_mrt *mrt, char *line);
+void	init_newobj(t_obj *obj, char *line, int id);
+t_sp	*init_sp(char *line);
+t_pl	*init_pl(char *line);
+t_cy	*init_cy(char *line);
+
+//UTILS
+
+void	exit_error(char *str, int n);
+float	ft_atof(char *n);
+t_obj	*ft_last(t_obj **obj);
+
 #endif

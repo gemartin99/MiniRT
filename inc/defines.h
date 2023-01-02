@@ -13,6 +13,7 @@
 # ifndef DEFINES_H
 #define DEFINES_H
 
+# include <mlx.h>
 # include	<stdio.h>
 # include	<unistd.h>
 # include	<stdlib.h>
@@ -75,7 +76,7 @@ typedef struct sp
 	t_point	point;
 	float		dia;
 	t_rgb		rgb;
-}							t_ps;
+}							t_sp;
 
 //Plano:
 //Coordenadas,
@@ -131,13 +132,21 @@ typedef struct s_img
 
 typedef struct s_mrt
 {
-	t_mlx	mlx;
-	t_img	img;
-	t_al	al;
-	t_cam	cam;
-	t_lp	lp;
-	t_obj	obj;
+	t_mlx	*mlx;
+	t_img	*img;
+	t_al	*al;
+	t_cam	*cam;
+	t_lp	*lp;
+	t_obj	*obj;
 }						t_mrt;
+
+# define H 1080
+# define W 1920
+
+# define SP 0
+#	define PL 1
+#	define CY 2
+
 
 #endif
 

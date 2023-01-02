@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smiro <smiro@student.42barcelona>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 15:01:08 by smiro             #+#    #+#             */
-/*   Updated: 2023/01/02 15:01:17 by smiro            ###   ########.fr       */
+/*   Created: 2023/01/02 12:45:54 by smiro             #+#    #+#             */
+/*   Updated: 2023/01/02 12:45:55 by smiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minirt.h"
 #include "../inc/libft/libft.h"
 
-int main(int argc, char **argv)
+void	exit_error(char *str, int n)
 {
-	if (argc != 2)
-		exit(0);
-	parsing(argv[1]);
-	return (0);
+	ft_putendl_fd(str, 2);
+	exit(n);
 }

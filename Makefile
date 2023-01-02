@@ -58,8 +58,9 @@ DARK_YELLOW =	\033[38;5;143m
 ### OBJECTS
 ################################################################################
 
-SRC_FILES	= 	main.c \
-				parsing.c
+SRC_FILES	=	main.c \
+				parsing.c \
+				error_manager.c
 
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
@@ -81,7 +82,7 @@ all:
 $(OBJ_DIR)%.o: %.c Makefile
 			@mkdir -p $(dir $@)
 			@echo "${BLUE} ◎ $(BROWN)Compiling   ${MAGENTA}→   $(CYAN)$< $(DEF_COLOR)"
-			@$(CC) $(CFLAGS) -I$(INC)mlx -c $< -o $@
+			@$(CC) $(CFLAGS) -Imlx -c $< -o $@
 
 $(NAME):	$(OBJ)
 			@$(CC) $(CFLAGS) $(OBJ) $(FT_LNK) $(LINKFLAGS) -o $(NAME)

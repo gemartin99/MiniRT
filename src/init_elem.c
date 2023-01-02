@@ -1,22 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_elem.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smiro <smiro@student.42barcelona>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 15:01:08 by smiro             #+#    #+#             */
-/*   Updated: 2023/01/02 15:01:17 by smiro            ###   ########.fr       */
+/*   Created: 2023/01/02 13:31:34 by smiro             #+#    #+#             */
+/*   Updated: 2023/01/02 13:31:39 by smiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minirt.h"
 #include "../inc/libft/libft.h"
 
-int main(int argc, char **argv)
+t_sp	*init_sp(char *line)
 {
-	if (argc != 2)
-		exit(0);
-	parsing(argv[1]);
-	return (0);
+	t_sp	*temp;
+
+	temp = ft_calloc(sizeof(t_sp), 1);
+	if (!temp)
+		exit_error("Error malloc", 8);
+	return (temp);
+}
+
+t_pl	*init_pl(char *line)
+{
+	t_pl	*temp;
+
+	temp = ft_calloc(sizeof(t_pl), 1);
+	if (!temp)
+		exit_error("Error malloc", 9);
+	return (temp);
+}
+
+t_cy	*init_cy(char *line)
+{
+	t_cy	*temp;
+
+	temp = ft_calloc(sizeof(t_cy), 1);
+	if (!temp)
+		exit_error("Error malloc", 8);
+	return (temp);
 }
