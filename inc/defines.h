@@ -91,8 +91,8 @@ typedef struct s_pl
 //Cilindro:
 //Coordenadas,
 //Vector de dirección 3D normalizado rango [-1,1],
-//Diametro de la esfera,
-//
+//Diametro del cilindro,
+//Altura del cilindro,
 //colores RGB
 typedef struct s_cy
 {
@@ -102,6 +102,17 @@ typedef struct s_cy
 	float		hgt;
 	t_rgb		rgb;
 }							t_cy;
+
+//Objetos:
+//Identificador,
+//puntero al elemento,
+//puntero al siguiente objetos si hay mas
+typedef struct s_obj
+{
+	char	id;
+	void	*elem;
+	struct	s_obj	*next;
+}							t_obj;
 
 typedef struct s_mlx
 {
@@ -122,6 +133,10 @@ typedef struct s_mrt
 {
 	t_mlx	mlx;
 	t_img	img;
+	t_al	al;
+	t_cam	cam;
+	t_lp	lp;
+	t_obj	obj;
 }						t_mrt;
 
 #endif
