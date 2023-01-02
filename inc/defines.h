@@ -1,0 +1,128 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minirt.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: smiro <smiro@student.42barcelona>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/02 11:25:03 by smiro             #+#    #+#             */
+/*   Updated: 2023/01/02 11:25:04 by smiro            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+# ifndef DEFINES_H
+#define DEFINES_H
+
+# include	<stdio.h>
+# include	<unistd.h>
+# include	<stdlib.h>
+# include	<fcntl.h>
+# include	<limits.h> 
+# include <math.h>
+
+typedef struct s_point
+{
+	float	x;
+	float	y;
+	float	z;
+}						t_point;
+
+typedef struct s_rgb
+{
+	int	r;
+	int	g;
+	int	b;
+}						t_rgb;
+
+//Luz de ambiente:
+//Ratio de luz de ambiente rango[0.0,1.0],
+//colores RGB
+typedef struct s_al
+{
+	float	r_min;
+	float	r_max;	
+	t_rgb	rgb;
+}						t_al;
+
+//Camara:
+//Cordenadas del punto de vista,
+//Vecror de orientación normalizado para cada eje rango[-1,1],
+//Campo de vision rango [0,180]
+typedef struct s_cam
+{
+	t_point	pov;
+	t_point	vector;
+	int			fov;
+}						t_cam;
+
+//Luz:
+//Punto de luz,
+//Brillo rango[0.0,1.0],
+//colores RGB
+typedef struct s_lp
+{
+	t_point	lpoint;
+	float		brt;
+	t_rgb		rgb;
+}							t_lp;
+
+//Esfera:
+//Coordenadas,
+//Diametro de la esfera,
+//colores RGB
+typedef struct sp
+{
+	t_point	point;
+	float		dia;
+	t_rgb		rgb;
+}							t_ps;
+
+//Plano:
+//Coordenadas,
+//Vector de dirección 3D normalizado rango [-1,1],
+//colores RGB
+typedef struct s_pl
+{
+	t_point	point;
+	t_point	vector;
+	t_rgb		rgb;
+}							t_pl;
+
+//Cilindro:
+//Coordenadas,
+//Vector de dirección 3D normalizado rango [-1,1],
+//Diametro de la esfera,
+//
+//colores RGB
+typedef struct s_cy
+{
+	t_point	point;
+	t_point	vector;
+	float		dia;
+	float		hgt;
+	t_rgb		rgb;
+}							t_cy;
+
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*win;
+}						t_mlx;
+
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}						t_img;
+
+typedef struct s_mrt
+{
+	t_mlx	mlx;
+	t_img	img;
+}						t_mrt;
+
+#endif
+
