@@ -15,8 +15,13 @@
 
 int main(int argc, char **argv)
 {
+	t_mrt *mrt;
+
+	mrt = ft_calloc(sizeof(t_mrt), 1);
+	if (!mrt)
+		exit_error("Malloc error", 1);
 	if (argc != 2)
 		exit(0);
-	parsing(argv[1]);
+	parsing(argv[1], mrt);
 	return (0);
 }

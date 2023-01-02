@@ -15,14 +15,16 @@
 
 #include "defines.h"
 
-void parsing(char *file_name);
+void parsing(char *file_name, t_mrt *mrt);
+void parsing_la(char **argv, int argc, t_mrt *mrt);
 
 //INIT
 
-void	init_al(t_mrt *mrt, char *line);
-void	init_cam(t_mrt *mrt, char *line);
-void	init_lp(t_mrt *mrt, char *line);
-void	init_newobj(t_obj *obj, char *line, int id);
+void	init_al(t_mrt *mrt, char **line);
+void	init_cam(t_mrt *mrt, char **line);
+void	init_lp(t_mrt *mrt, char **line);
+void	init_newobj(t_obj *obj, char **line, int id);
+t_rgb	*init_rgb(int r, int g, int b);
 t_sp	*init_sp(char *line);
 t_pl	*init_pl(char *line);
 t_cy	*init_cy(char *line);

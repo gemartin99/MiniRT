@@ -40,9 +40,8 @@ typedef struct s_rgb
 //colores RGB
 typedef struct s_al
 {
-	float	r_min;
-	float	r_max;	
-	t_rgb	rgb;
+	float	ratio;
+	t_rgb	*rgb;
 }						t_al;
 
 //Camara:
@@ -51,8 +50,8 @@ typedef struct s_al
 //Campo de vision rango [0,180]
 typedef struct s_cam
 {
-	t_point	pov;
-	t_point	vector;
+	t_point	*pov;
+	t_point	*vector;
 	int			fov;
 }						t_cam;
 
@@ -62,9 +61,9 @@ typedef struct s_cam
 //colores RGB
 typedef struct s_lp
 {
-	t_point	lpoint;
+	t_point	*lpoint;
 	float		brt;
-	t_rgb		rgb;
+	t_rgb		*rgb;
 }							t_lp;
 
 //Esfera:
@@ -73,9 +72,9 @@ typedef struct s_lp
 //colores RGB
 typedef struct sp
 {
-	t_point	point;
+	t_point	*point;
 	float		dia;
-	t_rgb		rgb;
+	t_rgb		*rgb;
 }							t_sp;
 
 //Plano:
@@ -84,9 +83,9 @@ typedef struct sp
 //colores RGB
 typedef struct s_pl
 {
-	t_point	point;
-	t_point	vector;
-	t_rgb		rgb;
+	t_point	*point;
+	t_point	*vector;
+	t_rgb		*rgb;
 }							t_pl;
 
 //Cilindro:
@@ -97,11 +96,11 @@ typedef struct s_pl
 //colores RGB
 typedef struct s_cy
 {
-	t_point	point;
-	t_point	vector;
+	t_point	*point;
+	t_point	*vector;
 	float		dia;
 	float		hgt;
-	t_rgb		rgb;
+	t_rgb		*rgb;
 }							t_cy;
 
 //Objetos:

@@ -13,6 +13,19 @@
 #include "../inc/minirt.h"
 #include "../inc/libft/libft.h"
 
+t_rgb *init_rgb(int r, int g, int b)
+{
+	t_rgb *temp;
+
+	temp = ft_calloc(sizeof(t_rgb), 1);
+	if (!temp)
+		exit_error("Error malloc", 6);
+	temp->r = r;
+	temp->g = g;
+	temp->b = b;
+	return (temp);
+}
+
 float	ft_atof(char *n)
 {
 	int		i;

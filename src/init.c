@@ -1,4 +1,4 @@
-x/* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
@@ -13,17 +13,28 @@ x/* ************************************************************************** *
 #include "../inc/minirt.h"
 #include "../inc/libft/libft.h"
 
-void	init_al(t_mrt *mrt, char *line)
+void	init_al(t_mrt *mrt, char **line)
 {
+	int i;
+
+	i = -1;
+	while (line[++i])
+		;
 	if (mrt->al)
 		exit_error("Error\nThere are more than one Ambient ligth", 1);
 	mrt->al = ft_calloc(sizeof(t_al), 1);
 	if (!mrt->al)
 		exit_error("Error malloc", 2);
+	parsing_la(line, i, mrt);
 }
 
-void	init_cam(t_mrt *mrt, char *line)
+/*void	init_cam(t_mrt *mrt, char **line)
 {
+	int i;
+
+	i = -1;
+	while (line[++i])
+		;
 	if (mrt->cam)
 		exit_error("Error\nnThere are more than oneCamera ligth", 3);
 	mrt->cam = ft_calloc(sizeof(t_cam), 1);
@@ -31,8 +42,13 @@ void	init_cam(t_mrt *mrt, char *line)
 		exit_error("Error malloc", 4);
 }
 
-void	init_lp(t_mrt *mrt, char *line)
+void	init_lp(t_mrt *mrt, char **line)
 {
+	int i;
+
+	i = -1;
+	while (line[++i])
+		;
 	if (mrt->lp)
 		exit_error("Error\nThere are more than one Ligth points", 5);
 	mrt->lp = ft_calloc(sizeof(t_lp), 1);
@@ -40,7 +56,7 @@ void	init_lp(t_mrt *mrt, char *line)
 		exit_error("Error malloc", 6);
 }
 
-void	init_newobj(t_obj *obj, char *line, int id)
+void	init_newobj(t_obj *obj, char **line, int id)
 {
 	t_obj	*temp;
 
@@ -75,4 +91,4 @@ void init_mlx(t_mrt	*mrt)
 		exit_error("Error malloc", 12);
 	mrt->img->addr = mlx_get_data_addr(mrt->img->img, &mrt->img->bits_per_pixel,
 			&mrt->img->line_length, &mrt->img->endian);
-}
+}*/
