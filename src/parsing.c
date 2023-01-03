@@ -18,6 +18,8 @@ int check_wrong_char(char *s)
 	int i;
 
 	i = -1;
+	if (!s)
+		exit_error("ERROR\nCARACTER INCORRECTO", 1);
 	while (s[++i])
 	{
 		if (s[i] != '-' && s[i] != '.' && s[i] != ',' && s[i] != ' ' && ft_isdigit(s[i]) == 0 && s[i] != '\n')
