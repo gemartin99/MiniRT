@@ -6,6 +6,10 @@ static int check_sa(char *s, t_mrt *mrt)
 	char **nums;
 	int i;
 
+	i = -1;
+	while (s[++i])
+		if (s[i] == '.')
+			exit_error("ERROR\nCARACTER INCORRECTO", 1);
 	i = 0;
 	nums = ft_split(s, ',');
 	if (!nums)
@@ -19,6 +23,10 @@ static int check_sa(char *s, t_mrt *mrt)
 	while (nums[++i])
 		free(nums[i]);
 	free(nums);
+	if ((mrt->al->rgb->r < 0 || mrt->al->rgb->r > 255)
+		|| (mrt->al->rgb->g < 0 || mrt->al->rgb->g > 255)
+		|| (mrt->al->rgb->b < 0 || mrt->al->rgb->b > 255))
+		exit_error("ERROR\nPARAMETROS INCORRECTOS", 1);
 	return (0);
 }
 
@@ -26,14 +34,13 @@ static int check_fa(char *s)
 {
 	int i;
 
-	i = 1;
+	i = -1;
 	if (ft_strlen(s) == 1 && ft_isdigit(s[0]) != 0)
 		return (0);
-	if (s[1] != '.' && ft_isdigit(s[0]) == 0)
-		return (-1);
+	check_point(s);
 	while(s[++i])
 	{
-		if (ft_isdigit(s[i]) == 0)
+		if (ft_isdigit(s[i]) == 0 && s[i] != '.')
 			return (-1);
 	}
 	return (0);
