@@ -27,6 +27,8 @@ void parsing_la(char **argv, int argc, t_mrt *mrt);
 void parsing_cam(char **argv, int argc, t_mrt *mrt);
 void parsing_lp(char **argv, int argc, t_mrt *mrt);
 void parsing_sp(char **argv, int argc, t_sp *sp);
+void parsing_pl(char **argv, int argc, t_pl *pl);
+void parsing_cy(char **argv, int argc, t_cy *cy);
 
 //INIT
 

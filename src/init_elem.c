@@ -39,6 +39,7 @@ t_pl	*init_pl(char **line)
 	temp = ft_calloc(sizeof(t_pl), 1);
 	if (!temp)
 		exit_error("Error malloc", 9);
+	parsing_pl(line, i, temp);
 	return (temp);
 }
 
@@ -53,5 +54,6 @@ t_cy	*init_cy(char **line)
 	temp = ft_calloc(sizeof(t_cy), 1);
 	if (!temp)
 		exit_error("Error malloc", 8);
+	parsing_cy(line, i, temp);
 	return (temp);
 }

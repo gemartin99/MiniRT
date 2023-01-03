@@ -69,7 +69,9 @@ SRC_FILES	=	main.c \
 				draw.c \
 				hooks.c \
 				init_elem.c \
-				parsing_sp.c
+				parsing_sp.c \
+				parsing_pl.c \
+				parsing_cy.c
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ 		=	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
