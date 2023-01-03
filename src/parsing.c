@@ -35,11 +35,11 @@ void check_id(char *s, char **res, t_mrt *mrt)
 	if (ft_strncmp(s, "L", 2) == 0)
 		init_lp(mrt, res);
 	if (ft_strncmp(s, "sp", 3) == 0)
-		printf("ENTRO sp\n");
+		init_newobj(mrt->obj, res, SP);
 	if (ft_strncmp(s, "pl", 3) == 0)
-		printf("ENTRO pl\n");
+		init_newobj(mrt->obj, res, PL);
 	if (ft_strncmp(s, "cy", 3) == 0)
-		printf("ENTRO cy\n");
+		init_newobj(mrt->obj, res, CY);
 }
 
 int ft_isspace(char *s)
@@ -80,7 +80,7 @@ void ft_read_file(char *s, t_mrt *mrt)
 
 	fd = open(s, O_RDONLY);
 	if (fd < 0)
-		exit(0);
+		exit_error("ERROR\nNO SE PUEDE ACCEDER AL FICHERO", 1);
 	temp = get_next_line(fd);
 	while (temp)
 	{
@@ -104,7 +104,5 @@ void parsing(char *file_name, t_mrt *mrt)
 {
 	if (ft_check_file_type(file_name) == -1)
 		exit_error("ERROR\nEL FICHERO NO ES .RT\n", 1);
-	if (access(file_name, F_OK) == -1)
-		exit_error("ERROR\nNO SE PUEDE ACCEDER AL FICHERO\n", 1);
 	ft_read_file(file_name, mrt);
 }

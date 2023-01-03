@@ -58,7 +58,7 @@ void	init_lp(t_mrt *mrt, char **line)
 	parsing_lp(line, i, mrt);
 }
 
-/*void	init_newobj(t_obj *obj, char **line, int id)
+void	init_newobj(t_obj *obj, char **line, int id)
 {
 	t_obj	*temp;
 
@@ -71,10 +71,13 @@ void	init_lp(t_mrt *mrt, char **line)
 		temp->elem = init_pl(line);
 	else if (id == CY)
 		temp->elem = init_cy(line);
-	(ft_last(&obj))->next = temp;
+	if (obj)
+		(ft_last(&obj))->next = temp;
+	else
+		obj = temp;
 }
-*/
-void init_mlx(t_mrt	*mrt)
+
+/*void init_mlx(t_mrt	*mrt)
 {
 	mrt->mlx = ft_calloc(sizeof(t_mlx), 1);
 	if (!mrt->mlx)
@@ -94,4 +97,4 @@ void init_mlx(t_mrt	*mrt)
 	mrt->img->addr = mlx_get_data_addr(mrt->img->img, &mrt->img->bits_per_pixel,
 			&mrt->img->line_length, &mrt->img->endian);
 	start(mrt);
-}
+}*/
