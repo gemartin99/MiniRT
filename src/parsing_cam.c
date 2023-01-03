@@ -43,15 +43,16 @@ static void check_sa(char *s, t_mrt *mrt)
 		exit_error("Error malloc", 6);
 	i = -1;
 	while (nums[++i])
+	{
 		check_less(nums[i]);
+		check_point(nums[i]);
+	}
 	if (i != 3)
 		exit_error("ERROR\nPARAMETROS INCORRECTOS", 1);
 	mrt->cam->vector = init_point(ft_atof(nums[0]), ft_atof(nums[1]), ft_atof(nums[2]));
-	if (mrt->cam->vector->x > 1 || mrt->cam->vector->x < -1)
-		exit_error("ERROR\nVECTOR FUERA DE RANGO", 1);
-	if (mrt->cam->vector->y > 1 || mrt->cam->vector->y < -1)
-		exit_error("ERROR\nVECTOR FUERA DE RANGO", 1);
-	if (mrt->cam->vector->z > 1 || mrt->cam->vector->z < -1)
+	if ((mrt->cam->vector->x > 1 || mrt->cam->vector->x < -1)
+		|| (mrt->cam->vector->y > 1 || mrt->cam->vector->y < -1)
+		|| (mrt->cam->vector->z > 1 || mrt->cam->vector->z < -1))
 		exit_error("ERROR\nVECTOR FUERA DE RANGO", 1);
 	i = -1;
 	while (nums[++i])
@@ -69,7 +70,10 @@ static void check_fa(char *s, t_mrt *mrt)
 		exit_error("Error malloc", 6);
 	i = -1;
 	while (nums[++i])
+	{
 		check_less(nums[i]);
+		check_point(nums[i]);
+	}
 	if (i != 3)
 		exit_error("ERROR\nPARAMETROS INCORRECTOS", 1);
 	mrt->cam->pov = init_point(ft_atof(nums[0]), ft_atof(nums[1]), ft_atof(nums[2]));
