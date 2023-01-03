@@ -38,11 +38,12 @@ t_point	*v_normalized(t_point *v)
 	return (temp);
 }
 
-void	v_div(t_point	**v1, t_point **v2)
+t_point	v_div(t_point	*v1, t_point **v2)
 {
-	(*v1)->x += (*v2)->x;
-	(*v1)->y += (*v2)->y;
-	(*v1)->z += (*v2)->z;
+	v1->x += (*v2)->x;
+	v1->y += (*v2)->y;
+	v1->z += (*v2)->z;
+	return (*v1);
 }
 
 float v_dot(t_point **v1, t_point **v2)

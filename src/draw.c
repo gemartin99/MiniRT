@@ -20,6 +20,27 @@ void	pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+void	raytrace(t_mrt *mrt)
+{
+	float	x;
+	float	y;
+	t_intersection i;
+
+	y = 0;
+	while(y < H)
+	{
+		x = 0;
+		while (x < W)
+		{
+			i.ray = makeray(new_perp(mrt->cam), vector2((2 * x) / (float)W - 1, (2 * y) / (float)H - 1));
+			if (obj_int(&i, mrt->obj))
+				pixel_put(mrt->img, x, y, 0x00FFFFFF);
+			x++;
+		}
+		y++;
+	}
+}
+
 void	start(t_mrt *mrt)
 {
 	mlx_put_image_to_window(mrt->mlx->mlx, mrt->mlx->win, mrt->img->img, 0, 0);

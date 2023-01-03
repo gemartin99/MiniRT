@@ -47,15 +47,25 @@ void 	init_mlx(t_mrt	*mrt);
 
 //VECTORS
 
-void	v_normalize(t_point **v);
+void		v_normalize(t_point **v);
 t_point	*v_normalized(t_point *v);
 t_point *v_cross(t_point **v1, t_point **v2);
-float	sqr(float n);
-void	v_div(t_point	**v1, t_point **v2);
-float	v_len(t_point	*v);
-float	v_len2(t_point	*v);
-void	v_sum(t_point **v1, t_point **v2);
-void	v_minus(t_point	**v1, t_point **v2);
+float		v_dot(t_point **v1, t_point **v2);
+float		sqr(float n);
+float		v_len(t_point	*v);
+float		v_len2(t_point	*v);
+t_point	v_sum(t_point *v1, t_point **v2);
+t_point	v_minus(t_point	*v1, t_point **v2);
+t_point	v_mult(t_point	*v1, float n);
+t_point	v_div(t_point	*v1, t_point **v2);
+t_vector	vector2(float x, float y);
+t_ray	makeray(t_perpective pctve, t_vector point);
+t_perpective	new_perp(t_cam *cam);
+int		obj_int(t_intersection *i, t_obj *o);
+int		sp_inter(t_intersection *i, t_obj	*o);
+int		sp_doesinter(t_intersection *i, t_obj	*o);
+int		pl_inter(t_intersection *i, t_obj	*o);
+int		pl_doesinter(t_intersection *i, t_obj	*o);
 
 //UTILS
 

@@ -27,16 +27,26 @@ float	v_len2(t_point	*v)
 	return (sqr(v->x) + sqr(v->y) + sqr(v->z));
 }
 
-void	v_sum(t_point **v1, t_point **v2)
+t_point	v_sum(t_point *v1, t_point **v2)
 {
-	(*v1)->x += (*v2)->x;
-	(*v1)->y += (*v2)->y;
-	(*v1)->z += (*v2)->z;
+	v1->x += (*v2)->x;
+	v1->y += (*v2)->y;
+	v1->z += (*v2)->z;
+	return (*v1);
 }
 
-void	v_minus(t_point	**v1, t_point **v2)
+t_point	v_minus(t_point	*v1, t_point **v2)
 {
-	(*v1)->x += (*v2)->x;
-	(*v1)->y += (*v2)->y;
-	(*v1)->z += (*v2)->z;
+	v1->x -= (*v2)->x;
+	v1->y -= (*v2)->y;
+	v1->z -= (*v2)->z;
+	return (*v1);
+}
+
+t_point	v_mult(t_point	*v1, float n)
+{
+	v1->x *= n;
+	v1->y *= n;
+	v1->z *= n;
+	return (*v1)
 }

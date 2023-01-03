@@ -20,6 +20,7 @@
 # include	<fcntl.h>
 # include	<limits.h> 
 # include <math.h>
+# include "vector.h"
 
 typedef struct s_point
 {
@@ -27,6 +28,8 @@ typedef struct s_point
 	float	y;
 	float	z;
 }						t_point;
+
+typedef t_point t_vector;
 
 typedef struct s_rgb
 {
@@ -112,6 +115,8 @@ typedef struct s_obj
 	char	id;
 	void	*elem;
 	struct	s_obj	*next;
+	int	(*intx)(t_intersection *i, struct s_obj *elem);
+	int	(*doesintx)(t_intersection *i, struct s_obj *elem);
 }							t_obj;
 
 typedef struct s_mlx
