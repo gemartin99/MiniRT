@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smiro <smiro@student.42barcelona>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 15:01:08 by smiro             #+#    #+#             */
-/*   Updated: 2023/01/02 15:01:17 by smiro            ###   ########.fr       */
+/*   Created: 2023/01/02 17:29:48 by smiro             #+#    #+#             */
+/*   Updated: 2023/01/02 17:29:50 by smiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minirt.h"
-#include "../inc/libft/libft.h"
 
-int main(int argc, char **argv)
+
+int	close_program(t_mrt *mrt)
 {
-	t_mrt *mrt;
+	mlx_destroy_window(mrt->mlx->mlx, mrt->mlx->win);
+	exit(0);
+}
 
-	mrt = ft_calloc(sizeof(t_mrt), 1);
-	if (!mrt)
-		exit_error("Malloc error", 1);
-	if (argc != 2)
-		exit(0);
-	parsing(argv[1], mrt);
-	init_mlx(mrt);
+int	key_hook(int key, t_mrt *mrt)
+{
+	if (key == 53)
+		close_program(mrt);
 	return (0);
 }

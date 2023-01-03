@@ -73,7 +73,7 @@ void	init_lp(t_mrt *mrt, char **line)
 		temp->elem = init_cy(line);
 	(ft_last(&obj))->next = temp;
 }
-
+*/
 void init_mlx(t_mrt	*mrt)
 {
 	mrt->mlx = ft_calloc(sizeof(t_mlx), 1);
@@ -82,7 +82,7 @@ void init_mlx(t_mrt	*mrt)
 	mrt->mlx->mlx = mlx_init();
 	if (!mrt->mlx->mlx)
 		exit_error("Error malloc", 10);
-	mrt->mlx->win = mlx_new_image(mrt->mlx->mlx, W, H, "MiniRT");
+	mrt->mlx->win = mlx_new_window(mrt->mlx->mlx, W, H, "MiniRT");
 	if (!mrt->mlx->win)
 		exit_error("Error malloc", 11);
 	mrt->img = ft_calloc(sizeof(t_img), 1);
@@ -93,4 +93,5 @@ void init_mlx(t_mrt	*mrt)
 		exit_error("Error malloc", 12);
 	mrt->img->addr = mlx_get_data_addr(mrt->img->img, &mrt->img->bits_per_pixel,
 			&mrt->img->line_length, &mrt->img->endian);
-}*/
+	start(mrt);
+}
