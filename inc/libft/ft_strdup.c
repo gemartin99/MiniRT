@@ -20,6 +20,6 @@ char	*ft_strdup(const char *s)
 	len = ft_strlen(s);
 	str = (char *)ft_calloc(len + 1, 1);
 	if (!str)
-		return (NULL);
+		exit(255);
 	return (ft_memcpy(str, s, len));
 }

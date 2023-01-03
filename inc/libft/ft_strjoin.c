@@ -20,7 +20,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	total = ft_strlen(s1) + ft_strlen(s2) + 1;
 	str = ft_calloc(total, 1);
 	if (!str)
-		return (NULL);
+		exit(255);
 	ft_strlcat(str, s1, total);
 	ft_strlcat(str, s2, total);
 	return (str);

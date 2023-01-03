@@ -20,7 +20,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	i = 0;
 	str = ft_calloc(ft_strlen(s) + 1, sizeof(char));
 	if (!str)
-		return (NULL);
+		exit(255);
 	while (i < ft_strlen(s))
 	{
 		str[i] = (*f)(i, s[i]);

@@ -17,6 +17,8 @@
 
 void parsing(char *file_name, t_mrt *mrt);
 void parsing_la(char **argv, int argc, t_mrt *mrt);
+void parsing_cam(char **argv, int argc, t_mrt *mrt);
+void parsing_lp(char **argv, int argc, t_mrt *mrt);
 
 //INIT
 
@@ -24,7 +26,9 @@ void	init_al(t_mrt *mrt, char **line);
 void	init_cam(t_mrt *mrt, char **line);
 void	init_lp(t_mrt *mrt, char **line);
 void	init_newobj(t_obj *obj, char **line, int id);
+void	check_less(char *s);
 t_rgb	*init_rgb(int r, int g, int b);
+t_point *init_point(float x, float y, float z);
 t_sp	*init_sp(char *line);
 t_pl	*init_pl(char *line);
 t_cy	*init_cy(char *line);

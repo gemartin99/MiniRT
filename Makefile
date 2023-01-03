@@ -63,7 +63,9 @@ SRC_FILES	=	main.c \
 				parsing_la.c \
 				error_manager.c \
 				utils.c \
-				init.c
+				init.c \
+				parsing_cam.c \
+				parsing_lp.c
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ 		=	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))

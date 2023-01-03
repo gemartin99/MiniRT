@@ -26,6 +26,19 @@ t_rgb *init_rgb(int r, int g, int b)
 	return (temp);
 }
 
+t_point *init_point(float x, float y, float z)
+{
+	t_point *temp;
+
+	temp = ft_calloc(sizeof(t_rgb), 1);
+	if (!temp)
+		exit_error("Error malloc", 6);
+	temp->x = x;
+	temp->y = y;
+	temp->z = z;
+	return (temp);
+}
+
 float	ft_atof(char *n)
 {
 	int		i;
@@ -65,4 +78,16 @@ t_obj	*ft_last(t_obj **obj)
 	while (temp->next)
 		temp = temp->next;
 	return (temp);
+}
+
+void check_less(char *s)
+{
+	int i;
+
+	i = -1;
+	while (s[++i])
+	{
+		if (s[i] == '-' && i != 0)
+			exit_error("ERROR\nCARACTER '-' EN POSICION ERRONEA", 1);
+	}
 }

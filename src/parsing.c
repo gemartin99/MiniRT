@@ -30,10 +30,10 @@ void check_id(char *s, char **res, t_mrt *mrt)
 {
 	if (ft_strncmp(s, "A", 2) == 0)
 		init_al(mrt, res);
-	/*if (ft_strncmp(s, "C", 2) == 0)
-		parsing_c(res, i);
+	if (ft_strncmp(s, "C", 2) == 0)
+		init_cam(mrt, res);
 	if (ft_strncmp(s, "L", 2) == 0)
-		parsing_l(res, i);*/
+		init_lp(mrt, res);
 	if (ft_strncmp(s, "sp", 3) == 0)
 		printf("ENTRO sp\n");
 	if (ft_strncmp(s, "pl", 3) == 0)
@@ -59,15 +59,18 @@ void check_valid_arg(char *s, t_mrt *mrt)
 {
 	char **res;
 	char *temp;
+	int i;
 
+	i = -1;
 	if (!s || ft_isspace(s) == 0)
 		return ;
 	temp = ft_strtrim(s, " ");
 	check_wrong_char(ft_strchr(temp, ' '));
 	res = ft_split(temp, ' ');
+	if (!res)
+		exit_error("Error malloc", 7);
 	check_id(res[0], res, mrt);
 	free(temp);
-	free(res);
 }
 
 void ft_read_file(char *s, t_mrt *mrt)

@@ -23,7 +23,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	{
 		str = ft_calloc(1, 1);
 		if (!str)
-			return (NULL);
+			exit(255);
 		str[0] = '\0';
 		return (str);
 	}
@@ -32,7 +32,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	else
 		str = ft_calloc((len + 1), 1);
 	if (!str)
-		return (NULL);
+		exit(255);
 	while (i < len && s[start])
 		str[i++] = s[start++];
 	str[i] = '\0';

@@ -56,7 +56,7 @@ char	*ft_itoa(int n)
 
 	str = ft_calloc(unidad(n), sizeof(char));
 	if (!str)
-		return (NULL);
+		exit(255);
 	fill(str, n);
 	return (str);
 }

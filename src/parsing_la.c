@@ -12,8 +12,8 @@ static int check_sa(char *s, t_mrt *mrt)
 		exit_error("Error malloc", 5);
 	while (nums[i])
 		i++;
-	if (i > 3)
-		exit_error("ERROR\nMAS ARGUMENTOS DE LOS INDICADOS", 5);
+	if (i != 3)
+		exit_error("ERROR\nPARAMETROS INCORRECTOS", 1);
 	mrt->al->rgb = init_rgb(ft_atoi(nums[0]), ft_atoi(nums[1]), ft_atoi(nums[2]));
 	i = -1;
 	while (nums[++i])
@@ -56,5 +56,4 @@ void parsing_la(char **argv, int argc, t_mrt *mrt)
 	while (argv[++i])
 		free(argv[i]);
 	free(argv);
-	exit (0);
 }

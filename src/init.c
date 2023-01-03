@@ -28,7 +28,7 @@ void	init_al(t_mrt *mrt, char **line)
 	parsing_la(line, i, mrt);
 }
 
-/*void	init_cam(t_mrt *mrt, char **line)
+void	init_cam(t_mrt *mrt, char **line)
 {
 	int i;
 
@@ -40,6 +40,7 @@ void	init_al(t_mrt *mrt, char **line)
 	mrt->cam = ft_calloc(sizeof(t_cam), 1);
 	if (!mrt->cam)
 		exit_error("Error malloc", 4);
+	parsing_cam(line, i, mrt);
 }
 
 void	init_lp(t_mrt *mrt, char **line)
@@ -54,9 +55,10 @@ void	init_lp(t_mrt *mrt, char **line)
 	mrt->lp = ft_calloc(sizeof(t_lp), 1);
 	if (!mrt->lp)
 		exit_error("Error malloc", 6);
+	parsing_lp(line, i, mrt);
 }
 
-void	init_newobj(t_obj *obj, char **line, int id)
+/*void	init_newobj(t_obj *obj, char **line, int id)
 {
 	t_obj	*temp;
 
