@@ -12,6 +12,7 @@
 
 #include "../inc/minirt.h"
 #include "../inc/libft/libft.h"
+#include <mlx.h>
 
 void	exit_error(char *str, int n)
 {

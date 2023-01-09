@@ -23,11 +23,6 @@ int	pl_inter(t_intersection *i, t_obj	*o)
 	dn = v_dot(*i->ray->direction, *plane->vector);
 	if (!dn)
 		return (0);
-	// printf("--------PLANE-------\n");
-	// printf("PALNE:POINT:x=%f y=%f z=%f\n", plane->point->x, plane->point->y, plane->point->z);
-	// printf("PALNE:VECTOR:x=%f y=%f z=%f\n", plane->vector->x, plane->vector->y, plane->vector->z);
-	// printf("ray:x=%f y=%f z=%f\n", i->ray->origin->x, i->ray->origin->y, i->ray->origin->z);
-	// printf("t:%f\n", dn);
 	t = v_dot(v_minus(plane->point, i->ray->origin), *plane->vector) / dn;
 	if (t <= RAY_T_MIN || t >= i->t)
 		return (0);
@@ -67,7 +62,7 @@ int	sp_inter(t_intersection *i, t_obj	*o)
 	ft_memcpy(localray->origin, i->ray->origin, sizeof(t_vector));
 	localray->direction = new_calloc(sizeof(t_vector), 1, 32);
 	ft_memcpy(localray->direction, i->ray->direction, sizeof(t_vector));
-	v_minus(localray->origin, sphere->point);	
+	v_minus(localray->origin, sphere->point);
 	n[0] = v_len2(localray->direction);
 	n[1] = 2 * v_dot(*localray->direction, *localray->origin);
 	n[2] = v_len2(localray->origin) - sqr(sphere->dia / 2);
@@ -82,7 +77,7 @@ int	sp_inter(t_intersection *i, t_obj	*o)
 	if (t[0] > RAY_T_MIN && t[0] < i->t)
 		i->t = t[0];
 	else if (t[1] > RAY_T_MIN && t[1] < i->t)
-		i->t = t[1];	
+		i->t = t[1];
 	else
 		return (0);
 	i->shape = o;

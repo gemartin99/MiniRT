@@ -12,10 +12,11 @@
 
 #include "../inc/minirt.h"
 #include "../inc/libft/libft.h"
+#include <mlx.h>
 
 void	init_al(t_mrt *mrt, char **line)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (line[++i])
@@ -30,7 +31,7 @@ void	init_al(t_mrt *mrt, char **line)
 
 void	init_cam(t_mrt *mrt, char **line)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (line[++i])
@@ -45,7 +46,7 @@ void	init_cam(t_mrt *mrt, char **line)
 
 void	init_lp(t_mrt *mrt, char **line)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (line[++i])
@@ -73,12 +74,12 @@ void	init_newobj(t_obj **obj, char **line, int id)
 	else if (id == PL)
 	{
 		temp->id = id;
-		temp->elem = (void*)init_pl(line);
+		temp->elem = (void *)init_pl(line);
 	}
 	else if (id == CY)
 	{
 		temp->id = id;
-		temp->elem = (void*)init_cy(line);
+		temp->elem = (void *)init_cy(line);
 	}
 	temp->next = NULL;
 	if ((*obj))
@@ -87,7 +88,7 @@ void	init_newobj(t_obj **obj, char **line, int id)
 		(*obj) = temp;
 }
 
-void init_mlx(t_mrt	*mrt)
+void	init_mlx(t_mrt	*mrt)
 {
 	mrt->mlx = ft_calloc(sizeof(t_mlx), 1);
 	if (!mrt->mlx)

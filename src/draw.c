@@ -12,31 +12,33 @@
 
 #include "../inc/minirt.h"
 #include "../inc/libft/libft.h"
+#include <mlx.h>
 
 void	pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
-	
+
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
 
 void	raytrace(t_mrt *mrt)
 {
-	float	x;
-	float	y;
-	t_intersection *i;
-	
+	float			x;
+	float			y;
+	t_intersection	*i;
+
 	y = 0;
 	i = ft_calloc(sizeof(t_intersection), 1);
-	while(y < H)
+	while (y < H)
 	{
 		free(i->ray);
 		x = 0;
 		while (x < W)
 		{
-			i->t = RAY_T_MAX;			
-			i->ray = makeray(new_perp(mrt->cam), vector2((2 * x) / (float)W - 1, (2 * y) / (float)H - 1));
+			i->t = RAY_T_MAX;
+			i->ray = makeray(new_perp(mrt->cam), vector2((2 * x)
+						/ (float)W - 1, (2 * y) / (float)H - 1));
 			if (obj_int(i, &(mrt->obj)))
 				pixel_put(mrt->img, x, y, 0x00FF0000);
 			x++;

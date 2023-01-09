@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../inc/minirt.h"
-
+#include <mlx.h>
 
 int	close_program(t_mrt *mrt)
 {
