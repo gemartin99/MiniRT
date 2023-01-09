@@ -18,3 +18,13 @@ void	exit_error(char *str, int n)
 	ft_putendl_fd(str, 2);
 	exit(n);
 }
+
+void	*new_calloc(size_t n, size_t size, int error)
+{
+	void	*temp;
+
+	temp = ft_calloc(n, size);
+	if (!temp)
+		exit_error("Error malloc", error);
+	return (temp);
+}

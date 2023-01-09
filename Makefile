@@ -27,7 +27,7 @@ FT_LIB		= $(FT)libft.a
 SRC_DIR		= src/
 OBJ_DIR		= obj/
 LINKFLAGS	= -L. -lmlx -framework OpenGL -framework AppKit
-CFLAGS		= -I $(INC) -MMD -Wall -Werror -Wextra
+CFLAGS		= -I $(INC) -MMD -Wall -Werror -Wextra -O3
 RM			= rm -f
 
 ################################################################################
@@ -71,7 +71,12 @@ SRC_FILES	=	main.c \
 				init_elem.c \
 				parsing_sp.c \
 				parsing_pl.c \
-				parsing_cy.c
+				parsing_cy.c \
+				v_perspective.c \
+				v_ray_intersections.c \
+				v_shape_intersections.c \
+				v_vectors.c \
+				v_utils.c
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ 		=	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))

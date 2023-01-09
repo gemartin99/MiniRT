@@ -13,10 +13,10 @@
 #include "../inc/minirt.h"
 #include "../inc/libft/libft.h"
 
-static void	check_fia(char *s, t_cy *cy)
+static void check_fia(char *s, t_cy *cy)
 {
-	char	**nums;
-	int		i;
+	char **nums;
+	int i;
 
 	i = -1;
 	while (s[++i])
@@ -41,26 +41,26 @@ static void	check_fia(char *s, t_cy *cy)
 		exit_error("ERROR\nPARAMETROS INCORRECTOS", 1);
 }
 
-static float	check_ta_foa(char *s)
+static float check_ta_foa(char *s)
 {
-	int	i;
+	int i;
 
 	i = -1;
 	if (ft_strlen(s) == 1 && ft_isdigit(s[0]) != 0)
-		return (ft_atof(s));
+		return(ft_atof(s));
 	check_point(s);
-	while (s[++i])
+	while(s[++i])
 	{
 		if (ft_isdigit(s[i]) == 0 && s[i] != '.')
 			exit_error("ERROR\nPARAMETROS INCORRECTOS", 1);
 	}
-	return (ft_atof(s));
+	return(ft_atof(s));
 }
 
-static void	check_sa(char *s, t_cy *cy)
+static void check_sa(char *s, t_cy *cy)
 {
-	char	**nums;
-	int		i;
+	char **nums;
+	int i;
 
 	nums = ft_split(s, ',');
 	if (!nums)
@@ -73,7 +73,7 @@ static void	check_sa(char *s, t_cy *cy)
 	}
 	if (i != 3)
 		exit_error("ERROR\nPARAMETROS VECTOR INCORRECTOS", 1);
-	cy->vector = i_p(ft_atof(nums[0]), ft_atof(nums[1]), ft_atof(nums[2]));
+	cy->vector = init_point(ft_atof(nums[0]), ft_atof(nums[1]), ft_atof(nums[2]));
 	i = -1;
 	while (nums[++i])
 		free(nums[i]);
@@ -84,10 +84,10 @@ static void	check_sa(char *s, t_cy *cy)
 		exit_error("ERROR\nPARAMETROS VECTOR INCORRECTOS", 1);
 }
 
-static void	check_fa(char *s, t_cy *cy)
+static void check_fa(char *s, t_cy *cy)
 {
-	char	**nums;
-	int		i;
+	char **nums;
+	int i;
 
 	nums = ft_split(s, ',');
 	if (!nums)
@@ -100,14 +100,14 @@ static void	check_fa(char *s, t_cy *cy)
 	}
 	if (i != 3)
 		exit_error("ERROR\nPARAMETROS INCORRECTOS", 1);
-	cy->point = i_p(ft_atof(nums[0]), ft_atof(nums[1]), ft_atof(nums[2]));
+	cy->point = init_point(ft_atof(nums[0]), ft_atof(nums[1]), ft_atof(nums[2]));
 	i = -1;
 	while (nums[++i])
 		free(nums[i]);
 	free(nums);
 }
 
-void	parsing_cy(char **argv, int argc, t_cy *cy)
+void parsing_cy(char **argv, int argc, t_cy *cy)
 {
 	if (argc != 6)
 		exit_error("ERROR\nCY CON MAS ARGUMENTOS DE LOS INDICADOS", 1);

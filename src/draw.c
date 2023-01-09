@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "../inc/minirt.h"
+#include "../inc/libft/libft.h"
 
-/*
 void	pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
@@ -25,17 +25,20 @@ void	raytrace(t_mrt *mrt)
 {
 	float	x;
 	float	y;
-	t_intersection i;
-
+	t_intersection *i;
+	
 	y = 0;
+	i = ft_calloc(sizeof(t_intersection), 1);
 	while(y < H)
 	{
+		free(i->ray);
 		x = 0;
 		while (x < W)
 		{
-			i.ray = makeray(new_perp(mrt->cam), vector2((2 * x) / (float)W - 1, (2 * y) / (float)H - 1));
-			if (obj_int(&i, mrt->obj))
-				pixel_put(mrt->img, x, y, 0x00FFFFFF);
+			i->t = RAY_T_MAX;			
+			i->ray = makeray(new_perp(mrt->cam), vector2((2 * x) / (float)W - 1, (2 * y) / (float)H - 1));
+			if (obj_int(i, &(mrt->obj)))
+				pixel_put(mrt->img, x, y, 0x00FF0000);
 			x++;
 		}
 		y++;
@@ -44,9 +47,9 @@ void	raytrace(t_mrt *mrt)
 
 void	start(t_mrt *mrt)
 {
+	raytrace(mrt);
 	mlx_put_image_to_window(mrt->mlx->mlx, mrt->mlx->win, mrt->img->img, 0, 0);
 	mlx_hook(mrt->mlx->win, 17, 0, close_program, mrt);
 	mlx_hook(mrt->mlx->win, 2, 0, key_hook, mrt);
 	mlx_loop(mrt->mlx->mlx);
 }
-*/

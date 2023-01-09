@@ -16,7 +16,7 @@
 t_sp	*init_sp(char **line)
 {
 	t_sp	*temp;
-	int		i;
+	int i;
 
 	i = -1;
 	while (line[++i])
@@ -31,7 +31,7 @@ t_sp	*init_sp(char **line)
 t_pl	*init_pl(char **line)
 {
 	t_pl	*temp;
-	int		i;
+	int i;
 
 	i = -1;
 	while (line[++i])
@@ -46,7 +46,7 @@ t_pl	*init_pl(char **line)
 t_cy	*init_cy(char **line)
 {
 	t_cy	*temp;
-	int		i;
+	int i;
 
 	i = -1;
 	while (line[++i])

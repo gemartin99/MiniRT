@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINES_H
-# define DEFINES_H
+# ifndef DEFINES_H
+#define DEFINES_H
 
 # include <mlx.h>
 # include	<stdio.h>
@@ -20,7 +20,6 @@
 # include	<fcntl.h>
 # include	<limits.h> 
 # include <math.h>
-# include "vector.h"
 
 typedef struct s_point
 {
@@ -29,7 +28,7 @@ typedef struct s_point
 	float	z;
 }						t_point;
 
-typedef t_point	t_vector;
+typedef t_point t_vector;
 
 typedef struct s_rgb
 {
@@ -55,7 +54,7 @@ typedef struct s_cam
 {
 	t_point	*pov;
 	t_point	*vector;
-	int		fov;
+	int			fov;
 }						t_cam;
 
 //Luz:
@@ -65,8 +64,8 @@ typedef struct s_cam
 typedef struct s_lp
 {
 	t_point	*lpoint;
-	float	brt;
-	t_rgb	*rgb;
+	float		brt;
+	t_rgb		*rgb;
 }							t_lp;
 
 //Esfera:
@@ -76,8 +75,8 @@ typedef struct s_lp
 typedef struct sp
 {
 	t_point	*point;
-	float	dia;
-	t_rgb	*rgb;
+	float		dia;
+	t_rgb		*rgb;
 }							t_sp;
 
 //Plano:
@@ -88,7 +87,7 @@ typedef struct s_pl
 {
 	t_point	*point;
 	t_point	*vector;
-	t_rgb	*rgb;
+	t_rgb		*rgb;
 }							t_pl;
 
 //Cilindro:
@@ -101,10 +100,12 @@ typedef struct s_cy
 {
 	t_point	*point;
 	t_point	*vector;
-	float	dia;
-	float	hgt;
-	t_rgb	*rgb;
+	float		dia;
+	float		hgt;
+	t_rgb		*rgb;
 }							t_cy;
+
+typedef struct s_intersection t_intersection;
 
 //Objetos:
 //Identificador,
@@ -112,11 +113,11 @@ typedef struct s_cy
 //puntero al siguiente objetos si hay mas
 typedef struct s_obj
 {
-	char			id;
-	void			*elem;
-	struct s_obj	*next;
-	int				(*intx)(t_intersection *i, struct s_obj *elem);
-	int				(*doesintx)(t_intersection *i, struct s_obj *elem);
+	char	id;
+	void	*elem;
+	struct	s_obj	*next;
+	int	(*intx)(t_intersection *i, struct s_obj *elem);
+	int	(*doesintx)(t_intersection *i, struct s_obj *elem);
 }							t_obj;
 
 typedef struct s_mlx
@@ -148,7 +149,9 @@ typedef struct s_mrt
 # define W 1920
 
 # define SP 0
-# define PL 1
-# define CY 2
+#	define PL 1
+#	define CY 2
+
 
 #endif
+

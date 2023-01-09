@@ -13,23 +13,22 @@
 #include "../inc/minirt.h"
 #include "../inc/libft/libft.h"
 
-int	check_wrong_char(char *s)
+int check_wrong_char(char *s)
 {
-	int	i;
+	int i;
 
 	i = -1;
 	if (!s)
 		exit_error("ERROR\nCARACTER INCORRECTO", 1);
 	while (s[++i])
 	{
-		if (s[i] != '-' && s[i] != '.' && s[i] != ','
-			&& s[i] != ' ' && ft_isdigit(s[i]) == 0 && s[i] != '\n')
+		if (s[i] != '-' && s[i] != '.' && s[i] != ',' && s[i] != ' ' && ft_isdigit(s[i]) == 0 && s[i] != '\n')
 			exit_error("CARACTER INCORRECTO", 1);
 	}
 	return (0);
 }
 
-void	check_id(char *s, char **res, t_mrt *mrt)
+void check_id(char *s, char **res, t_mrt *mrt)
 {
 	if (ft_strncmp(s, "A", 2) == 0)
 		init_al(mrt, res);
@@ -38,32 +37,31 @@ void	check_id(char *s, char **res, t_mrt *mrt)
 	if (ft_strncmp(s, "L", 2) == 0)
 		init_lp(mrt, res);
 	if (ft_strncmp(s, "sp", 3) == 0)
-		init_newobj(mrt->obj, res, SP);
+		init_newobj(&(mrt->obj), res, SP);
 	if (ft_strncmp(s, "pl", 3) == 0)
-		init_newobj(mrt->obj, res, PL);
+		init_newobj(&(mrt->obj), res, PL);
 	if (ft_strncmp(s, "cy", 3) == 0)
-		init_newobj(mrt->obj, res, CY);
+		init_newobj(&(mrt->obj), res, CY);
 }
 
-int	ft_isspace(char *s)
+int ft_isspace(char *s)
 {
-	int	i;
+	int i;
 
 	i = -1;
-	while (s[++i])
+	while(s[++i])
 	{
-		if (s[i] != ' ' && s[i] != '\t' && s[i] != '\n'
-			&& s[i] != '\v' && s[i] != '\f' && s[i] != '\r')
+		if (s[i] != ' ' && s[i] != '\t' && s[i] != '\n' && s[i] != '\v' && s[i] != '\f' && s[i] != '\r')
 			return (1);
 	}
 	return (0);
 }
 
-void	check_valid_arg(char *s, t_mrt *mrt)
+void check_valid_arg(char *s, t_mrt *mrt)
 {
-	char	**res;
-	char	*temp;
-	int		i;
+	char **res;
+	char *temp;
+	int i;
 
 	i = -1;
 	if (!s || ft_isspace(s) == 0)
@@ -77,10 +75,10 @@ void	check_valid_arg(char *s, t_mrt *mrt)
 	free(temp);
 }
 
-void	ft_read_file(char *s, t_mrt *mrt)
+void ft_read_file(char *s, t_mrt *mrt)
 {
-	char	*temp;
-	int		fd;
+	char *temp;
+	int fd;
 
 	fd = open(s, O_RDONLY);
 	if (fd < 0)
@@ -94,9 +92,9 @@ void	ft_read_file(char *s, t_mrt *mrt)
 	}
 }
 
-int	ft_check_file_type(char *s)
+int ft_check_file_type(char *s)
 {
-	int	i;
+	int i;
 
 	i = ft_strlen(s);
 	if (s[i - 1] == 't' && s[i - 2] == 'r' && s[i - 3] == '.')
@@ -104,7 +102,7 @@ int	ft_check_file_type(char *s)
 	return (-1);
 }
 
-void	parsing(char *file_name, t_mrt *mrt)
+void parsing(char *file_name, t_mrt *mrt)
 {
 	if (ft_check_file_type(file_name) == -1)
 		exit_error("ERROR\nEL FICHERO NO ES .RT\n", 1);

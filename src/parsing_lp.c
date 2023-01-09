@@ -13,73 +13,74 @@
 #include "../inc/minirt.h"
 #include "../inc/libft/libft.h"
 
-static void	check_ta(char *s, t_mrt *mrt)
+static void check_ta(char *s, t_mrt *mrt)
 {
-	char	**n;
-	int		i;
+	char **nums;
+	int i;
 
 	i = -1;
 	while (s[++i])
 		if (s[i] == '.')
 			exit_error("ERROR\nCARACTER INCORRECTO", 1);
 	i = 0;
-	n = ft_split(s, ',');
-	if (!n)
+	nums = ft_split(s, ',');
+	if (!nums)
 		exit_error("Error malloc", 5);
-	while (n[i])
+	while (nums[i])
 		i++;
 	if (i != 3)
 		exit_error("ERROR\nPARAMETROS INCORRECTOS", 1);
-	mrt->lp->rgb = init_rgb(ft_atoi(n[0]), ft_atoi(n[1]), ft_atoi(n[2]));
+	mrt->lp->rgb = init_rgb(ft_atoi(nums[0]), ft_atoi(nums[1]), ft_atoi(nums[2]));
 	i = -1;
-	while (n[++i])
-		free(n[i]);
-	free(n);
+	while (nums[++i])
+		free(nums[i]);
+	free(nums);
 	if ((mrt->lp->rgb->r < 0 || mrt->lp->rgb->r > 255)
 		|| (mrt->lp->rgb->g < 0 || mrt->lp->rgb->g > 255)
 		|| (mrt->lp->rgb->b < 0 || mrt->lp->rgb->b > 255))
 		exit_error("ERROR\nPARAMETROS INCORRECTOS", 1);
 }
 
-static void	check_sa(char *s)
+static void check_sa(char *s)
 {
-	int	i;
+	int i;
 
 	i = -1;
 	if (ft_strlen(s) == 1 && ft_isdigit(s[0]) != 0)
 		return ;
 	check_point(s);
-	while (s[++i])
+	while(s[++i])
 	{
 		if (ft_isdigit(s[i]) == 0 && s[i] != '.')
 			exit_error("ERROR\nPARAMETROS INCORRECTOS", 1);
 	}
 }
 
-static void	check_fa(char *s, t_mrt *mrt)
+static void check_fa(char *s, t_mrt *mrt)
 {
-	char	**n;
-	int		i;
+	char **nums;
+	int i;
 
-	n = ft_split(s, ',');
-	if (!n)
+	nums = ft_split(s, ',');
+	if (!nums)
 		exit_error("Error malloc", 6);
 	i = -1;
-	while (n[++i])
+	while (nums[++i])
 	{
-		check_less(n[i]);
-		check_point(n[i]);
+		check_less(nums[i]);
+		check_point(nums[i]);
 	}
 	if (i != 3)
 		exit_error("ERROR\nPARAMETROS INCORRECTOS", 1);
-	mrt->lp->lpoint = init_point(ft_atof(n[0]), ft_atof(n[1]), ft_atof(n[2]));
+	mrt->lp->lpoint = init_point(ft_atof(nums[0]), ft_atof(nums[1]), ft_atof(nums[2]));
 	i = -1;
-	while (n[++i])
-		free(n[i]);
-	free(n);
+	while (nums[++i])
+		free(nums[i]);
+	free(nums);
+	//printf("x%f y%f z%f\n", mrt->lp->lpoint->x, mrt->lp->lpoint->y, mrt->lp->lpoint->z);
 }
 
-void	parsing_lp(char **argv, int argc, t_mrt *mrt)
+void parsing_lp(char **argv, int argc, t_mrt *mrt)
 {
 	if (argc != 4)
 		exit_error("ERROR\nC CON MAS ARGUMENTOS DE LOS INDICADOS", 1);

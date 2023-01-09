@@ -15,7 +15,7 @@
 
 void	init_al(t_mrt *mrt, char **line)
 {
-	int	i;
+	int i;
 
 	i = -1;
 	while (line[++i])
@@ -30,7 +30,7 @@ void	init_al(t_mrt *mrt, char **line)
 
 void	init_cam(t_mrt *mrt, char **line)
 {
-	int	i;
+	int i;
 
 	i = -1;
 	while (line[++i])
@@ -45,7 +45,7 @@ void	init_cam(t_mrt *mrt, char **line)
 
 void	init_lp(t_mrt *mrt, char **line)
 {
-	int	i;
+	int i;
 
 	i = -1;
 	while (line[++i])
@@ -58,7 +58,7 @@ void	init_lp(t_mrt *mrt, char **line)
 	parsing_lp(line, i, mrt);
 }
 
-void	init_newobj(t_obj *obj, char **line, int id)
+void	init_newobj(t_obj **obj, char **line, int id)
 {
 	t_obj	*temp;
 
@@ -66,18 +66,28 @@ void	init_newobj(t_obj *obj, char **line, int id)
 	if (!temp)
 		exit_error("Error malloc", 7);
 	if (id == SP)
+	{
+		temp->id = id;
 		temp->elem = init_sp(line);
+	}
 	else if (id == PL)
-		temp->elem = init_pl(line);
+	{
+		temp->id = id;
+		temp->elem = (void*)init_pl(line);
+	}
 	else if (id == CY)
-		temp->elem = init_cy(line);
-	if (obj)
-		(ft_last(&obj))->next = temp;
+	{
+		temp->id = id;
+		temp->elem = (void*)init_cy(line);
+	}
+	temp->next = NULL;
+	if ((*obj))
+		(ft_last(obj))->next = temp;
 	else
-		obj = temp;
+		(*obj) = temp;
 }
 
-/*void init_mlx(t_mrt	*mrt)
+void init_mlx(t_mrt	*mrt)
 {
 	mrt->mlx = ft_calloc(sizeof(t_mlx), 1);
 	if (!mrt->mlx)
@@ -96,5 +106,6 @@ void	init_newobj(t_obj *obj, char **line, int id)
 		exit_error("Error malloc", 12);
 	mrt->img->addr = mlx_get_data_addr(mrt->img->img, &mrt->img->bits_per_pixel,
 			&mrt->img->line_length, &mrt->img->endian);
+	put_func(&(mrt->obj));
 	start(mrt);
-}*/
+}
