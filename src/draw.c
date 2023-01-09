@@ -12,6 +12,7 @@
 
 #include "../inc/minirt.h"
 
+/*
 void	pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
@@ -48,3 +49,4 @@ void	start(t_mrt *mrt)
 	mlx_hook(mrt->mlx->win, 2, 0, key_hook, mrt);
 	mlx_loop(mrt->mlx->mlx);
 }
+*/

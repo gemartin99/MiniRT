@@ -46,7 +46,7 @@ t_cy	*init_cy(char **line);
 void 	init_mlx(t_mrt	*mrt);
 
 //VECTORS
-
+/*
 void		v_normalize(t_point **v);
 t_point	*v_normalized(t_point *v);
 t_point *v_cross(t_point **v1, t_point **v2);
@@ -66,6 +66,7 @@ int		sp_inter(t_intersection *i, t_obj	*o);
 int		sp_doesinter(t_intersection *i, t_obj	*o);
 int		pl_inter(t_intersection *i, t_obj	*o);
 int		pl_doesinter(t_intersection *i, t_obj	*o);
+*/
 
 //UTILS
 

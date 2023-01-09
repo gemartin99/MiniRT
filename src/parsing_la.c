@@ -41,7 +41,7 @@ static int check_fa(char *s)
 	while(s[++i])
 	{
 		if (ft_isdigit(s[i]) == 0 && s[i] != '.')
-			return (-1);
+			exit_error("ERROR\nCARACTER INCORRECTO", 1);
 	}
 	return (0);
 }
@@ -52,14 +52,14 @@ void parsing_la(char **argv, int argc, t_mrt *mrt)
 
 	i = -1;
 	if (argc != 3)
-		exit_error("ERROR\nA CON MAS ARGUMENTOS DE LOS INDICADOS\n", 1);
+		exit_error("ERROR\nA CON MAS ARGUMENTOS DE LOS INDICADOS", 1);
 	if (ft_strlen(argv[1]) > 5 || check_fa(argv[1]) == -1)
-		exit_error("ERROR\nARGUMENTO CON DEMASIADOS CARACTERES\n", 1);
+		exit_error("ERROR\nARGUMENTO CON DEMASIADOS CARACTERES", 1);
 	mrt->al->ratio = ft_atof(argv[1]);
 	if (mrt->al->ratio > 1 || mrt->al->ratio < 0)
-		exit_error("ERROR\nPARAMETRO INCORRECTO AL\n", 1);
+		exit_error("ERROR\nPARAMETRO INCORRECTO AL", 1);
 	if (ft_strlen(argv[2]) > 12 || check_sa(argv[2], mrt) == -1)
-		exit_error("ERROR\nARGUMENTO CON DEMASIADOS CARACTERES\n", 1);
+		exit_error("ERROR\nARGUMENTO CON DEMASIADOS CARACTERES", 1);
 	while (argv[++i])
 		free(argv[i]);
 	free(argv);
