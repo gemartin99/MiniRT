@@ -13,10 +13,10 @@
 #include "../inc/minirt.h"
 #include "../inc/libft/libft.h"
 
-static void check_ta(char *s, t_mrt *mrt)
+static void	check_ta(char *s, t_mrt *mrt)
 {
-	int i;
-	char *temp;
+	int		i;
+	char	*temp;
 
 	i = -1;
 	temp = ft_strtrim(s, "\n");
@@ -31,39 +31,39 @@ static void check_ta(char *s, t_mrt *mrt)
 		exit_error("ERROR\nPARAMETRO FUERA DE RANGO", 1);
 }
 
-static void check_sa(char *s, t_mrt *mrt)
+static void	check_sa(char *s, t_mrt *mrt)
 {
-	char **nums;
-	int i;
-		
+	char	**n;
+	int		i;
+
 	if (ft_strlen(s) > 17)
 		exit_error("ERROR\nC CON MAS PARAMETROS DE LOS INDICADOS", 1);
-	nums = ft_split(s, ',');
-	if (!nums)
+	n = ft_split(s, ',');
+	if (!n)
 		exit_error("Error malloc", 6);
 	i = -1;
-	while (nums[++i])
+	while (n[++i])
 	{
-		check_less(nums[i]);
-		check_point(nums[i]);
+		check_less(n[i]);
+		check_point(n[i]);
 	}
 	if (i != 3)
 		exit_error("ERROR\nPARAMETROS INCORRECTOS", 1);
-	mrt->cam->vector = init_point(ft_atof(nums[0]), ft_atof(nums[1]), ft_atof(nums[2]));
+	mrt->cam->vector = i_p(ft_atof(n[0]), ft_atof(n[1]), ft_atof(n[2]));
 	if ((mrt->cam->vector->x > 1 || mrt->cam->vector->x < -1)
 		|| (mrt->cam->vector->y > 1 || mrt->cam->vector->y < -1)
 		|| (mrt->cam->vector->z > 1 || mrt->cam->vector->z < -1))
 		exit_error("ERROR\nVECTOR FUERA DE RANGO", 1);
 	i = -1;
-	while (nums[++i])
-		free(nums[i]);
-	free(nums);
+	while (n[++i])
+		free(n[i]);
+	free(n);
 }
 
-static void check_fa(char *s, t_mrt *mrt)
+static void	check_fa(char *s, t_mrt *mrt)
 {
-	char **nums;
-	int i;
+	char	**nums;
+	int		i;
 
 	nums = ft_split(s, ',');
 	if (!nums)
@@ -76,14 +76,14 @@ static void check_fa(char *s, t_mrt *mrt)
 	}
 	if (i != 3)
 		exit_error("ERROR\nPARAMETROS INCORRECTOS", 1);
-	mrt->cam->pov = init_point(ft_atof(nums[0]), ft_atof(nums[1]), ft_atof(nums[2]));
+	mrt->cam->pov = i_p(ft_atof(nums[0]), ft_atof(nums[1]), ft_atof(nums[2]));
 	i = -1;
 	while (nums[++i])
 		free(nums[i]);
 	free(nums);
 }
 
-void parsing_cam(char **argv, int argc, t_mrt *mrt)
+void	parsing_cam(char **argv, int argc, t_mrt *mrt)
 {
 	if (argc != 4)
 		exit_error("ERROR\nL CON MAS ARGUMENTOS DE LOS INDICADOS", 1);

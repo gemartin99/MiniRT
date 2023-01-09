@@ -1,28 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: smiro <smiro@student.42barcelona>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/02 12:43:42 by smiro             #+#    #+#             */
+/*   Updated: 2023/01/02 12:43:45 by smiro            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "minirt.h"
 #include "../inc/libft/libft.h"
 
-static int check_sa(char *s, t_mrt *mrt)
+static int	check_sa(char *s, t_mrt *mrt)
 {
-	char **nums;
-	int i;
+	char	**n;
+	int		i;
 
 	i = -1;
 	while (s[++i])
 		if (s[i] == '.')
 			exit_error("ERROR\nCARACTER INCORRECTO", 1);
 	i = 0;
-	nums = ft_split(s, ',');
-	if (!nums)
+	n = ft_split(s, ',');
+	if (!n)
 		exit_error("Error malloc", 5);
-	while (nums[i])
+	while (n[i])
 		i++;
 	if (i != 3)
 		exit_error("ERROR\nPARAMETROS INCORRECTOS", 1);
-	mrt->al->rgb = init_rgb(ft_atoi(nums[0]), ft_atoi(nums[1]), ft_atoi(nums[2]));
+	mrt->al->rgb = init_rgb(ft_atoi(n[0]), ft_atoi(n[1]), ft_atoi(n[2]));
 	i = -1;
-	while (nums[++i])
-		free(nums[i]);
-	free(nums);
+	while (n[++i])
+		free(n[i]);
+	free(n);
 	if ((mrt->al->rgb->r < 0 || mrt->al->rgb->r > 255)
 		|| (mrt->al->rgb->g < 0 || mrt->al->rgb->g > 255)
 		|| (mrt->al->rgb->b < 0 || mrt->al->rgb->b > 255))
@@ -30,15 +41,15 @@ static int check_sa(char *s, t_mrt *mrt)
 	return (0);
 }
 
-static int check_fa(char *s)
+static int	check_fa(char *s)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	if (ft_strlen(s) == 1 && ft_isdigit(s[0]) != 0)
 		return (0);
 	check_point(s);
-	while(s[++i])
+	while (s[++i])
 	{
 		if (ft_isdigit(s[i]) == 0 && s[i] != '.')
 			exit_error("ERROR\nCARACTER INCORRECTO", 1);
@@ -46,9 +57,9 @@ static int check_fa(char *s)
 	return (0);
 }
 
-void parsing_la(char **argv, int argc, t_mrt *mrt)
+void	parsing_la(char **argv, int argc, t_mrt *mrt)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	if (argc != 3)

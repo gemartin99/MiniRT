@@ -14,8 +14,8 @@
 
 t_perpective	new_perp(t_cam *cam)
 {
-	t_perpective new;
-	t_vector	v;
+	t_perpective	new;
+	t_vector		v;
 
 	v = *cam->vector;
 	v = v_minus(&v, &cam->pov);
@@ -23,18 +23,18 @@ t_perpective	new_perp(t_cam *cam)
 	new.rigth = v_cross(&new.forward, vector2(0, 0));
 	new.up = v_cross(&new.rigth, new.forward);
 	new.h = tan(cam->fov);
-	new.w = new.h * ((float)W/(float)H);
+	new.w = new.h * ((float)W / (float)H);
 	return (new);
 }
 
 t_ray	makeray(t_perpective pctve, t_vector point)
 {
-	t_ray	new;
+	t_ray		new;
 	t_vector	direction;
 
-	direction = v_sum(v_sum(pctve.forward, 
-				v_mult(pctve.rigth, pctve.w * point.x)), 
-				v_mult(pctve.up, pctve.h * point.y));
+	direction = v_sum(v_sum(pctve.forward,
+				v_mult(pctve.rigth, pctve.w * point.x)),
+			v_mult(pctve.up, pctve.h * point.y));
 	new.direction = direction;
 	new.origin = pctve.origin;
 	new.t_max = RAY_T_MAX;

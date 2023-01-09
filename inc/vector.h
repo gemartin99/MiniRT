@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef VECTOR_H
-#define VECTOR_H
+#ifndef VECTOR_H
+# define VECTOR_H
 
-# include "minirt.h"
+#include "minirt.h"
 
 # define RAY_T_MAX 1.0e30
 # define RAY_T_MIN 0.0001

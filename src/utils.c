@@ -13,9 +13,9 @@
 #include "../inc/minirt.h"
 #include "../inc/libft/libft.h"
 
-t_rgb *init_rgb(int r, int g, int b)
+t_rgb	*init_rgb(int r, int g, int b)
 {
-	t_rgb *temp;
+	t_rgb	*temp;
 
 	temp = ft_calloc(sizeof(t_rgb), 1);
 	if (!temp)
@@ -26,9 +26,9 @@ t_rgb *init_rgb(int r, int g, int b)
 	return (temp);
 }
 
-t_point *init_point(float x, float y, float z)
+t_point	*init_point(float x, float y, float z)
 {
-	t_point *temp;
+	t_point	*temp;
 
 	temp = ft_calloc(sizeof(t_rgb), 1);
 	if (!temp)
@@ -45,16 +45,16 @@ float	ft_atof(char *n)
 	int		j;
 	float	nb;
 	int		m;
-	
+
 	i = 0;
 	nb = 0;
 	m = 1;
 	j = 1;
 	if (n[i] == '-')
-		{
-			m = -m;
-			i++;
-		}
+	{
+		m = -m;
+		i++;
+	}
 	while (n[i])
 	{
 		if (j > 1 && n[i - 1] != '.')
@@ -80,11 +80,11 @@ t_obj	*ft_last(t_obj **obj)
 	return (temp);
 }
 
-void check_point(char *s)
+void	check_point(char *s)
 {
-	int i;
-	int j;
-	int c;
+	int	i;
+	int	j;
+	int	c;
 
 	i = -1;
 	j = 0;
@@ -94,14 +94,13 @@ void check_point(char *s)
 		if (s[i] == '.')
 			j++;
 	}
-	//if (j > 1)
-	//	exit_error("ERROR\nCARACTER '.' EN POSICION ERRONEA", 1);
 	i = -1;
 	while (s[++i])
 	{
 		if ((i == 0 && s[i] == '.') || (j > 1))
 			exit_error("ERROR\nCARACTER '.' EN POSICION ERRONEA", 1);
-		else if (s[i] == '.' && (ft_isdigit(s[i - 1]) != 1 || ft_isdigit(s[i + 1]) != 1))
+		else if (s[i] == '.' && (ft_isdigit(s[i - 1]) != 1
+				|| ft_isdigit(s[i + 1]) != 1))
 			exit_error("ERROR\nCARACTER '.' EN POSICION ERRONEA", 1);
 		else if (s[i] == '.')
 			c = i + 4;
@@ -110,9 +109,9 @@ void check_point(char *s)
 	}
 }
 
-void check_less(char *s)
+void	check_less(char *s)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (s[++i])

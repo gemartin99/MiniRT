@@ -14,7 +14,7 @@
 
 t_point	r_calculate(t_ray ray, float t)
 {
-	return (v_sum(ray.origin, v_mult(ray.direction,  t)));
+	return (v_sum(ray.origin, v_mult(ray.direction, t)));
 }
 
 int	i_intersected(t_intersection i)

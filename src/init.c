@@ -15,7 +15,7 @@
 
 void	init_al(t_mrt *mrt, char **line)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (line[++i])
@@ -30,7 +30,7 @@ void	init_al(t_mrt *mrt, char **line)
 
 void	init_cam(t_mrt *mrt, char **line)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (line[++i])
@@ -45,7 +45,7 @@ void	init_cam(t_mrt *mrt, char **line)
 
 void	init_lp(t_mrt *mrt, char **line)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (line[++i])

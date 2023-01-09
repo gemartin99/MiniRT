@@ -10,25 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef MINIRT_H
-#define MINIRT_H
+#ifndef MINIRT_H
+# define MINIRT_H
 
-#include "defines.h"
+# include "defines.h"
 
 void	start(t_mrt *mrt);
-
-int	close_program(t_mrt *mrt);
-int	key_hook(int key, t_mrt *mrt);
+int		close_program(t_mrt *mrt);
+int		key_hook(int key, t_mrt *mrt);
 
 //PARSING
 
-void parsing(char *file_name, t_mrt *mrt);
-void parsing_la(char **argv, int argc, t_mrt *mrt);
-void parsing_cam(char **argv, int argc, t_mrt *mrt);
-void parsing_lp(char **argv, int argc, t_mrt *mrt);
-void parsing_sp(char **argv, int argc, t_sp *sp);
-void parsing_pl(char **argv, int argc, t_pl *pl);
-void parsing_cy(char **argv, int argc, t_cy *cy);
+void	parsing(char *file_name, t_mrt *mrt);
+void	parsing_la(char **argv, int argc, t_mrt *mrt);
+void	parsing_cam(char **argv, int argc, t_mrt *mrt);
+void	parsing_lp(char **argv, int argc, t_mrt *mrt);
+void	parsing_sp(char **argv, int argc, t_sp *sp);
+void	parsing_pl(char **argv, int argc, t_pl *pl);
+void	parsing_cy(char **argv, int argc, t_cy *cy);
 
 //INIT
 
@@ -39,13 +38,12 @@ void	init_newobj(t_obj *obj, char **line, int id);
 void	check_less(char *s);
 void	check_point(char *s);
 t_rgb	*init_rgb(int r, int g, int b);
-t_point *init_point(float x, float y, float z);
+t_point	*init_point(float x, float y, float z);
 t_sp	*init_sp(char **line);
 t_pl	*init_pl(char **line);
 t_cy	*init_cy(char **line);
-void 	init_mlx(t_mrt	*mrt);
+void	init_mlx(t_mrt	*mrt);
 
-//VECTORS
 /*
 void		v_normalize(t_point **v);
 t_point	*v_normalized(t_point *v);

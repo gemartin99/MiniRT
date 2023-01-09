@@ -12,7 +12,6 @@
 
 #include "../inc/minirt.h"
 
-
 int	close_program(t_mrt *mrt)
 {
 	mlx_destroy_window(mrt->mlx->mlx, mrt->mlx->win);

@@ -13,9 +13,9 @@
 #include "../inc/minirt.h"
 #include "../inc/libft/libft.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_mrt *mrt;
+	t_mrt	*mrt;
 
 	mrt = ft_calloc(sizeof(t_mrt), 1);
 	if (!mrt)
