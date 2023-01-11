@@ -68,6 +68,18 @@ float	ft_atof(char *n)
 	return (m * nb / j);
 }
 
+t_lp	*ft_last2(t_lp **lp)
+{
+	t_lp	*temp;
+
+	if (!*lp)
+		return (*lp);
+	temp = *lp;
+	while (temp->next)
+		temp = temp->next;
+	return (temp);
+}
+
 t_obj	*ft_last(t_obj **obj)
 {
 	t_obj	*temp;

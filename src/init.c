@@ -44,19 +44,26 @@ void	init_cam(t_mrt *mrt, char **line)
 	parsing_cam(line, i, mrt);
 }
 
-void	init_lp(t_mrt *mrt, char **line)
+void	init_lp(t_lp **lp, char **line)
 {
-	int	i;
+	int		i;
+	t_lp	*temp;
 
 	i = -1;
 	while (line[++i])
 		;
-	if (mrt->lp)
-		exit_error("Error\nThere are more than one Ligth points", 5);
-	mrt->lp = ft_calloc(sizeof(t_lp), 1);
-	if (!mrt->lp)
+	temp = ft_calloc(sizeof(t_lp), 1);
+	if (!temp)
 		exit_error("Error malloc", 6);
-	parsing_lp(line, i, mrt);
+	temp->next = NULL;
+	if (*lp)
+		(ft_last2(lp))->next = temp;
+	else
+		(*lp) = temp;
+	parsing_lp(line, i, temp);
+	temp = *lp;
+	while (temp)
+		temp = temp->next;
 }
 
 void	init_newobj(t_obj **obj, char **line, int id)
