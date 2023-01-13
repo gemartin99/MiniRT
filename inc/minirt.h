@@ -66,6 +66,7 @@ int		obj_int(t_intersection *i, t_obj **o);
 int		sp_inter(t_intersection *i, t_obj	*o);
 int		sp_doesinter(t_intersection *i, t_obj	*o);
 int		pl_inter(t_intersection *i, t_obj	*o);
+int		cy_inter(t_intersection *i, t_obj	*o);
 int		pl_doesinter(t_intersection *i, t_obj	*o);
 t_perpective	*new_perp(t_cam *cam);
 
@@ -75,5 +76,6 @@ void	exit_error(char *str, int n);
 float	ft_atof(char *n);
 t_obj	*ft_last(t_obj **obj);
 void	*new_calloc(size_t n, size_t size, int error);
+void	*new_cpy(void *src, size_t size);
 
 #endif

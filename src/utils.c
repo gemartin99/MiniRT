@@ -80,27 +80,31 @@ t_obj	*ft_last(t_obj **obj)
 	return (temp);
 }
 
-void check_point(char *s)
+void	check_point(char *s)
 {
-	int i;
-	int j;
-
+	int	i;
+	int	j;
+	int	c;
 	i = -1;
 	j = 0;
+	c = -1;
 	while (s[++i])
 	{
 		if (s[i] == '.')
 			j++;
 	}
-	if (j > 1)
-		exit_error("ERROR\nCARACTER '.' EN POSICION ERRONEA", 1);
 	i = -1;
 	while (s[++i])
 	{
-		if (i == 0 && s[i] == '.')
+		if ((i == 0 && s[i] == '.') || (j > 1))
 			exit_error("ERROR\nCARACTER '.' EN POSICION ERRONEA", 1);
-		else if (s[i] == '.' && (ft_isdigit(s[i - 1]) != 1 || ft_isdigit(s[i + 1]) != 1))
+		else if (s[i] == '.' && (ft_isdigit(s[i - 1]) != 1
+			|| ft_isdigit(s[i + 1]) != 1))
 			exit_error("ERROR\nCARACTER '.' EN POSICION ERRONEA", 1);
+		else if (s[i] == '.')
+			c = i + 4;
+		else if (i == c)
+			exit_error("ERROR\nMAX 3 DECIMALES", 1);
 	}
 }
 
@@ -114,4 +118,13 @@ void check_less(char *s)
 		if (s[i] == '-' && i != 0)
 			exit_error("ERROR\nCARACTER '-' EN POSICION ERRONEA", 1);
 	}
+}
+
+void	*new_cpy(void *src, size_t size)
+{
+	void	*dest;
+
+	dest = new_calloc(size, 1, 90);
+	ft_memcpy(dest, src, size);
+	return (dest);
 }

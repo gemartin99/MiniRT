@@ -26,9 +26,11 @@ void	raytrace(t_mrt *mrt)
 	float	x;
 	float	y;
 	t_intersection *i;
+	t_perpective	*p;
 	
 	y = 0;
 	i = ft_calloc(sizeof(t_intersection), 1);
+	p = new_perp(mrt->cam);
 	while(y < H)
 	{
 		free(i->ray);
@@ -36,7 +38,7 @@ void	raytrace(t_mrt *mrt)
 		while (x < W)
 		{
 			i->t = RAY_T_MAX;			
-			i->ray = makeray(new_perp(mrt->cam), vector2((2 * x) / (float)W - 1, (2 * y) / (float)H - 1));
+			i->ray = makeray(p, vector2((2 * x) / (float)W - 1, (2 * y) / (float)H - 1));
 			if (obj_int(i, &(mrt->obj)))
 				pixel_put(mrt->img, x, y, 0x00FF0000);
 			x++;
