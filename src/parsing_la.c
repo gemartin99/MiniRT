@@ -71,7 +71,4 @@ void	parsing_la(char **argv, int argc, t_mrt *mrt)
 		exit_error("ERROR\nPARAMETRO INCORRECTO AL", 1);
 	if (ft_strlen(argv[2]) > 12 || check_sa(argv[2], mrt) == -1)
 		exit_error("ERROR\nARGUMENTO CON DEMASIADOS CARACTERES", 1);
-	while (argv[++i])
-		free(argv[i]);
-	free(argv);
 }

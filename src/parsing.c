@@ -74,6 +74,10 @@ void	check_valid_arg(char *s, t_mrt *mrt)
 	if (!res)
 		exit_error("Error malloc", 7);
 	check_id(res[0], res, mrt);
+	i = -1;
+	while (res[++i])
+		free(res[i]);
+	free(res);
 	free(temp);
 }
 

@@ -19,14 +19,16 @@ static void	check_ta(char *s, t_mrt *mrt)
 	char	*temp;
 
 	i = -1;
-	temp = ft_strtrim(s, "\n");
+	temp = ft_strdup(s);
 	free(s);
-	if (ft_strlen(temp) > 3)
+	s = ft_strtrim(temp, "\n");
+	free(temp);
+	if (ft_strlen(s) > 3)
 		exit_error("ERROR\nC CON MAS PARAMETROS DE LOS INDICADOS", 1);
-	while (temp[++i])
-		if (ft_isdigit(temp[i]) != 1)
+	while (s[++i])
+		if (ft_isdigit(s[i]) != 1)
 			exit_error("ERROR\nCARACTER INCORRECTO", 1);
-	mrt->cam->fov = ft_atoi(temp);
+	mrt->cam->fov = ft_atoi(s);
 	if (mrt->cam->fov > 180)
 		exit_error("ERROR\nPARAMETRO FUERA DE RANGO", 1);
 }
