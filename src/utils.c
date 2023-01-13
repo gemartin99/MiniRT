@@ -13,10 +13,10 @@
 #include "../inc/minirt.h"
 #include "../inc/libft/libft.h"
 
-t_rgb *init_rgb(int r, int g, int b)
+t_rgb	*init_rgb(int r, int g, int b)
 {
-	t_rgb *temp;
-
+	t_rgb	*temp;
+	
 	temp = ft_calloc(sizeof(t_rgb), 1);
 	if (!temp)
 		exit_error("Error malloc", 6);
@@ -26,10 +26,10 @@ t_rgb *init_rgb(int r, int g, int b)
 	return (temp);
 }
 
-t_point *init_point(float x, float y, float z)
+t_point	*init_point(float x, float y, float z)
 {
-	t_point *temp;
-
+	t_point	*temp;
+	
 	temp = ft_calloc(sizeof(t_rgb), 1);
 	if (!temp)
 		exit_error("Error malloc", 6);
@@ -68,10 +68,22 @@ float	ft_atof(char *n)
 	return (m * nb / j);
 }
 
+t_lp	*ft_last2(t_lp **lp)
+{
+	t_lp	*temp;
+	
+	if (!*lp)
+		return (*lp);
+	temp = *lp;
+	while (temp->next)
+		temp = temp->next;
+	return (temp);
+}
+
 t_obj	*ft_last(t_obj **obj)
 {
 	t_obj	*temp;
-
+	
 	if (!*obj)
 		return (*obj);
 	temp = *obj;
@@ -84,34 +96,31 @@ void	check_point(char *s)
 {
 	int	i;
 	int	j;
-	int	c;
+	
 	i = -1;
 	j = 0;
-	c = -1;
 	while (s[++i])
 	{
 		if (s[i] == '.')
 			j++;
 	}
+	if (j > 1)
+		exit_error("ERROR\nCARACTER '.' EN POSICION ERRONEA", 1);
 	i = -1;
 	while (s[++i])
 	{
-		if ((i == 0 && s[i] == '.') || (j > 1))
+		if (i == 0 && s[i] == '.')
 			exit_error("ERROR\nCARACTER '.' EN POSICION ERRONEA", 1);
-		else if (s[i] == '.' && (ft_isdigit(s[i - 1]) != 1
-			|| ft_isdigit(s[i + 1]) != 1))
+			else if (s[i] == '.' && (ft_isdigit(s[i - 1]) != 1
+				|| ft_isdigit(s[i + 1]) != 1))
 			exit_error("ERROR\nCARACTER '.' EN POSICION ERRONEA", 1);
-		else if (s[i] == '.')
-			c = i + 4;
-		else if (i == c)
-			exit_error("ERROR\nMAX 3 DECIMALES", 1);
 	}
 }
 
-void check_less(char *s)
+void	check_less(char *s)
 {
-	int i;
-
+	int	i;
+	
 	i = -1;
 	while (s[++i])
 	{

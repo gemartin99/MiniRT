@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef VECTOR_H
-#define VECTOR_H
+#ifndef VECTOR_H
+# define VECTOR_H
 
 # include "defines.h"
 
@@ -22,8 +22,8 @@ typedef struct s_ray
 {
 	t_point		*origin;
 	t_vector	*direction;
-	float			t_max;
-} 					t_ray;
+	float		t_max;
+}				t_ray;
 
 typedef struct s_intersection
 {
@@ -38,8 +38,8 @@ typedef struct s_perspective
 	t_vector	*forward;
 	t_vector	*up;
 	t_vector	*rigth;
-	float			h;
-	float			w;
+	float		h;
+	float		w;
 }						t_perpective;
 
 #endif

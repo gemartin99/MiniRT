@@ -11,21 +11,53 @@
 /* ************************************************************************** */
 
 #include "../inc/minirt.h"
-#include "../inc/libft/libft.h"
-#include <mlx.h>
 
-void	exit_error(char *str, int n)
+int	create_trgb(int t, int r, int g, int b)
 {
-	ft_putendl_fd(str, 2);
-	exit(n);
+	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-void	*new_calloc(size_t n, size_t size, int error)
+int	get_t(int trgb)
 {
-	void	*temp;
+	return ((trgb >> 24) & 0xFF);
+}
 
-	temp = ft_calloc(n, size);
-	if (!temp)
-		exit_error("Error malloc", error);
-	return (temp);
+int	get_r(int trgb)
+{
+	return ((trgb >> 16) & 0xFF);
+}
+
+int	get_g(int trgb)
+{
+	return ((trgb >> 8) & 0xFF);
+}
+
+int	get_b(int trgb)
+{
+	return (trgb & 0xFF);
+}
+
+int	create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b)
+{
+	return (*(int *)(unsigned char [4]){b, g, r, t});
+}
+
+unsigned char	get_t(int trgb)
+{
+	return (((unsigned char *)&trgb)[3]);
+}
+
+unsigned char	get_r(int trgb)
+{
+	return (((unsigned char *)&trgb)[2]);
+}
+
+unsigned char	get_g(int trgb)
+{
+	return (((unsigned char *)&trgb)[1]);
+}
+
+unsigned char	get_b(int trgb)
+{
+	return (((unsigned char *)&trgb)[0]);
 }

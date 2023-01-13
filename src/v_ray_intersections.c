@@ -16,7 +16,7 @@ t_point	r_calculate(t_ray ray, float t)
 {
 	t_point	temp;
 
-	temp = v_mult(ray.direction,  t);
+	temp = v_mult(ray.direction, t);
 	return (v_sum(ray.origin, &temp));
 }
 

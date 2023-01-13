@@ -15,8 +15,8 @@
 
 t_perpective	*new_perp(t_cam *cam)
 {
-	t_perpective *new;
-	t_vector	v;
+	t_perpective	*new;
+	t_vector		v;
 
 	new = new_calloc(sizeof(t_perpective), 1, 25);
 	v = *cam->vector;

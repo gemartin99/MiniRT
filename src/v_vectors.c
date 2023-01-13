@@ -45,14 +45,14 @@ t_point	v_div(t_point	*v1, t_point *v2)
 	return (*v1);
 }
 
-float v_dot(t_point v1, t_point v2)
+float	v_dot(t_point v1, t_point v2)
 {
 	return (v1.x * v2.x
-			+ v1.y * v2.y
-			+ v1.z * v2.z);
+		+ v1.y * v2.y
+		+ v1.z * v2.z);
 }
 
-t_point *v_cross(t_point v1, t_point v2)
+t_point	*v_cross(t_point v1, t_point v2)
 {
 	t_point	*temp;
 

@@ -12,10 +12,11 @@
 
 #include "../inc/minirt.h"
 #include "../inc/libft/libft.h"
+#include <mlx.h>
 
 void	init_al(t_mrt *mrt, char **line)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (line[++i])
@@ -30,7 +31,7 @@ void	init_al(t_mrt *mrt, char **line)
 
 void	init_cam(t_mrt *mrt, char **line)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (line[++i])
@@ -43,19 +44,26 @@ void	init_cam(t_mrt *mrt, char **line)
 	parsing_cam(line, i, mrt);
 }
 
-void	init_lp(t_mrt *mrt, char **line)
+void	init_lp(t_lp **lp, char **line)
 {
-	int i;
+	int		i;
+	t_lp	*temp;
 
 	i = -1;
 	while (line[++i])
 		;
-	if (mrt->lp)
-		exit_error("Error\nThere are more than one Ligth points", 5);
-	mrt->lp = ft_calloc(sizeof(t_lp), 1);
-	if (!mrt->lp)
+	temp = ft_calloc(sizeof(t_lp), 1);
+	if (!temp)
 		exit_error("Error malloc", 6);
-	parsing_lp(line, i, mrt);
+	temp->next = NULL;
+	if (*lp)
+		(ft_last2(lp))->next = temp;
+	else
+		(*lp) = temp;
+	parsing_lp(line, i, temp);
+	temp = *lp;
+	while (temp)
+		temp = temp->next;
 }
 
 void	init_newobj(t_obj **obj, char **line, int id)
@@ -73,12 +81,12 @@ void	init_newobj(t_obj **obj, char **line, int id)
 	else if (id == PL)
 	{
 		temp->id = id;
-		temp->elem = (void*)init_pl(line);
+		temp->elem = (void *)init_pl(line);
 	}
 	else if (id == CY)
 	{
 		temp->id = id;
-		temp->elem = (void*)init_cy(line);
+		temp->elem = (void *)init_cy(line);
 	}
 	temp->next = NULL;
 	if ((*obj))
@@ -87,7 +95,7 @@ void	init_newobj(t_obj **obj, char **line, int id)
 		(*obj) = temp;
 }
 
-void init_mlx(t_mrt	*mrt)
+void	init_mlx(t_mrt	*mrt)
 {
 	mrt->mlx = ft_calloc(sizeof(t_mlx), 1);
 	if (!mrt->mlx)

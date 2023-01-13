@@ -80,7 +80,7 @@ int	sp_inter(t_intersection *i, t_obj	*o)
 	if (t[0] > RAY_T_MIN && t[0] < i->t)
 		i->t = t[0];
 	else if (t[1] > RAY_T_MIN && t[1] < i->t)
-		i->t = t[1];	
+		i->t = t[1];
 	else
 		return (0);
 	i->shape = o;
