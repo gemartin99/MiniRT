@@ -66,6 +66,7 @@ static void	check_sa(char *s, t_pl *pl)
 		|| (pl->vector->y > 1 || pl->vector->y < -1)
 		|| (pl->vector->z > 1 || pl->vector->z < -1))
 		exit_error("ERROR\nPARAMETROS VECTOR INCORRECTOS", 1);
+	pl->vector = v_normalized(pl->vector);
 }
 
 static void	check_fa(char *s, t_pl *pl)

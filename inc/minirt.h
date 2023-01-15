@@ -67,9 +67,19 @@ int		sp_doesinter(t_intersection *i, t_obj	*o);
 int		pl_inter(t_intersection *i, t_obj	*o);
 int		cy_inter(t_intersection *i, t_obj	*o);
 int		pl_doesinter(t_intersection *i, t_obj	*o);
-
 t_vector		vector2(float x, float y);
 t_perpective	*new_perp(t_cam *cam);
+t_point	r_calculate(t_ray ray, float t);
+t_point	i_position(t_intersection i);
+
+//COLOR & LIGHT
+
+t_rgb	*lightray(t_intersection *i, t_mrt *mrt, t_cy *shape);
+int	create_trgb(t_rgb	*color);
+t_rgb	*intensity(t_rgb *c, float intensity);
+t_rgb	*color_mult(t_rgb *c1, t_rgb *c2);
+t_rgb	*color_sum(t_rgb *c1, t_rgb *c2);
+int	is_shadow(t_intersection *i, t_lp *lp);
 
 //UTILS
 

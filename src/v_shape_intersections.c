@@ -13,6 +13,25 @@
 #include "../inc/minirt.h"
 #include "../inc/libft/libft.h"
 
+int	cuadratic(t_intersection *i, float *n)
+{
+	int	t[2];
+	float discriminant;
+
+	discriminant = sqr(n[1]) - 4 * n[0] * n[2];
+	if (discriminant < 0)
+		return (-1);
+	t[0] = (-n[1] - sqrt(discriminant)) / (2 * n[0]);
+	t[1] = (-n[1] + sqrt(discriminant)) / (2 * n[0]);
+	if (t[0] > RAY_T_MIN && t[0] < i->t && t[0] < t[1])
+		i->t = t[0];
+	else if (t[1] > RAY_T_MIN && t[1] < i->t)
+		i->t = t[1];
+	else
+		return (-1);
+	return (0);
+}
+
 ///BORRAR
 
 void	printv(t_point *temp)
@@ -23,16 +42,24 @@ void	printv(t_point *temp)
 int	pl_inter(t_intersection *i, t_obj	*o)
 {
 	float	dn;
+	float	xv;
 	float	t;
 	t_pl	*plane;
-	t_vector	origin;
 	
 	plane = new_cpy(o->elem, sizeof(t_pl));
 	dn = v_dot(*i->ray->direction, *plane->vector);
 	if (!dn)
+	{
+		free(plane);
 		return (0);
-	origin = v_minus(i->ray->origin, plane->point);
-	t = v_dot(v_mult(&origin, -1), *plane->vector) / dn;
+	}
+	xv = v_dot(v_minus(i->ray->origin, plane->point), *plane->vector) * -1;
+	if ((dn < 0 && xv > 0) || (dn > 0 && xv < 0))
+	{
+		free(plane);
+		return (0);
+	}
+	t = xv / dn;
 	free(plane);
 	if (t <= RAY_T_MIN || t >= i->t)
 		return (0);
@@ -44,14 +71,25 @@ int	pl_inter(t_intersection *i, t_obj	*o)
 int	pl_doesinter(t_intersection *i, t_obj	*o)
 {
 	float	dn;
+	float	xv;
 	float	t;
 	t_pl	*plane;
-
-	plane = o->elem;
-	dn = v_dot(*i->ray->origin, *plane->vector);
+	
+	plane = new_cpy(o->elem, sizeof(t_pl));
+	dn = v_dot(*i->ray->direction, *plane->vector);
 	if (!dn)
+	{
+		free(plane);
 		return (0);
-	t = v_dot(v_minus(plane->point, i->ray->origin), *plane->vector);
+	}
+	xv = v_dot(v_minus(i->ray->origin, plane->point), *plane->vector) * -1;
+	if ((dn < 0 && xv > 0) || (dn > 0 && xv < 0))
+	{
+		free(plane);
+		return (0);
+	}
+	t = xv / dn;
+	free(plane);
 	if (t <= RAY_T_MIN || t >= i->t)
 		return (0);
 	return (1);
@@ -61,8 +99,6 @@ int	sp_inter(t_intersection *i, t_obj	*o)
 {
 	t_vector	*local;
 	float	n[3];
-	float	discriminant;
-	float	t[2];
 	t_sp	*sphere;
 
 	sphere = o->elem;
@@ -71,17 +107,8 @@ int	sp_inter(t_intersection *i, t_obj	*o)
 	n[0] = v_len2(i->ray->direction);
 	n[1] = 2 * v_dot(*(i->ray->direction), *(local));
 	n[2] = v_len2(local) - sqr(sphere->dia / 2);
-	discriminant = sqr(n[1]) - 4 * n[0] * n[2];
 	free(local);
-	if (discriminant < 0)
-		return (0);
-	t[0] = (-n[1] - sqrt(discriminant)) / (2 * n[0]);
-	t[1] = (-n[1] + sqrt(discriminant)) / (2 * n[0]);
-	if (t[0] > RAY_T_MIN && t[0] < i->t)
-		i->t = t[0];
-	else if (t[1] > RAY_T_MIN && t[1] < i->t)
-		i->t = t[1];
-	else
+	if (cuadratic(i, n) == -1)
 		return (0);
 	i->shape = o;
 	return (1);
@@ -91,8 +118,6 @@ int	sp_doesinter(t_intersection *i, t_obj	*o)
 {
 	t_vector	*local;
 	float	n[3];
-	float	discriminant;
-	float	t[2];
 	t_sp	*sphere;
 
 	sphere = o->elem;
@@ -101,104 +126,57 @@ int	sp_doesinter(t_intersection *i, t_obj	*o)
 	n[0] = v_len2(i->ray->direction);
 	n[1] = 2 * v_dot(*(i->ray->direction), *(local));
 	n[2] = v_len2(local) - sqr(sphere->dia / 2);
-	discriminant = sqr(n[1]) - 4 * n[0] * n[2];
 	free(local);
-	if (discriminant < 0)
+	if (cuadratic(i, n) == -1)
 		return (0);
-	t[0] = (-n[1] - sqrt(discriminant)) / (2 * n[0]);
-	t[1] = (-n[1] + sqrt(discriminant)) / (2 * n[0]);
-	if (t[0] > RAY_T_MIN && t[0] < i->t)
-		i->t = t[0];
-	else if (t[1] > RAY_T_MIN && t[1] < i->t)
-		i->t = t[1];	
-	else
-		return (0);
-	i->shape = o;
+	return (1);
+}
+
+int	cy_caps(t_cy	*cylinder, t_intersection	*i, float dn)
+{
+	t_point	p1;
+	// t_point	p2;
+	float		t;
+
+	p1 = v_minus(i->ray->origin, cylinder->point);
+	t = v_dot(p1, *cylinder->vector) / dn;
+	if (t <= RAY_T_MIN || t >= i->t)
+		return (-1);
+	i->t = t;
+	// p2 = v_mult(cylinder->vector, cylinder->hgt);
+	// p2 = v_sum(&p2, &p1);
+	// t = v_dot(p2, v2)
 	return (1);
 }
 
 int	cy_inter(t_intersection *i, t_obj	*o)
 {
-	t_ray	*localray;
-	float	n[3];
-	float	discriminant;
-	float	t[3];
+	float	n[4];
 	t_cy	*cylinder;
+	float	dotp[2];
+	t_vector	origin;
+	float	t;
 
+	t = i->t;
 	cylinder = o->elem;
-	t_obj	*tempobj;
-	
-	tempobj = new_calloc(sizeof(t_obj), 1, 90);
-	cylinder->vector = v_normalized(cylinder->vector);
-	localray = new_cpy(i->ray, sizeof(t_ray));
-	*localray->origin = v_minus(i->ray->origin, cylinder->point);
-	n[0] = v_len2(i->ray->direction) - sqr(v_dot(*i->ray->direction, *cylinder->vector));
-	n[1] = 2 * (v_dot(*i->ray->direction, *localray->origin) - v_dot(*i->ray->direction, *cylinder->vector) * v_dot(*localray->origin, *cylinder->vector));
-	n[2] = v_len2(localray->origin) - sqr(v_dot(*localray->origin, *cylinder->vector)) - sqr(cylinder->dia / 2);
-	discriminant = sqr(n[1]) - 4 * n[0] * n[2];
-	if (discriminant < 0)
+	origin = v_minus(i->ray->origin, cylinder->point);
+	dotp[0] = v_dot(*i->ray->direction, *cylinder->vector);
+	dotp[1] = v_dot(*cylinder->vector, origin);
+	n[0] = v_len2(i->ray->direction) - sqr(dotp[0]);
+	n[1] = 2 * (v_dot(*i->ray->direction, origin) - dotp[0] * dotp[1]);
+	n[2] = v_len2(&origin) - sqr(v_dot(origin, *cylinder->vector)) - sqr(cylinder->dia / 2);
+	if (cuadratic(i, n) == -1)
 		return (0);
-	t[0] = (-n[1] - sqrt(discriminant)) / (2 * n[0]);
-	t[1] = (-n[1] + sqrt(discriminant)) / (2 * n[0]);
-	if (t[1] < 0)
-		return (0);
-	if (t[0] > RAY_T_MIN && t[0] < i->t)
-		i->t = t[0];
-	else
-		i->t = t[1];
-	t[2] = v_dot(*i->ray->direction, *cylinder->vector) * i->t + v_dot(*localray->origin, *cylinder->vector);
-	if (t[2] < 0 || t[2] > cylinder->hgt)
+	n[3] = v_dot(*i->ray->direction, *cylinder->vector) * i->t + v_dot(origin, *cylinder->vector);
+	if ((n[3] < 0 || n[3] > cylinder->hgt) && n[3] != 0)
 	{
-		t[2] = v_dot(v_mult(localray->origin, -1), v_mult(cylinder->vector, -1)) / t[2];
-		if (t[2] <= RAY_T_MIN || t[2] >= i->t)
+		// if (cy_caps(cylinder, i, n[3]) == -1)
+		// {
+			i->t = t;
 			return (0);
+		// }
 	}
-	t_point	temp2 = v_mult(cylinder->vector, cylinder->hgt);
-	temp2 = v_sum(cylinder->point, &temp2);
 	i->shape = o;
 	return (1);
 }
 
-
-// int	cy_inter(t_intersection *i, t_obj	*o)
-// {
-// 	t_ray	*localray;
-// 	float	n[3];
-// 	float	discriminant;
-// 	float	t[3];
-// 	t_cy	*cylinder;
-
-// 	cylinder = o->elem;
-// 	cylinder->vector = v_normalized(cylinder->vector);
-// 	localray = new_cpy(i->ray, sizeof(t_ray));
-// 	localray->origin = v_cross(v_minus(i->ray->origin, cylinder->point), *cylinder->vector);
-// 	localray->direction = v_cross(*(i->ray->direction), *cylinder->vector);
-// 	n[0] = v_len2(localray->direction);
-// 	n[1] = 2 * v_dot(*localray->direction, *localray->origin);
-// 	n[2] = v_len2(localray->origin) - sqr(cylinder->dia / 2);
-// 	discriminant = sqr(n[1]) - 4 * n[0] * n[2];
-// 	if (discriminant < 0)
-// 		return (0);
-// 	t[0] = (-n[1] - sqrt(discriminant)) / (2 * n[0]);
-// 	t[1] = (-n[1] + sqrt(discriminant)) / (2 * n[0]);
-// 	if (t[1] < 0)
-// 		return (0);
-// 	if (t[0] > RAY_T_MIN && t[0] < i->t)
-// 		i->t = t[0];
-// 	else
-// 		i->t = t[1];
-// 	t_point temp = v_mult(i->ray->direction, i->t);
-// 	temp = v_sum(i->ray->origin, &temp);
-// 	temp = v_minus(&temp, cylinder->point);
-// 	if (v_dot(*cylinder->vector, temp) < 0)
-// 		return (0);
-// 	temp = v_mult(i->ray->direction, i->t);
-// 	temp = v_sum(i->ray->origin, &temp);
-// 	t_point	temp2 = v_mult(cylinder->point, cylinder->hgt);
-// 	temp2 = v_minus(v_cross(*cylinder->vector, temp2), cylinder->point);
-// 	temp = v_minus(&temp, &temp2);
-// 	if (v_dot(*cylinder->vector, temp) > 0)
-// 		return (0);
-// 	i->shape = o;
-// 	return (1);
-// }

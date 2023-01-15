@@ -75,8 +75,8 @@ typedef struct s_lp
 typedef struct sp
 {
 	t_point		*point;
-	float		dia;
 	t_rgb		*rgb;
+	float		dia;
 }							t_sp;
 
 //Plano:
@@ -86,8 +86,8 @@ typedef struct sp
 typedef struct s_pl
 {
 	t_point	*point;
-	t_point	*vector;
 	t_rgb	*rgb;
+	t_point	*vector;
 }							t_pl;
 
 //Cilindro:
@@ -99,10 +99,10 @@ typedef struct s_pl
 typedef struct s_cy
 {
 	t_point	*point;
+	t_rgb	*rgb;
 	t_point	*vector;
 	float	dia;
 	float	hgt;
-	t_rgb	*rgb;
 }								t_cy;
 
 typedef struct s_intersection	t_intersection;

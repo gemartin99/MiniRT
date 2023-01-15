@@ -9,7 +9,8 @@
 /*   Updated: 2023/01/02 12:43:45 by smiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "minirt.h"
+
+#include "../inc/minirt.h"
 #include "../inc/libft/libft.h"
 
 static int	check_sa(char *s, t_mrt *mrt)

@@ -76,7 +76,10 @@ SRC_FILES	=	main.c \
 				v_ray_intersections.c \
 				v_shape_intersections.c \
 				v_vectors.c \
-				v_utils.c
+				v_utils.c \
+				colors.c \
+				light.c \
+				shadow.c
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ 		=	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))

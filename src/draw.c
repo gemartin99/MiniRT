@@ -40,7 +40,10 @@ void	raytrace(t_mrt *mrt)
 			i->ray = makeray(new_perp(mrt->cam), vector2((2 * x)
 				/ (float)W - 1, (2 * y) / (float)H - 1));
 			if (obj_int(i, &(mrt->obj)))
-				pixel_put(mrt->img, x, y, 0x00FF0000);
+			{
+				t_cy *temp = i->shape->elem;
+				pixel_put(mrt->img, x, y, create_trgb(lightray(i, mrt, temp)));
+			}
 			x++;
 		}
 		y++;

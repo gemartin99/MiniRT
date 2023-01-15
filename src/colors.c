@@ -12,52 +12,48 @@
 
 #include "../inc/minirt.h"
 
-int	create_trgb(int t, int r, int g, int b)
+void	printrgb(t_rgb *c, char *str);
+
+int	create_trgb(t_rgb	*color)
 {
-	return (t << 24 | r << 16 | g << 8 | b);
+	return (00 << 24 | color->r << 16 | color->g << 8 | color->b);
 }
 
-int	get_t(int trgb)
+t_rgb	*color_mult(t_rgb *c1, t_rgb *c2)
 {
-	return ((trgb >> 24) & 0xFF);
+	t_rgb	*temp;
+
+	temp = new_calloc(sizeof(t_rgb), 1, 92);
+	temp->r = ((float)c1->r / 255) * ((float)c2->r / 255) * 255;
+	temp->g = ((float)c1->g / 255) * ((float)c2->g / 255) * 255;
+	temp->b = ((float)c1->b / 255) * ((float)c2->b / 255) * 255;
+	return (temp);
 }
 
-int	get_r(int trgb)
+t_rgb	*color_sum(t_rgb *c1, t_rgb *c2)
 {
-	return ((trgb >> 16) & 0xFF);
+	t_rgb	*temp;
+
+	temp = new_calloc(sizeof(t_rgb), 1, 92);
+	temp->r = c1->r + c2->r;
+	if (temp->r > 255)
+		temp->r = 255;
+	temp->g = c1->g + c2->g;
+	if (temp->g > 255)
+		temp->g = 255;
+	temp->b = c1->b + c2->b;
+	if (temp->b > 255)
+		temp->b = 255;
+	return (temp);
 }
 
-int	get_g(int trgb)
+t_rgb	*intensity(t_rgb *c, float intensity)
 {
-	return ((trgb >> 8) & 0xFF);
-}
+	t_rgb	*temp;
 
-int	get_b(int trgb)
-{
-	return (trgb & 0xFF);
-}
-
-int	create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b)
-{
-	return (*(int *)(unsigned char [4]){b, g, r, t});
-}
-
-unsigned char	get_t(int trgb)
-{
-	return (((unsigned char *)&trgb)[3]);
-}
-
-unsigned char	get_r(int trgb)
-{
-	return (((unsigned char *)&trgb)[2]);
-}
-
-unsigned char	get_g(int trgb)
-{
-	return (((unsigned char *)&trgb)[1]);
-}
-
-unsigned char	get_b(int trgb)
-{
-	return (((unsigned char *)&trgb)[0]);
+	temp = new_calloc(sizeof(t_rgb), 1, 92);
+	temp->r = c->r * intensity;
+	temp->g = c->g * intensity;
+	temp->b = c->b * intensity;
+	return (temp);
 }
