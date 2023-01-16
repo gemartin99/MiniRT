@@ -32,7 +32,6 @@ void	raytrace(t_mrt *mrt)
 	i = ft_calloc(sizeof(t_intersection), 1);
 	while (y < H)
 	{
-		free(i->ray);
 		x = 0;
 		while (x < W)
 		{
@@ -44,6 +43,9 @@ void	raytrace(t_mrt *mrt)
 				t_cy *temp = i->shape->elem;
 				pixel_put(mrt->img, x, y, create_trgb(lightray(i, mrt, temp)));
 			}
+			free(i->ray->origin);
+			free(i->ray->direction);
+			free(i->ray);
 			x++;
 		}
 		y++;

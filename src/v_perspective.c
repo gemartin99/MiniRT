@@ -19,13 +19,13 @@ t_perpective	*new_perp(t_cam *cam)
 	t_vector		v;
 
 	new = new_calloc(sizeof(t_perpective), 1, 25);
-	v = *cam->vector;
+	v = vector2(0, 1);
 	v = v_minus(&v, cam->pov);
 	new->forward = v_normalized(&v);
 	v = vector2(0, 1);
 	new->rigth = v_normalized(v_cross(*new->forward, v));
 	new->up = v_cross(*new->rigth, *new->forward);
-	new->h = atan(cam->fov);
+	new->h = tan(cam->fov * M_PI / 180);
 	new->w = new->h * ((float)W/(float)H);
 	new->origin = new_calloc(sizeof(t_point), 1, 27);
 	new->origin = ft_memcpy(new->origin, cam->pov, sizeof(t_point));
