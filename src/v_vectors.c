@@ -39,9 +39,9 @@ t_point	*v_normalized(t_point *v)
 
 t_point	v_div(t_point	*v1, t_point *v2)
 {
-	v1->x += v2->x;
-	v1->y += v2->y;
-	v1->z += v2->z;
+	v1->x /= v2->x;
+	v1->y /= v2->y;
+	v1->z /= v2->z;
 	return (*v1);
 }
 
@@ -59,8 +59,8 @@ t_point	*v_cross(t_point v1, t_point v2)
 	temp = ft_calloc(sizeof(t_point), 1);
 	if (!temp)
 		exit_error("Error malloc", 20);
-	temp->x = v1.x * v2.z - v1.z * v2.y;
+	temp->x = v1.y * v2.z - v1.z * v2.y;
 	temp->y = v1.z * v2.x - v1.x * v2.z;
-	temp->z = v1.x * v2.y - v1.x * v2.x;
+	temp->z = v1.x * v2.y - v1.y * v2.x;
 	return (temp);
 }

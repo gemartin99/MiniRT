@@ -126,4 +126,5 @@ fclean:		clean
 re:			fclean all
 			@echo "$(GREEN)Cleaned and rebuilt everything for fdf!$(DEF_COLOR)"
 
+
 .PHONY:		all clean fclean re norm

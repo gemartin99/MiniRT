@@ -28,7 +28,7 @@ static float	light_dp(t_intersection *i, t_lp *lp, t_obj *o, t_cy *shape)
 	ip = i_position(*i);
 	if (o->id == SP)
 	{
-		ip = v_minus(&ip, shape->point);
+		ip = v_minus(shape->point, &ip);
 		vector = v_normalized(&ip);
 		ip = i_position(*i);
 	}
@@ -57,7 +57,7 @@ t_rgb	*lightray(t_intersection *i, t_mrt *mrt, t_cy *shape)
 			return (color);
 		if (is_shadow(i, temp))
 			dp = 0.01;
-		color = color_sum(color, color_mult(intensity(temp->rgb, sqr(temp->brt * dp)), mrt->al->rgb));
+		color = color_sum(color, color_mult(intensity(temp->rgb, temp->brt * dp), mrt->al->rgb));
 		temp = temp->next;
 	}
 	return (color);

@@ -19,8 +19,7 @@ t_perpective	*new_perp(t_cam *cam)
 	t_vector		v;
 
 	new = new_calloc(sizeof(t_perpective), 1, 25);
-	v = vector2(0, 1);
-	v = v_minus(&v, cam->pov);
+	v = v_minus(cam->vector, cam->pov);
 	new->forward = v_normalized(&v);
 	v = vector2(0, 1);
 	new->rigth = v_normalized(v_cross(*new->forward, v));
@@ -43,7 +42,8 @@ t_ray	*makeray(t_perpective *pctve, t_vector point)
 	temp = v_sum(pctve->forward, &temp);
 	temp2 = v_mult(pctve->up, pctve->h * point.y);
 	temp = v_sum(&temp, &temp2);
-	new->direction = v_normalized(&temp);
+	new->direction = new_calloc(sizeof(t_vector), 1, 104);
+	*new->direction = temp;
 	new->origin = new_calloc(sizeof(t_point), 1, 27);
 	new->origin = ft_memcpy(new->origin, pctve->origin, sizeof(t_point));
 	new->t_max = RAY_T_MAX;
