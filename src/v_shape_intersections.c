@@ -159,7 +159,7 @@ int	cy_inter(t_intersection *i, t_obj	*o)
 
 	t = i->t;
 	cylinder = o->elem;
-	cylinder->vector = v_normalized(cylinder->vector);
+	cylinder->vector = v_normalized(cylinder->vector, 1);
 	origin = v_minus(i->ray->origin, cylinder->point);
 	dotp[0] = v_dot(*i->ray->direction, *cylinder->vector);
 	dotp[1] = v_dot(*cylinder->vector, origin);

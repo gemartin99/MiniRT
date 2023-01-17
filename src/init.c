@@ -17,6 +17,7 @@
 void	init_al(t_mrt *mrt, char **line)
 {
 	int	i;
+	t_rgb	*temp;
 
 	i = -1;
 	while (line[++i])
@@ -26,8 +27,11 @@ void	init_al(t_mrt *mrt, char **line)
 	mrt->al = ft_calloc(sizeof(t_al), 1);
 	if (!mrt->al)
 		exit_error("Error malloc", 2);
-	parsing_la(line, i, mrt);	
-	mrt->al->rgb = intensity(mrt->al->rgb, mrt->al->ratio);
+	parsing_la(line, i, mrt);
+	temp = mrt->al->rgb;
+	mrt->al->rgb = 0;
+	mrt->al->rgb = intensity(temp, mrt->al->ratio);
+	free(temp);
 }
 
 void	init_cam(t_mrt *mrt, char **line)
@@ -112,6 +116,6 @@ void	init_mlx(t_mrt	*mrt)
 		exit_error("Error malloc", 12);
 	mrt->img->addr = mlx_get_data_addr(mrt->img->img, &mrt->img->bits_per_pixel,
 			&mrt->img->line_length, &mrt->img->endian);
-	put_func(&(mrt->obj));	
+	put_func(&(mrt->obj));
 	start(mrt);
 }

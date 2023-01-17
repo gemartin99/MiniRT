@@ -29,13 +29,13 @@ static float	light_dp(t_intersection *i, t_lp *lp, t_obj *o, t_cy *shape)
 	if (o->id == SP)
 	{
 		ip = v_minus(shape->point, &ip);
-		vector = v_normalized(&ip);
+		vector = v_normalized(&ip, 0);
 		ip = i_position(*i);
 	}
 	else
 		vector = shape->vector;
 	ip = v_minus(&ip, lp->lpoint);
-	io = v_normalized(&ip);
+	io = v_normalized(&ip, 0);
 	dp = v_dot(*vector, *io) * -1;
 	free(io);
 	return (dp);

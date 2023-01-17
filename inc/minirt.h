@@ -50,7 +50,7 @@ void	put_func(t_obj **obj);
 //VECTORS
 
 void	v_normalize(t_point **v);
-t_point	*v_normalized(t_point *v);
+t_point	*v_normalized(t_point *v, int control);
 t_point	*v_cross(t_point v1, t_point v2);
 float	v_dot(t_point v1, t_point v2);
 float	sqr(float n);

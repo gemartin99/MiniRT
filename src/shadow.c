@@ -38,7 +38,7 @@ int	is_shadow(t_intersection *i, t_lp *lp)
 	lray->origin = new_calloc(sizeof(t_point), 1, 102);
 	*lray->origin = i_position(*i);
 	v = v_minus(lray->origin, lp->lpoint);
-	lray->direction = v_normalized(&v);
+	lray->direction = v_normalized(&v, 0);
 	if (check_shadow(lray, i->shape, v_len(&v)))
 		return (1);
 	return (0);

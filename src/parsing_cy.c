@@ -82,7 +82,7 @@ static void	check_sa(char *s, t_cy *cy)
 		|| (cy->vector->y > 1 || cy->vector->y < -1)
 		|| (cy->vector->z > 1 || cy->vector->z < -1))
 		exit_error("ERROR\nPARAMETROS VECTOR INCORRECTOS", 1);
-	cy->vector = v_normalized(cy->vector);
+	cy->vector = v_normalized(cy->vector, 0);
 }
 
 static void	check_fa(char *s, t_cy *cy)

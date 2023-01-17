@@ -23,7 +23,7 @@ void	v_normalize(t_point **v)
 	(*v)->z /= len;
 }
 
-t_point	*v_normalized(t_point *v)
+t_point	*v_normalized(t_point *v, int control)
 {
 	t_point	*temp;
 
@@ -34,6 +34,8 @@ t_point	*v_normalized(t_point *v)
 	temp->y = v->y;
 	temp->z = v->z;
 	v_normalize(&temp);
+	if (control == 1)
+		free(v);
 	return (temp);
 }
 

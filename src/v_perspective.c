@@ -20,9 +20,9 @@ t_perpective	*new_perp(t_cam *cam)
 
 	new = new_calloc(sizeof(t_perpective), 1, 25);
 	v = v_minus(cam->vector, cam->pov);
-	new->forward = v_normalized(&v);
+	new->forward = v_normalized(&v, 0);
 	v = vector2(0, 1);
-	new->rigth = v_normalized(v_cross(*new->forward, v));
+	new->rigth = v_normalized(v_cross(*new->forward, v), 1);
 	new->up = v_cross(*new->rigth, *new->forward);
 	new->h = tan(cam->fov * M_PI / 180);
 	new->w = new->h * ((float)W/(float)H);
