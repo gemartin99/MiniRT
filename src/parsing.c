@@ -112,6 +112,8 @@ int	ft_check_file_type(char *s)
 void	parsing(char *file_name, t_mrt *mrt)
 {
 	if (ft_check_file_type(file_name) == -1)
-		exit_error("ERROR\nEL FICHERO NO ES .RT\n", 1);
+		exit_error("ERROR\nEL FICHERO NO ES .RT", 1);
 	ft_read_file(file_name, mrt);
+	if (!mrt->lp || !mrt->cam || !mrt->al)
+		exit_error("ERROR\nEL MAPA DEBE CONTENER A, C & L", 1);
 }
