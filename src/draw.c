@@ -52,10 +52,16 @@ void	raytrace(t_mrt *mrt)
 		}
 		y++;
 	}
+	free(p->forward);
+	free(p->origin);
+	free(p->rigth);
+	free(p->up);
+	free(p);
+	free(i);
 }
 
 void	start(t_mrt *mrt)
-{
+{	
 	raytrace(mrt);
 	mlx_put_image_to_window(mrt->mlx->mlx, mrt->mlx->win, mrt->img->img, 0, 0);
 	mlx_hook(mrt->mlx->win, 17, 0, close_program, mrt);

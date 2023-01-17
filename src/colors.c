@@ -16,7 +16,11 @@ void	printrgb(t_rgb *c, char *str);
 
 int	create_trgb(t_rgb	*color)
 {
-	return (00 << 24 | color->r << 16 | color->g << 8 | color->b);
+	int	rgb;
+
+	rgb = 00 << 24 | color->r << 16 | color->g << 8 | color->b;
+	free(color);
+	return (rgb);
 }
 
 t_rgb	*color_mult(t_rgb *c1, t_rgb *c2)
@@ -44,6 +48,8 @@ t_rgb	*color_sum(t_rgb *c1, t_rgb *c2)
 	temp->b = c1->b + c2->b;
 	if (temp->b > 255)
 		temp->b = 255;
+	free(c1);
+	free(c2);
 	return (temp);
 }
 

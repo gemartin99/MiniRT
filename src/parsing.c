@@ -32,7 +32,7 @@ int	check_wrong_char(char *s)
 void	check_id(char *s, char **res, t_mrt *mrt)
 {
 	if (ft_strncmp(s, "A", 2) == 0)
-		init_al(mrt, res);
+		init_al(mrt, res); 
 	if (ft_strncmp(s, "C", 2) == 0)
 		init_cam(mrt, res);
 	if (ft_strncmp(s, "L", 2) == 0)
@@ -96,6 +96,7 @@ void	ft_read_file(char *s, t_mrt *mrt)
 		free(temp);
 		temp = get_next_line(fd);
 	}
+	close(fd);
 }
 
 int	ft_check_file_type(char *s)

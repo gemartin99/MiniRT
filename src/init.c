@@ -28,10 +28,9 @@ void	init_al(t_mrt *mrt, char **line)
 	if (!mrt->al)
 		exit_error("Error malloc", 2);
 	parsing_la(line, i, mrt);
-	temp = mrt->al->rgb;
-	mrt->al->rgb = 0;
-	mrt->al->rgb = intensity(temp, mrt->al->ratio);
-	free(temp);
+	temp = intensity(mrt->al->rgb, mrt->al->ratio);
+	free(mrt->al->rgb);
+	mrt->al->rgb = temp;
 }
 
 void	init_cam(t_mrt *mrt, char **line)
