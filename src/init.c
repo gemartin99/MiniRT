@@ -16,7 +16,7 @@
 
 void	init_al(t_mrt *mrt, char **line)
 {
-	int	i;
+	int		i;
 	t_rgb	*temp;
 
 	i = -1;

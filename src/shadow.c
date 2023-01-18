@@ -15,7 +15,7 @@
 static int	check_shadow(t_ray *ray, t_obj *o, float t)
 {
 	t_intersection	*tempi;
-	int	res;
+	int				res;
 
 	tempi = new_calloc(sizeof(t_intersection), 1, 103);
 	tempi->ray = ray;
@@ -31,7 +31,7 @@ static int	check_shadow(t_ray *ray, t_obj *o, float t)
 
 int	is_shadow(t_intersection *i, t_lp *lp)
 {
-	t_vector	v;
+	t_vector		v;
 	t_ray			*lray;
 
 	lray = new_calloc(sizeof(t_ray), 1, 101);

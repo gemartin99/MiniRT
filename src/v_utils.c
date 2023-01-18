@@ -29,7 +29,7 @@ float	v_len2(t_point	*v)
 
 t_point	v_sum(t_point *v1, t_point *v2)
 {
-	t_point new;
+	t_point	new;
 
 	new.x = v1->x + v2->x;
 	new.y = v1->y + v2->y;
@@ -39,7 +39,7 @@ t_point	v_sum(t_point *v1, t_point *v2)
 
 t_point	v_minus(t_point	*v1, t_point *v2)
 {
-	t_point new;
+	t_point	new;
 
 	new.x = v2->x - v1->x;
 	new.y = v2->y - v1->y;
@@ -49,7 +49,7 @@ t_point	v_minus(t_point	*v1, t_point *v2)
 
 t_point	v_mult(t_point	*v1, float n)
 {
-	t_point new;
+	t_point	new;
 
 	new.x = v1->x * n;
 	new.y = v1->y * n;

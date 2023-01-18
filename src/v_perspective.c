@@ -25,7 +25,7 @@ t_perpective	*new_perp(t_cam *cam)
 	new->rigth = v_normalized(v_cross(*new->forward, v), 1);
 	new->up = v_cross(*new->rigth, *new->forward);
 	new->h = tan(cam->fov * M_PI / 180);
-	new->w = new->h * ((float)W/(float)H);
+	new->w = new->h * ((float) W / (float)H);
 	new->origin = new_calloc(sizeof(t_point), 1, 27);
 	new->origin = ft_memcpy(new->origin, cam->pov, sizeof(t_point));
 	return (new);

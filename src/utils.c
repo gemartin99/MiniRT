@@ -16,7 +16,7 @@
 t_rgb	*init_rgb(int r, int g, int b)
 {
 	t_rgb	*temp;
-	
+
 	temp = ft_calloc(sizeof(t_rgb), 1);
 	if (!temp)
 		exit_error("Error malloc", 6);
@@ -29,7 +29,7 @@ t_rgb	*init_rgb(int r, int g, int b)
 t_point	*init_point(float x, float y, float z)
 {
 	t_point	*temp;
-	
+
 	temp = ft_calloc(sizeof(t_rgb), 1);
 	if (!temp)
 		exit_error("Error malloc", 6);
@@ -45,16 +45,16 @@ float	ft_atof(char *n)
 	int		j;
 	float	nb;
 	int		m;
-	
+
 	i = 0;
 	nb = 0;
 	m = 1;
 	j = 1;
 	if (n[i] == '-')
-		{
-			m = -m;
-			i++;
-		}
+	{
+		m = -m;
+		i++;
+	}
 	while (n[i])
 	{
 		if (j > 1 && n[i - 1] != '.')
@@ -71,7 +71,7 @@ float	ft_atof(char *n)
 t_lp	*ft_last2(t_lp **lp)
 {
 	t_lp	*temp;
-	
+
 	if (!*lp)
 		return (*lp);
 	temp = *lp;
@@ -83,7 +83,7 @@ t_lp	*ft_last2(t_lp **lp)
 t_obj	*ft_last(t_obj **obj)
 {
 	t_obj	*temp;
-	
+
 	if (!*obj)
 		return (*obj);
 	temp = *obj;
@@ -96,7 +96,7 @@ void	check_point(char *s)
 {
 	int	i;
 	int	j;
-	
+
 	i = -1;
 	j = 0;
 	while (s[++i])
@@ -111,7 +111,7 @@ void	check_point(char *s)
 	{
 		if (i == 0 && s[i] == '.')
 			exit_error("ERROR\nCARACTER '.' EN POSICION ERRONEA", 1);
-			else if (s[i] == '.' && (ft_isdigit(s[i - 1]) != 1
+		else if (s[i] == '.' && (ft_isdigit(s[i - 1]) != 1
 				|| ft_isdigit(s[i + 1]) != 1))
 			exit_error("ERROR\nCARACTER '.' EN POSICION ERRONEA", 1);
 	}
@@ -120,7 +120,7 @@ void	check_point(char *s)
 void	check_less(char *s)
 {
 	int	i;
-	
+
 	i = -1;
 	while (s[++i])
 	{

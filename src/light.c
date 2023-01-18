@@ -20,9 +20,9 @@ void	printrgb(t_rgb *c, char *str)
 
 static float	light_dp(t_intersection *i, t_lp *lp, t_obj *o, t_cy *shape)
 {
-	float	dp;
+	float		dp;
 	t_vector	ip;
-	t_vector *io;
+	t_vector	*io;
 	t_vector	*vector;
 
 	ip = i_position(*i);
@@ -52,8 +52,8 @@ t_rgb	*lightray(t_intersection *i, t_mrt *mrt, t_cy *shape)
 
 	(void)i;
 	temp = mrt->lp;
-	color = color_mult(shape->rgb ,mrt->al->rgb);
-	while(temp)
+	color = color_mult(shape->rgb, mrt->al->rgb);
+	while (temp)
 	{
 		dp = light_dp(i, mrt->lp, i->shape, shape);
 		intsy = intensity(temp->rgb, temp->brt * dp);
