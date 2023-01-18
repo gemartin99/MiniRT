@@ -51,9 +51,10 @@ typedef struct s_al
 //Campo de vision rango [0,180]
 typedef struct s_cam
 {
-	t_point	*pov;
-	t_point	*vector;
-	int		fov;
+	t_point			*pov;
+	t_point			*vector;
+	int				fov;
+	struct s_cam	*next;
 }						t_cam;
 
 //Luz:

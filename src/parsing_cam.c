@@ -13,7 +13,7 @@
 #include "../inc/minirt.h"
 #include "../inc/libft/libft.h"
 
-static void	check_ta(char *s, t_mrt *mrt)
+static void	check_ta(char *s, t_cam *cam)
 {
 	int		i;
 	char	*temp;
@@ -28,12 +28,12 @@ static void	check_ta(char *s, t_mrt *mrt)
 	while (s[++i])
 		if (ft_isdigit(s[i]) != 1)
 			exit_error("ERROR\nCARACTER INCORRECTO", 1);
-	mrt->cam->fov = ft_atoi(s);
-	if (mrt->cam->fov > 180)
+	cam->fov = ft_atoi(s);
+	if (cam->fov > 180)
 		exit_error("ERROR\nPARAMETRO FUERA DE RANGO", 1);
 }
 
-static void	check_sa(char *s, t_mrt *mrt)
+static void	check_sa(char *s, t_cam *cam)
 {
 	char	**n;
 	int		i;
@@ -51,10 +51,10 @@ static void	check_sa(char *s, t_mrt *mrt)
 	}
 	if (i != 3)
 		exit_error("ERROR\nPARAMETROS INCORRECTOS", 1);
-	mrt->cam->vector = init_point(ft_atof(n[0]), ft_atof(n[1]), ft_atof(n[2]));
-	if ((mrt->cam->vector->x > 1 || mrt->cam->vector->x < -1)
-		|| (mrt->cam->vector->y > 1 || mrt->cam->vector->y < -1)
-		|| (mrt->cam->vector->z > 1 || mrt->cam->vector->z < -1))
+	cam->vector = init_point(ft_atof(n[0]), ft_atof(n[1]), ft_atof(n[2]));
+	if ((cam->vector->x > 1 || cam->vector->x < -1)
+		|| (cam->vector->y > 1 || cam->vector->y < -1)
+		|| (cam->vector->z > 1 || cam->vector->z < -1))
 		exit_error("ERROR\nVECTOR FUERA DE RANGO", 1);
 	i = -1;
 	while (n[++i])
@@ -62,7 +62,7 @@ static void	check_sa(char *s, t_mrt *mrt)
 	free(n);
 }
 
-static void	check_fa(char *s, t_mrt *mrt)
+static void	check_fa(char *s, t_cam *cam)
 {
 	char	**n;
 	int		i;
@@ -78,18 +78,18 @@ static void	check_fa(char *s, t_mrt *mrt)
 	}
 	if (i != 3)
 		exit_error("ERROR\nPARAMETROS INCORRECTOS", 1);
-	mrt->cam->pov = init_point(ft_atof(n[0]), ft_atof(n[1]), ft_atof(n[2]));
+	cam->pov = init_point(ft_atof(n[0]), ft_atof(n[1]), ft_atof(n[2]));
 	i = -1;
 	while (n[++i])
 		free(n[i]);
 	free(n);
 }
 
-void	parsing_cam(char **argv, int argc, t_mrt *mrt)
+void	parsing_cam(char **argv, int argc, t_cam *cam)
 {
 	if (argc != 4)
 		exit_error("ERROR\nL CON MAS ARGUMENTOS DE LOS INDICADOS", 1);
-	check_fa(argv[1], mrt);
-	check_sa(argv[2], mrt);
-	check_ta(argv[3], mrt);
+	check_fa(argv[1], cam);
+	check_sa(argv[2], cam);
+	check_ta(argv[3], cam);
 }

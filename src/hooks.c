@@ -23,5 +23,9 @@ int	key_hook(int key, t_mrt *mrt)
 {
 	if (key == 53)
 		close_program(mrt);
+	if (key == 123)
+		printf("L\n");
+	if (key == 124)
+		printf("R\n");
 	return (0);
 }

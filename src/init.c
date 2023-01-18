@@ -33,19 +33,23 @@ void	init_al(t_mrt *mrt, char **line)
 	mrt->al->rgb = temp;
 }
 
-void	init_cam(t_mrt *mrt, char **line)
+void	init_cam(t_cam **cam, char **line)
 {
-	int	i;
+	int		i;
+	t_cam	*temp;
 
 	i = -1;
 	while (line[++i])
 		;
-	if (mrt->cam)
-		exit_error("Error\nnThere are more than oneCamera ligth", 3);
-	mrt->cam = ft_calloc(sizeof(t_cam), 1);
-	if (!mrt->cam)
-		exit_error("Error malloc", 4);
-	parsing_cam(line, i, mrt);
+	temp = ft_calloc(sizeof(t_cam), 1);
+	if (!temp)
+		exit_error("Error malloc", 6);
+	temp->next = NULL;
+	if (*cam)
+		(ft_last3(cam))->next = temp;
+	else
+		(*cam) = temp;
+	parsing_cam(line, i, temp);
 }
 
 void	init_lp(t_lp **lp, char **line)

@@ -34,7 +34,7 @@ void	check_id(char *s, char **res, t_mrt *mrt)
 	if (ft_strncmp(s, "A", 2) == 0)
 		init_al(mrt, res);
 	if (ft_strncmp(s, "C", 2) == 0)
-		init_cam(mrt, res);
+		init_cam(&(mrt->cam), res);
 	if (ft_strncmp(s, "L", 2) == 0)
 		init_lp(&(mrt->lp), res);
 	if (ft_strncmp(s, "sp", 3) == 0)

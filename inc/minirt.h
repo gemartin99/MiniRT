@@ -25,7 +25,7 @@ int		key_hook(int key, t_mrt *mrt);
 
 void	parsing(char *file_name, t_mrt *mrt);
 void	parsing_la(char **argv, int argc, t_mrt *mrt);
-void	parsing_cam(char **argv, int argc, t_mrt *mrt);
+void	parsing_cam(char **argv, int argc, t_cam *cam);
 void	parsing_lp(char **argv, int argc, t_lp *lp);
 void	parsing_sp(char **argv, int argc, t_sp *sp);
 void	parsing_pl(char **argv, int argc, t_pl *pl);
@@ -34,7 +34,7 @@ void	parsing_cy(char **argv, int argc, t_cy *cy);
 //INIT
 
 void	init_al(t_mrt *mrt, char **line);
-void	init_cam(t_mrt *mrt, char **line);
+void	init_cam(t_cam **cam, char **line);
 void	init_lp(t_lp **lp, char **line);
 void	init_newobj(t_obj **obj, char **line, int id);
 void	check_less(char *s);
@@ -87,6 +87,7 @@ void	exit_error(char *str, int n);
 float	ft_atof(char *n);
 t_obj	*ft_last(t_obj **obj);
 t_lp	*ft_last2(t_lp **lp);
+t_cam	*ft_last3(t_cam **cam);
 void	*new_calloc(size_t n, size_t size, int error);
 void	*new_cpy(void *src, size_t size);
 
