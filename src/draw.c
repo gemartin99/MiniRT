@@ -28,7 +28,6 @@ void	raytrace(t_mrt *mrt)
 	float			y;
 	t_intersection	*i;
 	t_perpective	*p;
-	t_cy			*temp;
 
 	y = 0;
 	i = ft_calloc(sizeof(t_intersection), 1);
@@ -43,8 +42,7 @@ void	raytrace(t_mrt *mrt)
 						/ (float)W - 1, (2 * y) / (float)H - 1));
 			if (obj_int(i, &(mrt->obj)))
 			{
-				temp = i->shape->elem;
-				pixel_put(mrt->img, x, y, create_trgb(lightray(i, mrt, temp)));
+				pixel_put(mrt->img, x, y, create_trgb(lightray(i, mrt, i->shape->elem)));
 			}
 			free(i->ray->origin);
 			free(i->ray->direction);

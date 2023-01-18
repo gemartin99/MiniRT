@@ -16,16 +16,13 @@
 t_perpective	*new_perp(t_cam *cam)
 {
 	t_perpective	*new;
-	t_vector		v;
 
 	new = new_calloc(sizeof(t_perpective), 1, 25);
-	v = v_minus(cam->vector, cam->pov);
-	new->forward = v_normalized(&v, 0);
-	v = vector2(0, 1);
-	new->rigth = v_normalized(v_cross(*new->forward, v), 1);
-	new->up = v_cross(*new->rigth, *new->forward);
+	new->forward = v_normalized(cam->vector, 0);
+	new->rigth = v_cross(*new->forward, vector2(0, 1));
+	new->up = v_cross(*new->forward, *new->rigth);
 	new->h = tan(cam->fov * M_PI / 180);
-	new->w = new->h * ((float) W / (float)H);
+	new->w = new->h * ((float)W/(float)H);
 	new->origin = new_calloc(sizeof(t_point), 1, 27);
 	new->origin = ft_memcpy(new->origin, cam->pov, sizeof(t_point));
 	return (new);
@@ -38,12 +35,11 @@ t_ray	*makeray(t_perpective *pctve, t_vector point)
 	t_point	temp2;
 
 	new = new_calloc(sizeof(t_ray), 1, 22);
-	temp = v_mult(pctve->rigth, pctve->w * point.x);
+	temp = v_mult(pctve->rigth, point.x * pctve->w);
 	temp = v_sum(pctve->forward, &temp);
-	temp2 = v_mult(pctve->up, pctve->h * point.y);
+	temp2 = v_mult(pctve->up, point.y * pctve->h);
 	temp = v_sum(&temp, &temp2);
-	new->direction = new_calloc(sizeof(t_vector), 1, 104);
-	*new->direction = temp;
+	new->direction = v_normalized(&temp, 0);
 	new->origin = new_calloc(sizeof(t_point), 1, 27);
 	new->origin = ft_memcpy(new->origin, pctve->origin, sizeof(t_point));
 	new->t_max = RAY_T_MAX;

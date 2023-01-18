@@ -53,7 +53,7 @@ int	pl_inter(t_intersection *i, t_obj	*o)
 		free(plane);
 		return (0);
 	}
-	xv = v_dot(v_minus(i->ray->origin, plane->point), *plane->vector) * -1;
+	xv = v_dot(v_minus(plane->point, i->ray->origin), *plane->vector) * -1;
 	if ((dn < 0 && xv > 0) || (dn > 0 && xv < 0))
 	{
 		free(plane);
@@ -103,7 +103,7 @@ int	sp_inter(t_intersection *i, t_obj	*o)
 
 	sphere = o->elem;
 	local = new_cpy(i->ray->origin, sizeof(t_point));
-	*local = v_minus(local, sphere->point);		
+	*local = v_minus(sphere->point, local);
 	n[0] = v_len2(i->ray->direction);
 	n[1] = 2 * v_dot(*(i->ray->direction), *(local));
 	n[2] = v_len2(local) - sqr(sphere->dia / 2);
@@ -149,50 +149,6 @@ int	cy_caps(t_cy	*cylinder, t_intersection	*i, float dn)
 	return (1);
 }
 
-// int	cy_inter(t_intersection *i, t_obj	*o)
-// {
-// 	float	n[4];
-// 	t_cy	*cylinder;
-// 	t_vector	origin[2];
-// 	t_ray	localray;
-// 	float	t;
-
-// 	t = i->t;
-// 	cylinder = o->elem;
-// 	cylinder->vector = v_normalized(cylinder->vector, 1);
-// 	origin[0] = v_minus(i->ray->origin, cylinder->point);
-// 	localray.origin = v_cross(*cylinder->vector, origin[0]);
-// 	localray.origin = v_cross(*localray.origin, *cylinder->vector);
-// 	localray.direction = v_cross(*cylinder->vector, *i->ray->direction);
-// 	localray.direction = v_cross(*localray.direction, *cylinder->vector);
-// 	n[0] = v_len2(localray.direction);
-// 	n[1] = 2 * v_dot(*localray.origin, *localray.direction);
-// 	n[2] = v_len2(localray.origin) - sqr(cylinder->dia / 2);
-// 	if (cuadratic(i, n) == -1)
-// 		return (0);
-// 	origin[0] = v_mult(i->ray->direction, i->t);
-// 	origin[0] = v_sum(&origin[0], i->ray->origin);
-// 	origin[1] = v_minus(&origin[0], cylinder->point);
-// 	if (v_dot(origin[1], *cylinder->vector) < 0)
-// 	{
-// 		// if (cy_caps(cylinder, i, n[3]) == -1)
-// 		// {
-// 			i->t = t;
-// 			return (0);
-// 		// }
-// 	}
-// 	origin[1] = v_mult(cylinder->vector, cylinder->hgt);
-// 	origin[1] = v_sum(&origin[1], cylinder->point);
-// 	origin[1] = v_minus(&origin[0], &origin[1]);
-// 	if (v_dot(origin[1], *cylinder->vector) > 0)
-// 	{
-// 		i->t = t;
-// 		return (0);
-// 	}
-// 	i->shape = o;
-// 	return (1);
-// }
-
 int	cy_inter(t_intersection *i, t_obj	*o)
 {
 	float	n[4];
@@ -204,7 +160,7 @@ int	cy_inter(t_intersection *i, t_obj	*o)
 	t = i->t;
 	cylinder = o->elem;
 	cylinder->vector = v_normalized(cylinder->vector, 1);
-	origin = v_minus(i->ray->origin, cylinder->point);
+	origin = v_minus(cylinder->point, i->ray->origin);
 	dotp[0] = v_dot(*i->ray->direction, *cylinder->vector);
 	dotp[1] = v_dot(*cylinder->vector, origin);
 	n[0] = v_len2(i->ray->direction) - sqr(dotp[0]);
