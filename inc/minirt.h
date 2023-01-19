@@ -62,6 +62,7 @@ t_point	v_mult(t_point	*v1, float n);
 t_point	v_div(t_point	*v1, t_point *v2);
 t_ray	*makeray(t_perpective *pctve, t_vector point);
 int		obj_int(t_intersection *i, t_obj **o);
+int		obj_doesint(t_intersection *i, t_obj **o);
 int		sp_inter(t_intersection *i, t_obj	*o);
 int		sp_doesinter(t_intersection *i, t_obj	*o);
 int		pl_inter(t_intersection *i, t_obj	*o);
@@ -69,8 +70,11 @@ int		cy_inter(t_intersection *i, t_obj	*o);
 int		pl_doesinter(t_intersection *i, t_obj	*o);
 t_vector		vector2(float x, float y);
 t_perpective	*new_perp(t_cam *cam);
-t_point	r_calculate(t_ray ray, float t);
-t_point	i_position(t_intersection i);
+t_point		r_calculate(t_ray ray, float t);
+t_point		i_position(t_intersection i);
+t_vector	*pl_normal(t_vector *vector);
+t_vector	*cy_normal(t_cy *cylinder, t_point inter);
+t_vector	*get_normal(t_intersection *i);
 
 //COLOR & LIGHT
 
@@ -79,7 +83,7 @@ int	create_trgb(t_rgb	*color);
 t_rgb	*intensity(t_rgb *c, float intensity);
 t_rgb	*color_mult(t_rgb *c1, t_rgb *c2);
 t_rgb	*color_sum(t_rgb *c1, t_rgb *c2);
-int	is_shadow(t_intersection *i, t_lp *lp);
+int	is_shadow(t_intersection *i, t_lp *lp, t_obj *o);
 
 //UTILS
 

@@ -48,14 +48,14 @@ int	obj_int(t_intersection *i, t_obj **o)
 	return (bool);
 }
 
-int	obj_doesint(t_intersection *i, t_obj *o)
+int	obj_doesint(t_intersection *i, t_obj **o)
 {
 	t_obj	*temp;
 
-	temp = o;
+	temp = *o;
 	while (temp)
 	{
-		if (temp->doesintx(i, temp->elem))
+		if (temp->intx(i, temp))
 			return (1);
 		temp = temp->next;
 	}

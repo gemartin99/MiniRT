@@ -39,27 +39,74 @@ void	printv(t_point *temp)
 	printf("X=%f, Y=%f, Z=%f\n", temp->x, temp->y, temp->z);
 }
 
-int	pl_inter(t_intersection *i, t_obj	*o)
+t_vector	*pl_normal(t_vector *vector)
 {
+	t_vector	*normal;
+	t_vector	*temp;
+
+	temp = v_cross(vector2(0, 1), *vector);
+	normal = v_cross(*vector, *temp);
+	free(temp);
+	v_normalize(&normal);
+	return (normal);
+}
+
+t_vector	*cy_normal(t_cy *cylinder, t_point inter)
+{
+	t_vector	*normal;
+	t_vector	temp;
+	t_vector	temp2;
+	float			dn;
+
+	temp = v_minus(&inter, cylinder->point);
+	dn = v_dot(*cylinder->vector, temp);
+	temp2 = v_mult(cylinder->vector, dn);
+	temp = v_minus(&temp, &temp2);
+	normal = v_normalized(&temp, 0);
+	return (normal);
+}
+
+t_vector	*get_normal(t_intersection *i)
+{
+	t_cy	*shape;
+	t_vector	temp;
+
+	shape = i->shape->elem;
+	if (i->shape->id == PL)
+		return (pl_normal(shape->vector));
+	else if (i->shape->id == CY)
+		return (cy_normal(shape, i_position(*i)));
+	temp = i_position(*i);
+	temp = v_minus(&temp, shape->point);
+	return (v_normalized(&temp, 0));
+}
+
+int	pl_inter(t_intersection *i, t_obj	*o)
+{ 
 	float	dn;
 	float	xv;
 	float	t;
 	t_pl	*plane;
+	t_vector *normal;
 	
 	plane = new_cpy(o->elem, sizeof(t_pl));
-	dn = v_dot(*i->ray->direction, *plane->vector);
+	normal = pl_normal(plane->vector);
+	dn = v_dot(*i->ray->direction, *normal);
 	if (!dn)
 	{
+		free(normal);
 		free(plane);
 		return (0);
 	}
-	xv = v_dot(v_minus(plane->point, i->ray->origin), *plane->vector) * -1;
+	xv = v_dot(v_minus(plane->point, i->ray->origin), *normal) * -1;
 	if ((dn < 0 && xv > 0) || (dn > 0 && xv < 0))
 	{
+		free(normal);
 		free(plane);
 		return (0);
 	}
 	t = xv / dn;
+	free(normal);
 	free(plane);
 	if (t <= RAY_T_MIN || t >= i->t)
 		return (0);
@@ -74,22 +121,27 @@ int	pl_doesinter(t_intersection *i, t_obj	*o)
 	float	xv;
 	float	t;
 	t_pl	*plane;
+	t_vector *normal;
 	
 	plane = new_cpy(o->elem, sizeof(t_pl));
-	dn = v_dot(*i->ray->direction, *plane->vector);
+	normal = pl_normal(plane->vector);
+	dn = v_dot(*i->ray->direction, *normal);
 	if (!dn)
 	{
+		free(normal);
 		free(plane);
 		return (0);
 	}
-	xv = v_dot(v_minus(i->ray->origin, plane->point), *plane->vector) * -1;
+	xv = v_dot(v_minus(plane->point, i->ray->origin), *normal) * -1;
 	if ((dn < 0 && xv > 0) || (dn > 0 && xv < 0))
 	{
+		free(normal);
 		free(plane);
 		return (0);
 	}
 	t = xv / dn;
 	free(plane);
+	free(normal);
 	if (t <= RAY_T_MIN || t >= i->t)
 		return (0);
 	return (1);
@@ -122,7 +174,7 @@ int	sp_doesinter(t_intersection *i, t_obj	*o)
 
 	sphere = o->elem;
 	local = new_cpy(i->ray->origin, sizeof(t_point));
-	*local = v_minus(local, sphere->point);		
+	*local = v_minus(sphere->point, local);
 	n[0] = v_len2(i->ray->direction);
 	n[1] = 2 * v_dot(*(i->ray->direction), *(local));
 	n[2] = v_len2(local) - sqr(sphere->dia / 2);
@@ -132,21 +184,24 @@ int	sp_doesinter(t_intersection *i, t_obj	*o)
 	return (1);
 }
 
-int	cy_caps(t_cy	*cylinder, t_intersection	*i, float dn)
+int	cy_caps(t_cy	*cylinder, t_intersection	*i)
 {
-	t_point	p1;
-	// t_point	p2;
-	float		t;
+	t_obj	*tempobj;
+	t_pl	*pl;
+	t_vector	temp;
 
-	p1 = v_minus(i->ray->origin, cylinder->point);
-	t = v_dot(p1, *cylinder->vector) / dn;
-	if (t <= RAY_T_MIN || t >= i->t)
-		return (-1);
-	i->t = t;
-	// p2 = v_mult(cylinder->vector, cylinder->hgt);
-	// p2 = v_sum(&p2, &p1);
-	// t = v_dot(p2, v2)
-	return (1);
+	tempobj = new_calloc(sizeof(t_obj), 1, 98);
+	tempobj->intx = &pl_inter;
+	tempobj->doesintx = &pl_doesinter;
+	pl = new_calloc(sizeof(t_pl), 1, 76);
+	pl->rgb = new_cpy(cylinder->rgb, sizeof(t_rgb));
+	pl->point = new_cpy(cylinder->point, sizeof(t_rgb));
+	temp = v_mult(cylinder->vector, -1);
+	pl->vector = v_normalized(&temp, 0);
+	tempobj->elem = pl;
+	if (tempobj->intx(i, tempobj))
+		return (1);
+	return (-1);
 }
 
 int	cy_inter(t_intersection *i, t_obj	*o)
@@ -171,7 +226,7 @@ int	cy_inter(t_intersection *i, t_obj	*o)
 	n[3] = v_dot(*i->ray->direction, *cylinder->vector) * i->t + v_dot(origin, *cylinder->vector);
 	if ((n[3] < 0 || n[3] > cylinder->hgt) && n[3] != 0)
 	{
-		// if (cy_caps(cylinder, i, n[3]) == -1)
+		// if (cy_caps(cylinder, i) == -1)
 		// {
 			i->t = t;
 			return (0);
