@@ -20,6 +20,30 @@
 # include	<limits.h> 
 # include <math.h>
 
+typedef struct s_intersection	t_intersection;
+
+//Objetos:
+//Identificador,
+//puntero al elemento,
+//puntero al siguiente objetos si hay mas
+typedef struct s_obj
+{
+	char			id;
+	void			*elem;
+	struct s_obj	*next;
+	int				(*intx)(t_intersection *i, struct s_obj *elem);
+	int				(*doesintx)(t_intersection *i, struct s_obj *elem);
+}							t_obj;
+
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}						t_img;
+
 typedef struct s_point
 {
 	float	x;
@@ -54,7 +78,9 @@ typedef struct s_cam
 	t_point			*pov;
 	t_point			*vector;
 	int				fov;
+	t_img			*img;
 	struct s_cam	*next;
+	struct s_cam	*prev;
 }						t_cam;
 
 //Luz:
@@ -89,6 +115,7 @@ typedef struct s_pl
 	t_point	*point;
 	t_rgb	*rgb;
 	t_point	*vector;
+	t_point	*normal;
 }							t_pl;
 
 //Cilindro:
@@ -102,24 +129,11 @@ typedef struct s_cy
 	t_point	*point;
 	t_rgb	*rgb;
 	t_point	*vector;
+	t_obj	*topcap;
+	t_obj	*bottomcap;	
 	float	dia;
 	float	hgt;
 }								t_cy;
-
-typedef struct s_intersection	t_intersection;
-
-//Objetos:
-//Identificador,
-//puntero al elemento,
-//puntero al siguiente objetos si hay mas
-typedef struct s_obj
-{
-	char			id;
-	void			*elem;
-	struct s_obj	*next;
-	int				(*intx)(t_intersection *i, struct s_obj *elem);
-	int				(*doesintx)(t_intersection *i, struct s_obj *elem);
-}							t_obj;
 
 typedef struct s_mlx
 {
@@ -127,20 +141,11 @@ typedef struct s_mlx
 	void	*win;
 }						t_mlx;
 
-typedef struct s_img
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}						t_img;
-
 typedef struct s_mrt
 {
 	t_mlx	*mlx;
-	t_img	*img;
 	t_al	*al;
+	t_img	*img;
 	t_cam	*cam;
 	t_lp	*lp;
 	t_obj	*obj;

@@ -24,8 +24,14 @@ int	key_hook(int key, t_mrt *mrt)
 	if (key == 53)
 		close_program(mrt);
 	if (key == 123)
-		printf("L\n");
+	{
+		mrt->cam = mrt->cam->prev;
+		mlx_put_image_to_window(mrt->mlx->mlx, mrt->mlx->win, mrt->cam->img->img, 0, 0);
+	}
 	if (key == 124)
-		printf("R\n");
+	{
+		mrt->cam = mrt->cam->next;
+		mlx_put_image_to_window(mrt->mlx->mlx, mrt->mlx->win, mrt->cam->img->img, 0, 0);
+	}
 	return (0);
 }

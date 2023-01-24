@@ -62,13 +62,17 @@ static float	light_dp(t_intersection *i, t_lp *lp)
 t_rgb	*lightray(t_intersection *i, t_mrt *mrt, t_cy *shape)
 {
 	t_lp	*temp;
-	t_rgb	*color;
+	t_rgb	*color[2];
 	float	dp;
 	t_rgb	*intsy;
+	int		l;
+	int 	s;
 
 	temp = mrt->lp;
-	color = color_sum(new_cpy(shape->rgb, sizeof(t_rgb)), new_cpy(mrt->al->rgb, sizeof(t_rgb)));
-	// color = new_cpy(shape->rgb, sizeof(t_rgb));
+	l = 0;
+	s = 0;
+	color[0] = color_sum(new_cpy(shape->rgb, sizeof(t_rgb)), new_cpy(mrt->al->rgb, sizeof(t_rgb)));
+	color[1] = intensity(shape->rgb, 0);
 	while (temp)
 	{
 		dp = light_dp(i, temp);
@@ -76,14 +80,23 @@ t_rgb	*lightray(t_intersection *i, t_mrt *mrt, t_cy *shape)
 		if (dp <= 0)
 		{
 			free(intsy);
-			return (color);
+			return (color[0]);
 		}
 		if (is_shadow(i, temp, mrt->obj))
-			color = color_mult(mrt->al->rgb, intsy);
+		{
+			if (!l && !s)
+			{
+				color[1] = color_mult(mrt->al->rgb, intsy);
+				s = 1;
+			}
+		}
 		else
-			color = color_sum(color_mult(intsy, color), specular(i, temp));
+		{
+			l = 1;
+			color[1] = color_sum(color_sum(color_mult(intsy, color[0]), specular(i, temp)), color[1]);
+		}
 		free(intsy);
 		temp = temp->next;
 	}
-	return (color);
+	return (color[1]);
 }

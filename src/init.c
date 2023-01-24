@@ -46,9 +46,15 @@ void	init_cam(t_cam **cam, char **line)
 		exit_error("Error malloc", 6);
 	temp->next = NULL;
 	if (*cam)
+	{
+		temp->prev = (ft_last3(cam));
 		(ft_last3(cam))->next = temp;
+	}
 	else
+	{
 		(*cam) = temp;
+		temp->prev = NULL;
+	}
 	parsing_cam(line, i, temp);
 }
 
@@ -76,24 +82,18 @@ void	init_newobj(t_obj **obj, char **line, int id)
 	t_obj	*temp;
 
 	temp = ft_calloc(sizeof(t_obj), 1);
+	temp->id = id;
+	temp->next = NULL;
 	if (!temp)
 		exit_error("Error malloc", 7);
 	if (id == SP)
-	{
-		temp->id = id;
 		temp->elem = init_sp(line);
-	}
 	else if (id == PL)
-	{
-		temp->id = id;
 		temp->elem = (void *)init_pl(line);
-	}
 	else if (id == CY)
 	{
-		temp->id = id;
 		temp->elem = (void *)init_cy(line);
 	}
-	temp->next = NULL;
 	if ((*obj))
 		(ft_last(obj))->next = temp;
 	else
@@ -111,14 +111,6 @@ void	init_mlx(t_mrt	*mrt)
 	mrt->mlx->win = mlx_new_window(mrt->mlx->mlx, W, H, "MiniRT");
 	if (!mrt->mlx->win)
 		exit_error("Error malloc", 11);
-	mrt->img = ft_calloc(sizeof(t_img), 1);
-	if (!mrt->img)
-		exit_error("Error malloc", 14);
-	mrt->img->img = mlx_new_image(mrt->mlx->mlx, W, H);
-	if (!mrt->img->img)
-		exit_error("Error malloc", 12);
-	mrt->img->addr = mlx_get_data_addr(mrt->img->img, &mrt->img->bits_per_pixel,
-			&mrt->img->line_length, &mrt->img->endian);
 	put_func(&(mrt->obj));
 	start(mrt);
 }

@@ -32,36 +32,6 @@ t_point	i_position(t_intersection i)
 	return (r_calculate(*(i.ray), i.t));
 }
 
-int	obj_int(t_intersection *i, t_obj **o)
-{
-	t_obj	*temp;
-	int		bool;
-
-	temp = *o;
-	bool = 0;
-	while (temp)
-	{
-		if (temp->intx(i, temp))
-			bool = 1;
-		temp = temp->next;
-	}
-	return (bool);
-}
-
-int	obj_doesint(t_intersection *i, t_obj **o)
-{
-	t_obj	*temp;
-
-	temp = *o;
-	while (temp)
-	{
-		if (temp->intx(i, temp))
-			return (1);
-		temp = temp->next;
-	}
-	return (0);
-}
-
 void	put_func(t_obj **obj)
 {
 	t_obj	*temp;

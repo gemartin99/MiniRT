@@ -22,7 +22,7 @@ void	pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	raytrace(t_mrt *mrt)
+void	raytrace(t_mrt *mrt, t_cam *cam)
 {
 	float			x;
 	float			y;
@@ -31,7 +31,7 @@ void	raytrace(t_mrt *mrt)
 
 	y = 0;
 	i = ft_calloc(sizeof(t_intersection), 1);
-	p = new_perp(mrt->cam);
+	p = new_perp(cam);
 	while (y < H)
 	{
 		x = 0;
@@ -41,9 +41,7 @@ void	raytrace(t_mrt *mrt)
 			i->ray = makeray(p, vector2((2 * x)
 						/ (float)W - 1, (2 * y) / (float)H - 1));
 			if (obj_int(i, &(mrt->obj)))
-			{
-				pixel_put(mrt->img, x, y, create_trgb(lightray(i, mrt, i->shape->elem)));
-			}
+				pixel_put(cam->img, x, y, create_trgb(lightray(i, mrt, i->shape->elem)));
 			free(i->ray->origin);
 			free(i->ray->direction);
 			free(i->ray);
@@ -59,10 +57,32 @@ void	raytrace(t_mrt *mrt)
 	free(i);
 }
 
+void	cams_img(t_mrt *mrt, t_cam **cam)
+{
+	t_cam	*temp;
+	int		first;
+
+	temp = *cam;
+	first = 1;
+	while (temp)
+	{
+		temp->img = new_img(mrt->mlx);
+		raytrace(mrt, temp);
+		if (first)
+		{
+			mlx_put_image_to_window(mrt->mlx->mlx, mrt->mlx->win, temp->img->img, 0, 0);
+			first = 0;			
+		}
+		temp = temp->next;
+	}
+	mrt->cam->prev = ft_last3(cam);
+	(ft_last3(cam))->next = mrt->cam;
+	mrt->img = (*cam)->img;
+}
+
 void	start(t_mrt *mrt)
-{	
-	raytrace(mrt);
-	mlx_put_image_to_window(mrt->mlx->mlx, mrt->mlx->win, mrt->img->img, 0, 0);
+{
+	cams_img(mrt, &mrt->cam);
 	mlx_hook(mrt->mlx->win, 17, 0, close_program, mrt);
 	mlx_hook(mrt->mlx->win, 2, 0, key_hook, mrt);
 	mlx_loop(mrt->mlx->mlx);

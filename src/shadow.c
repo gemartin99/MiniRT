@@ -12,13 +12,14 @@
 
 #include "../inc/minirt.h"
 
-static int	check_shadow(t_intersection *i, t_ray *ray, t_obj *o)
+ int	check_shadow(t_intersection *i, t_ray *ray, t_obj *o)
 {
 	t_intersection	*tempi;
 	int				res;
 
 	tempi = new_cpy(i, sizeof(t_intersection));
 	tempi->ray = ray;
+	tempi->t = ray->t_max;
 	res = obj_doesint(tempi, &o);
 	free(ray->direction);
 	free(ray->origin);
@@ -36,6 +37,7 @@ int	is_shadow(t_intersection *i, t_lp *lp, t_obj *o)
 	lray->origin = new_calloc(sizeof(t_point), 1, 102);
 	*lray->origin = i_position(*i);
 	v = v_minus(lray->origin, lp->lpoint);
+	lray->t_max = v_len(&v);
 	lray->direction = v_normalized(&v, 0);
 	if (check_shadow(i, lray, o))
 		return (1);

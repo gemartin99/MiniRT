@@ -77,6 +77,9 @@ SRC_FILES	=	main.c \
 				v_shape_intersections.c \
 				v_vectors.c \
 				v_utils.c \
+				v_sphere.c \
+				v_plane.c \
+				v_cylinder.c \
 				colors.c \
 				light.c \
 				shadow.c

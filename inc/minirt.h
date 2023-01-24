@@ -36,6 +36,7 @@ void	parsing_cy(char **argv, int argc, t_cy *cy);
 void	init_al(t_mrt *mrt, char **line);
 void	init_cam(t_cam **cam, char **line);
 void	init_lp(t_lp **lp, char **line);
+t_img	*new_img(t_mlx	*mlx);
 void	init_newobj(t_obj **obj, char **line, int id);
 void	check_less(char *s);
 void	check_point(char *s);
@@ -75,6 +76,7 @@ t_point		i_position(t_intersection i);
 t_vector	*pl_normal(t_vector *vector);
 t_vector	*cy_normal(t_cy *cylinder, t_point inter);
 t_vector	*get_normal(t_intersection *i);
+int	cuadratic(t_intersection *i, float *n);
 
 //COLOR & LIGHT
 
