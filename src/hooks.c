@@ -26,12 +26,14 @@ int	key_hook(int key, t_mrt *mrt)
 	if (key == 123)
 	{
 		mrt->cam = mrt->cam->prev;
-		mlx_put_image_to_window(mrt->mlx->mlx, mrt->mlx->win, mrt->cam->img->img, 0, 0);
+		mlx_put_image_to_window(mrt->mlx->mlx,
+			mrt->mlx->win, mrt->cam->img->img, 0, 0);
 	}
 	if (key == 124)
 	{
 		mrt->cam = mrt->cam->next;
-		mlx_put_image_to_window(mrt->mlx->mlx, mrt->mlx->win, mrt->cam->img->img, 0, 0);
+		mlx_put_image_to_window(mrt->mlx->mlx,
+			mrt->mlx->win, mrt->cam->img->img, 0, 0);
 	}
 	return (0);
 }

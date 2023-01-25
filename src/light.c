@@ -59,44 +59,55 @@ static float	light_dp(t_intersection *i, t_lp *lp)
 	return (dp);
 }
 
-t_rgb	*lightray(t_intersection *i, t_mrt *mrt, t_cy *shape)
+void	check_algo(t_rgb **color, t_point *temp2, t_mrt *mrt, t_rgb *intsy)
+{
+	if (!temp2->z && !temp2->y)
+	{
+		color[1] = color_mult(mrt->al->rgb, intsy);
+		temp2->y = 1;
+	}
+}
+
+t_rgb	*ft_algo(t_rgb *color[2], t_intersection *i, t_mrt *mrt, t_point *temp2)
 {
 	t_lp	*temp;
-	t_rgb	*color[2];
-	float	dp;
 	t_rgb	*intsy;
-	int		l;
-	int 	s;
 
 	temp = mrt->lp;
-	l = 0;
-	s = 0;
-	color[0] = color_sum(new_cpy(shape->rgb, sizeof(t_rgb)), new_cpy(mrt->al->rgb, sizeof(t_rgb)));
-	color[1] = intensity(shape->rgb, 0);
 	while (temp)
 	{
-		dp = light_dp(i, temp);
-		intsy = intensity(temp->rgb, temp->brt * dp);
-		if (dp <= 0)
+		temp2->x = light_dp(i, temp);
+		intsy = intensity(temp->rgb, temp->brt * temp2->x);
+		if (temp2->x <= 0)
 		{
 			free(intsy);
 			return (color[0]);
 		}
 		if (is_shadow(i, temp, mrt->obj))
-		{
-			if (!l && !s)
-			{
-				color[1] = color_mult(mrt->al->rgb, intsy);
-				s = 1;
-			}
-		}
+			check_algo(color, temp2, mrt, intsy);
 		else
 		{
-			l = 1;
-			color[1] = color_sum(color_sum(color_mult(intsy, color[0]), specular(i, temp)), color[1]);
+			temp2->z = 1;
+			color[1] = color_sum(color_sum(color_mult(intsy,
+							color[0]), specular(i, temp)), color[1]);
 		}
 		free(intsy);
 		temp = temp->next;
 	}
 	return (color[1]);
+}
+
+t_rgb	*lightray(t_intersection *i, t_mrt *mrt, t_cy *shape)
+{
+	t_rgb	*color[2];
+	t_rgb	*res;
+	t_point	*temp2;
+
+	temp2 = init_point(0, 0, 0);
+	color[0] = color_sum(new_cpy(shape->rgb, sizeof(t_rgb)),
+			new_cpy(mrt->al->rgb, sizeof(t_rgb)));
+	color[1] = intensity(shape->rgb, 0);
+	res = ft_algo(color, i, mrt, temp2);
+	free(temp2);
+	return (res);
 }

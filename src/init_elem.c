@@ -61,7 +61,7 @@ static t_obj	*init_cap(t_cy *cylinder, int top)
 	}
 	else
 		*pl->normal = v_mult(cylinder->vector, -1);
-	pl->rgb = new_cpy(cylinder->rgb, sizeof(t_rgb)); 
+	pl->rgb = new_cpy(cylinder->rgb, sizeof(t_rgb));
 	tempo = new_calloc(sizeof(t_obj), 1, 189);
 	tempo->elem = pl;
 	tempo->id = PL;
@@ -83,7 +83,7 @@ t_cy	*init_cy(char **line)
 		exit_error("Error malloc", 8);
 	parsing_cy(line, i, temp);
 	temp->topcap = init_cap(temp, 1);
-	temp->bottomcap	= init_cap(temp, 0);
+	temp->bottomcap = init_cap(temp, 0);
 	return (temp);
 }
 

@@ -14,6 +14,25 @@
 #include "../inc/libft/libft.h"
 #include <mlx.h>
 
+void	ft_free(t_intersection *i, t_perpective *p, int c)
+{
+	if (c == 0)
+	{
+		free(i->ray->origin);
+		free(i->ray->direction);
+		free(i->ray);
+	}
+	if (c == 1)
+	{
+		free(p->forward);
+		free(p->origin);
+		free(p->rigth);
+		free(p->up);
+		free(p);
+		free(i);
+	}
+}
+
 void	pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
@@ -41,20 +60,14 @@ void	raytrace(t_mrt *mrt, t_cam *cam)
 			i->ray = makeray(p, vector2((2 * x)
 						/ (float)W - 1, (2 * y) / (float)H - 1));
 			if (obj_int(i, &(mrt->obj)))
-				pixel_put(cam->img, x, y, create_trgb(lightray(i, mrt, i->shape->elem)));
-			free(i->ray->origin);
-			free(i->ray->direction);
-			free(i->ray);
+				pixel_put(cam->img, x, y, create_trgb(lightray(i,
+							mrt, i->shape->elem)));
+			ft_free(i, p, 0);
 			x++;
 		}
 		y++;
 	}
-	free(p->forward);
-	free(p->origin);
-	free(p->rigth);
-	free(p->up);
-	free(p);
-	free(i);
+	ft_free(i, p, 1);
 }
 
 void	cams_img(t_mrt *mrt, t_cam **cam)
@@ -70,8 +83,9 @@ void	cams_img(t_mrt *mrt, t_cam **cam)
 		raytrace(mrt, temp);
 		if (first)
 		{
-			mlx_put_image_to_window(mrt->mlx->mlx, mrt->mlx->win, temp->img->img, 0, 0);
-			first = 0;			
+			mlx_put_image_to_window(mrt->mlx->mlx,
+				mrt->mlx->win, temp->img->img, 0, 0);
+			first = 0;
 		}
 		temp = temp->next;
 	}
