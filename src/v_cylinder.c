@@ -31,18 +31,20 @@ t_vector	*cy_normal(t_cy *cylinder, t_point inter)
 int	cy_caps(t_cy	*cylinder, t_intersection	*i)
 {
 	t_intersection	*tempi;
+	int	res;
 
+	res = 0;
 	tempi = new_cpy(i, sizeof(t_intersection));
 	tempi->t = RAY_T_MAX;
 	tempi->ray = new_cpy(i->ray, sizeof(t_ray) + sizeof(t_vector) + sizeof(t_point));
-	cylinder->topcap->intx(tempi, cylinder->topcap);
-	cylinder->bottomcap->intx(tempi, cylinder->bottomcap);
-	if (tempi->t <= i->t)
+	res += cylinder->topcap->intx(tempi, cylinder->topcap);
+	res += cylinder->bottomcap->intx(tempi, cylinder->bottomcap);
+	if (i->t > tempi->t)
 	{
 		i->t = tempi->t;
 		i->shape = tempi->shape;
 	}
-	return (0);
+	return (res);
 }
 
 int	cy_inter(t_intersection *i, t_obj	*o)
@@ -73,9 +75,8 @@ int	cy_inter(t_intersection *i, t_obj	*o)
 				i->t = t;
 				return (0);
 		}
-		i->t = n[0];
-		cy_caps(cylinder, i);
-		return (1);
+		i->t = t;
+		return (cy_caps(cylinder, i));
 	}
 	i->shape = o;
 	return (1);

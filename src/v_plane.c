@@ -44,10 +44,7 @@ int	pl_inter(t_intersection *i, t_obj	*o)
 	}
 	t = xv / dn;
 	if (t <= RAY_T_MIN || t >= i->t)
-	{
-		printf("T2:%f\n", i->t);
 		return (0);
-	}
 	i->t = t;
 	i->shape = o;
 	return (1);
