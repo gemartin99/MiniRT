@@ -166,5 +166,6 @@ typedef struct s_mrt
 # define SP 0
 # define PL 1
 # define CY 2
+# define TR 3
 
 #endif
