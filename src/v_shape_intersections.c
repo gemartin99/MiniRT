@@ -15,8 +15,8 @@
 
 int	cuadratic(t_intersection *i, float *n)
 {
-	int	t[2];
-	float discriminant;
+	int		t[2];
+	float	discriminant;
 
 	discriminant = sqr(n[1]) - 4 * n[0] * n[2];
 	if (discriminant < 0)
@@ -36,12 +36,12 @@ int	cuadratic(t_intersection *i, float *n)
 
 t_vector	*get_normal(t_intersection *i)
 {
-	t_cy	*shape;
+	t_cy		*shape;
 	t_vector	temp;
 
 	shape = i->shape->elem;
 	if (i->shape->id == PL)
-		return (new_cpy(((t_pl*)(shape))->normal, sizeof(t_vector)));
+		return (new_cpy(((t_pl *)(shape))->normal, sizeof(t_vector)));
 	else if (i->shape->id == CY)
 		return (cy_normal(shape, i_position(*i)));
 	temp = i_position(*i);
@@ -78,4 +78,3 @@ int	obj_doesint(t_intersection *i, t_obj **o)
 	}
 	return (0);
 }
-

@@ -12,7 +12,7 @@
 
 #include "../inc/minirt.h"
 
- int	check_shadow(t_intersection *i, t_ray *ray, t_obj *o)
+int	check_shadow(t_intersection *i, t_ray *ray, t_obj *o)
 {
 	t_intersection	*tempi;
 	int				res;

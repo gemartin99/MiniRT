@@ -13,6 +13,11 @@
 #include "../inc/minirt.h"
 #include "../inc/libft/libft.h"
 
+float	sqr(float n)
+{
+	return (n * n);
+}
+
 int	check_wrong_char(char *s)
 {
 	int	i;

@@ -12,11 +12,6 @@
 
 #include "../inc/minirt.h"
 
-float	sqr(float n)
-{
-	return (n * n);
-}
-
 float	v_len(t_point	*v)
 {
 	float	n;

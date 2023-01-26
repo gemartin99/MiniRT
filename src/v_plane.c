@@ -28,7 +28,7 @@ t_vector	*pl_normal(t_vector *vector)
 }
 
 int	pl_inter(t_intersection *i, t_obj	*o)
-{ 
+{
 	float	dn;
 	float	xv;
 	float	t;
@@ -56,7 +56,7 @@ int	pl_doesinter(t_intersection *i, t_obj	*o)
 	float	xv;
 	float	t;
 	t_pl	*plane;
-	
+
 	plane = new_cpy(o->elem, sizeof(t_pl));
 	dn = v_dot(*i->ray->direction, *plane->normal);
 	xv = v_dot(v_minus(plane->point, i->ray->origin), *plane->normal) * -1;

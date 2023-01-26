@@ -16,8 +16,8 @@
 int	sp_inter(t_intersection *i, t_obj	*o)
 {
 	t_vector	*local;
-	float	n[3];
-	t_sp	*sphere;
+	float		n[3];
+	t_sp		*sphere;
 
 	sphere = o->elem;
 	local = new_cpy(i->ray->origin, sizeof(t_point));
@@ -35,8 +35,8 @@ int	sp_inter(t_intersection *i, t_obj	*o)
 int	sp_doesinter(t_intersection *i, t_obj	*o)
 {
 	t_vector	*local;
-	float	n[3];
-	t_sp	*sphere;
+	float		n[3];
+	t_sp		*sphere;
 
 	sphere = o->elem;
 	local = new_cpy(i->ray->origin, sizeof(t_point));
