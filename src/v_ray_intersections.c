@@ -52,7 +52,7 @@ void	put_func(t_obj **obj)
 		else
 		{
 			temp->intx = &cy_inter;
-			temp->doesintx = NULL;
+			temp->doesintx = &cy_doesinter;
 		}
 		temp = temp->next;
 	}

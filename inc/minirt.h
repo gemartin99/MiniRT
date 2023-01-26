@@ -77,6 +77,7 @@ t_vector		*pl_normal(t_vector *vector);
 t_vector		*cy_normal(t_cy *cylinder, t_point inter);
 t_vector		*get_normal(t_intersection *i);
 int				cuadratic(t_intersection *i, float *n);
+int				cy_doesinter(t_intersection *i, t_obj	*o);
 
 //COLOR & LIGHT
 
