@@ -135,6 +135,15 @@ typedef struct s_cy
 	float	hgt;
 }								t_cy;
 
+typedef struct s_tr
+{
+	t_point	*point;
+	t_rgb	*rgb;
+	t_point	*vector;	
+	float	big_dia;
+	float	small_dia;
+}								t_tr;
+
 typedef struct s_mlx
 {
 	void	*mlx;
