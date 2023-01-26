@@ -74,12 +74,9 @@ int	cy_inter(t_intersection *i, t_obj	*o)
 	if (n[3] <= 0 || n[3] >= cylinder->hgt)
 	{
 		n[2] = v_dot(*i->ray->direction, *cylinder->vector) * n[1] + v_dot(origin, *cylinder->vector);
-		if ((n[2] < 0 && n[3] < 0) || (n[2] > cylinder->hgt && n[3] > cylinder->hgt) || n[1] > t)
-		{
-				i->t = t;
-				return (0);
-		}
 		i->t = t;
+		if ((n[2] < 0 && n[3] < 0) || (n[2] > cylinder->hgt && n[3] > cylinder->hgt))
+				return (0);
 		return (cy_caps(cylinder, i, n));
 	}
 	i->shape = o;
@@ -109,9 +106,9 @@ int	cy_doesinter(t_intersection *i, t_obj	*o)
 	{
 		n[2] = v_dot(*i->ray->direction, *cylinder->vector) * n[0] + v_dot(origin, *cylinder->vector);
 		n[3] = v_dot(*i->ray->direction, *cylinder->vector) * n[1] + v_dot(origin, *cylinder->vector);
+		i->t = t;
 		if ((n[2] < 0 && n[3] < 0) || (n[2] > cylinder->hgt && n[3] > cylinder->hgt))
 			return (0);
-		i->t = t;
 		return (cy_caps(cylinder, i, n));
 	}
 	return (1);
