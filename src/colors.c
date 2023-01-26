@@ -12,7 +12,11 @@
 
 #include "../inc/minirt.h"
 
-void	printrgb(t_rgb *c, char *str);
+void	printrgb(t_rgb *c, char *str)
+{
+	printf("%s:", str);
+	printf(" R:%d, G:%d, B:%d\n", c->r, c->g, c->b);
+}
 
 int	create_trgb(t_rgb	*color)
 {

@@ -12,12 +12,6 @@
 
 #include "../inc/minirt.h"
 
-void	printrgb(t_rgb *c, char *str)
-{
-	printf("%s:", str);
-	printf(" R:%d, G:%d, B:%d\n", c->r, c->g, c->b);
-}
-
 static t_rgb	*specular(t_intersection *i, t_lp *lp)
 {
 	float		dp;

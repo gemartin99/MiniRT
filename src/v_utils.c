@@ -19,7 +19,7 @@ float	sqr(float n)
 
 float	v_len(t_point	*v)
 {
-	float n;
+	float	n;
 
 	n = v_len2(v);
 	if (n == 0)

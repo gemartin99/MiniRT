@@ -63,12 +63,14 @@ SRC_FILES	=	main.c \
 				parsing_la.c \
 				error_manager.c \
 				utils.c \
+				utils2.c \
 				init.c \
 				parsing_cam.c \
 				parsing_lp.c \
 				draw.c \
 				hooks.c \
 				init_elem.c \
+				init_elem2.c \
 				parsing_sp.c \
 				parsing_pl.c \
 				parsing_cy.c \

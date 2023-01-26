@@ -13,22 +13,6 @@
 #include "../inc/minirt.h"
 #include "../inc/libft/libft.h"
 
-int	check_wrong_char(char *s)
-{
-	int	i;
-
-	i = -1;
-	if (!s)
-		exit_error("ERROR\nCARACTER INCORRECTO", 1);
-	while (s[++i])
-	{
-		if (s[i] != '-' && s[i] != '.' && s[i] != ','
-			&& s[i] != ' ' && ft_isdigit(s[i]) == 0 && s[i] != '\n')
-			exit_error("CARACTER INCORRECTO", 1);
-	}
-	return (0);
-}
-
 void	check_id(char *s, char **res, t_mrt *mrt)
 {
 	if (ft_strncmp(s, "A", 2) == 0)
@@ -43,20 +27,6 @@ void	check_id(char *s, char **res, t_mrt *mrt)
 		init_newobj(&(mrt->obj), res, PL);
 	if (ft_strncmp(s, "cy", 3) == 0)
 		init_newobj(&(mrt->obj), res, CY);
-}
-
-int	ft_isspace(char *s)
-{
-	int	i;
-
-	i = -1;
-	while (s[++i])
-	{
-		if (s[i] != ' ' && s[i] != '\t' && s[i] != '\n'
-			&& s[i] != '\v' && s[i] != '\f' && s[i] != '\r')
-			return (1);
-	}
-	return (0);
 }
 
 void	check_valid_arg(char *s, t_mrt *mrt)
@@ -103,7 +73,11 @@ int	ft_check_file_type(char *s)
 {
 	int	i;
 
+	if (!s)
+		return (-1);
 	i = ft_strlen(s);
+	if (i < 4)
+		return (-1);
 	if (s[i - 1] == 't' && s[i - 2] == 'r' && s[i - 3] == '.')
 		return (0);
 	return (-1);

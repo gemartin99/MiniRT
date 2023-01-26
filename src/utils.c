@@ -13,30 +13,20 @@
 #include "../inc/minirt.h"
 #include "../inc/libft/libft.h"
 
-t_rgb	*init_rgb(int r, int g, int b)
+int	check_wrong_char(char *s)
 {
-	t_rgb	*temp;
+	int	i;
 
-	temp = ft_calloc(sizeof(t_rgb), 1);
-	if (!temp)
-		exit_error("Error malloc", 6);
-	temp->r = r;
-	temp->g = g;
-	temp->b = b;
-	return (temp);
-}
-
-t_point	*init_point(float x, float y, float z)
-{
-	t_point	*temp;
-
-	temp = ft_calloc(sizeof(t_rgb), 1);
-	if (!temp)
-		exit_error("Error malloc", 6);
-	temp->x = x;
-	temp->y = y;
-	temp->z = z;
-	return (temp);
+	i = -1;
+	if (!s)
+		exit_error("ERROR\nCARACTER INCORRECTO", 1);
+	while (s[++i])
+	{
+		if (s[i] != '-' && s[i] != '.' && s[i] != ','
+			&& s[i] != ' ' && ft_isdigit(s[i]) == 0 && s[i] != '\n')
+			exit_error("CARACTER INCORRECTO", 1);
+	}
+	return (0);
 }
 
 float	ft_atof(char *n)
@@ -68,77 +58,18 @@ float	ft_atof(char *n)
 	return (m * nb / j);
 }
 
-t_cam	*ft_last3(t_cam **cam)
-{
-	t_cam	*temp;
-
-	if (!*cam)
-		return (*cam);
-	temp = *cam;
-	while (temp->next)
-		temp = temp->next;
-	return (temp);
-}
-
-t_lp	*ft_last2(t_lp **lp)
-{
-	t_lp	*temp;
-
-	if (!*lp)
-		return (*lp);
-	temp = *lp;
-	while (temp->next)
-		temp = temp->next;
-	return (temp);
-}
-
-t_obj	*ft_last(t_obj **obj)
-{
-	t_obj	*temp;
-
-	if (!*obj)
-		return (*obj);
-	temp = *obj;
-	while (temp->next)
-		temp = temp->next;
-	return (temp);
-}
-
-void	check_point(char *s)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	j = 0;
-	while (s[++i])
-	{
-		if (s[i] == '.')
-			j++;
-	}
-	if (j > 1)
-		exit_error("ERROR\nCARACTER '.' EN POSICION ERRONEA", 1);
-	i = -1;
-	while (s[++i])
-	{
-		if (i == 0 && s[i] == '.')
-			exit_error("ERROR\nCARACTER '.' EN POSICION ERRONEA", 1);
-		else if (s[i] == '.' && (ft_isdigit(s[i - 1]) != 1
-				|| ft_isdigit(s[i + 1]) != 1))
-			exit_error("ERROR\nCARACTER '.' EN POSICION ERRONEA", 1);
-	}
-}
-
-void	check_less(char *s)
+int	ft_isspace(char *s)
 {
 	int	i;
 
 	i = -1;
 	while (s[++i])
 	{
-		if (s[i] == '-' && i != 0)
-			exit_error("ERROR\nCARACTER '-' EN POSICION ERRONEA", 1);
+		if (s[i] != ' ' && s[i] != '\t' && s[i] != '\n'
+			&& s[i] != '\v' && s[i] != '\f' && s[i] != '\r')
+			return (1);
 	}
+	return (0);
 }
 
 void	*new_cpy(void *src, size_t size)
