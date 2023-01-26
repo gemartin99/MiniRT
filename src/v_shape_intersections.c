@@ -72,7 +72,7 @@ int	obj_doesint(t_intersection *i, t_obj **o)
 	temp = *o;
 	while (temp)
 	{
-		if (temp->intx(i, temp))
+		if (temp->doesintx(i, temp))
 			return (1);
 		temp = temp->next;
 	}

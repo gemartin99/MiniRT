@@ -43,6 +43,7 @@ int	pl_inter(t_intersection *i, t_obj	*o)
 		return (0);
 	}
 	t = xv / dn;
+	free(plane);
 	if (t <= RAY_T_MIN || t >= i->t)
 		return (0);
 	i->t = t;
@@ -66,6 +67,7 @@ int	pl_doesinter(t_intersection *i, t_obj	*o)
 		return (0);
 	}
 	t = xv / dn;
+	free(plane);
 	if (t <= RAY_T_MIN || t >= i->t)
 		return (0);
 	return (1);
