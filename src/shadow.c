@@ -24,7 +24,7 @@ int	check_shadow(t_intersection *i, t_ray *ray, t_obj *o)
 	free(ray->direction);
 	free(ray->origin);
 	free(ray);
-	free(tempi);	
+	free(tempi);
 	return (res);
 }
 
@@ -33,7 +33,6 @@ int	is_shadow(t_intersection *i, t_lp *lp, t_obj *o)
 	t_vector		v;
 	t_ray			*lray;
 
-
 	lray = new_calloc(sizeof(t_ray), 1, 101);
 	lray->origin = new_calloc(sizeof(t_point), 1, 102);
 	*lray->origin = i_position(*i);
@@ -41,6 +40,6 @@ int	is_shadow(t_intersection *i, t_lp *lp, t_obj *o)
 	lray->t_max = v_len(&v);
 	lray->direction = v_normalized(&v, 0);
 	if (check_shadow(i, lray, o))
-		return (1);	
+		return (1);
 	return (0);
 }

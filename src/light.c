@@ -78,7 +78,7 @@ t_rgb	*ray_color(t_rgb *c[2], t_intersection *i, t_mrt *mrt, t_point *temp2)
 			return (new_cpy(c[0], sizeof(t_rgb)));
 		}
 		if (is_shadow(i, temp, mrt->obj))
-			check_ray_color(c, temp2, mrt, intsy); 
+			check_ray_color(c, temp2, mrt, intsy);
 		else
 		{
 			temp2->z = 1;
