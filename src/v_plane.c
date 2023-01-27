@@ -18,6 +18,7 @@ t_vector	*pl_normal(t_vector *vector)
 	t_vector	*normal;
 	t_vector	*temp;
 
+	v_normalize(&vector);
 	temp = v_cross(vector2(0, 1), *vector);
 	normal = v_cross(*vector, *temp);
 	if (!normal->x && !normal->y && !normal->z)
@@ -34,16 +35,12 @@ int	pl_inter(t_intersection *i, t_obj	*o)
 	float	t;
 	t_pl	*plane;
 
-	plane = new_cpy(o->elem, sizeof(t_pl));
+	plane = o->elem;
 	dn = v_dot(*i->ray->direction, *plane->normal);
-	xv = v_dot(v_minus(plane->point, i->ray->origin), *plane->normal) * -1;
-	if (!dn || (dn < 0 && xv > 0) || (dn > 0 && xv < 0))
-	{
-		free(plane);
+	xv = v_dot(v_minus(plane->point, i->ray->origin), *plane->normal);
+	if (!dn || (dn > 0 && xv > 0) || (dn > 0 && xv > 0))
 		return (0);
-	}
-	t = xv / dn;
-	free(plane);
+	t = -xv / dn;
 	if (t <= RAY_T_MIN || t >= i->t)
 		return (0);
 	i->t = t;
@@ -58,16 +55,12 @@ int	pl_doesinter(t_intersection *i, t_obj	*o)
 	float	t;
 	t_pl	*plane;
 
-	plane = new_cpy(o->elem, sizeof(t_pl));
+	plane = o->elem;
 	dn = v_dot(*i->ray->direction, *plane->normal);
-	xv = v_dot(v_minus(plane->point, i->ray->origin), *plane->normal) * -1;
-	if (!dn || (dn < 0 && xv > 0) || (dn > 0 && xv < 0))
-	{
-		free(plane);
+	xv = v_dot(v_minus(plane->point, i->ray->origin), *plane->normal);
+	if (!dn || (dn > 0 && xv > 0) || (dn > 0 && xv > 0))
 		return (0);
-	}
-	t = xv / dn;
-	free(plane);
+	t = -xv / dn;
 	if (t <= RAY_T_MIN || t >= i->t)
 		return (0);
 	return (1);

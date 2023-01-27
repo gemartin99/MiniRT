@@ -55,9 +55,13 @@ static float	light_dp(t_intersection *i, t_lp *lp)
 
 void	check_ray_color(t_rgb **color, t_point *temp2, t_mrt *mrt, t_rgb *intsy)
 {
+	t_rgb	*temp;
+
 	if (!temp2->z && !temp2->y)
 	{
-		color[1] = color_mult(mrt->al->rgb, intsy);
+		temp = color_mult(mrt->al->rgb, intsy);
+		free(color[1]);
+		color[1] = temp;
 		temp2->y = 1;
 	}
 }
