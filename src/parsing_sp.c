@@ -83,7 +83,7 @@ static void	check_fa(char *s, t_sp *sp)
 void	parsing_sp(char **argv, int argc, t_sp *sp)
 {
 	if (argc != 4)
-		exit_error("ERROR\nSP CON MAS ARGUMENTOS DE LOS INDICADOS", 1);
+		exit_error("ERROR\nSP CON NUMERO DE ARGUMENTOS INCORRECTO", 1);
 	check_fa(argv[1], sp);
 	check_sa(argv[2], sp);
 	check_ta(argv[3], sp);

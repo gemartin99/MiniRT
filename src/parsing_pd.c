@@ -13,7 +13,7 @@
 #include "../inc/minirt.h"
 #include "../inc/libft/libft.h"
 
-static void	check_fo(char *s, t_pd *pd)
+static void	check_fiv(char *s, t_pd *pd)
 {
 	char	**n;
 	int		i;
@@ -41,20 +41,33 @@ static void	check_fo(char *s, t_pd *pd)
 		exit_error("ERROR\nPARAMETROS INCORRECTOS", 1);
 }
 
-static void	check_ta(char *s, t_pd *pd)
+static void	check_ta_and_fo(char *s, char *s2, t_pd *pd)
 {
 	int	i;
 
 	i = -1;
 	if (ft_strlen(s) == 1 && ft_isdigit(s[0]) != 0)
-		return ;
-	check_point(s);
-	while (s[++i])
+		;
+	else
 	{
-		if (ft_isdigit(s[i]) == 0 && s[i] != '.')
+		check_point(s);
+		while (s[++i])
+		{
+			if (ft_isdigit(s[i]) == 0 && s[i] != '.')
+				exit_error("ERROR\nPARAMETROS INCORRECTOS", 1);
+		}
+		pd->scalar = ft_atof(s);
+	}
+	i = -1;
+	if (ft_strlen(s2) == 1 && ft_isdigit(s2[0]) != 0)
+		return ;
+	check_point(s2);
+	while (s2[++i])
+	{
+		if (ft_isdigit(s2[i]) == 0 && s2[i] != '.')
 			exit_error("ERROR\nPARAMETROS INCORRECTOS", 1);
 	}
-	pd->scalar = ft_atof(s);
+	pd->hgt = ft_atof(s2);
 }
 
 static void	check_sa(char *s, t_pd *pd)
@@ -110,10 +123,10 @@ static void	check_fa(char *s, t_pd *pd)
 
 void	parsing_pd(char **argv, int argc, t_pd *pd)
 {
-	if (argc != 5)
-		exit_error("ERROR\nPD CON MAS ARGUMENTOS DE LOS INDICADOS", 1);
+	if (argc != 6)
+		exit_error("ERROR\nPD CON NUMERO DE ARGUMENTOS INCORRECTO", 1);
 	check_fa(argv[1], pd);
 	check_sa(argv[2], pd);
-	check_ta(argv[3], pd);
-	check_fo(argv[4], pd);
+	check_ta_and_fo(argv[3], argv[4], pd);
+	check_fiv(argv[5], pd);
 }

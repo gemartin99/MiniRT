@@ -82,7 +82,7 @@ static void	check_fa(char *s, t_lp *lp)
 void	parsing_lp(char **argv, int argc, t_lp *lp)
 {
 	if (argc != 4)
-		exit_error("ERROR\nC CON MAS ARGUMENTOS DE LOS INDICADOS", 1);
+		exit_error("ERROR\nC CON NUMERO DE ARGUMENTOS INCORRECTO", 1);
 	check_fa(argv[1], lp);
 	check_sa(argv[2]);
 	lp->brt = ft_atof(argv[2]);

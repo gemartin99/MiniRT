@@ -64,7 +64,7 @@ void	parsing_la(char **argv, int argc, t_mrt *mrt)
 
 	i = -1;
 	if (argc != 3)
-		exit_error("ERROR\nA CON MAS ARGUMENTOS DE LOS INDICADOS", 1);
+		exit_error("ERROR\nA CON NUMERO DE ARGUMENTOS INCORRECTO", 1);
 	check_fa(argv[1]);
 	mrt->al->ratio = ft_atof(argv[1]);
 	if (mrt->al->ratio > 1 || mrt->al->ratio < 0)

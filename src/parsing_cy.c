@@ -111,7 +111,7 @@ static void	check_fa(char *s, t_cy *cy)
 void	parsing_cy(char **argv, int argc, t_cy *cy)
 {
 	if (argc != 6)
-		exit_error("ERROR\nCY CON MAS ARGUMENTOS DE LOS INDICADOS", 1);
+		exit_error("ERROR\nCY CON NUMERO DE ARGUMENTOS INCORRECTO", 1);
 	check_fa(argv[1], cy);
 	check_sa(argv[2], cy);
 	cy->dia = check_ta_foa(argv[3]);

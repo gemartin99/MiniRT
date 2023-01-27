@@ -141,6 +141,7 @@ typedef struct s_pd
 	t_rgb		*rgb;
 	t_point	*vector;	
 	float	scalar;
+	float	hgt;
 }								t_pd;
 
 typedef struct s_mlx

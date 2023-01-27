@@ -88,7 +88,7 @@ static void	check_fa(char *s, t_cam *cam)
 void	parsing_cam(char **argv, int argc, t_cam *cam)
 {
 	if (argc != 4)
-		exit_error("ERROR\nL CON MAS ARGUMENTOS DE LOS INDICADOS", 1);
+		exit_error("ERROR\nL CON NUMERO DE ARGUMENTOS INCORRECTO", 1);
 	check_fa(argv[1], cam);
 	check_sa(argv[2], cam);
 	check_ta(argv[3], cam);

@@ -95,7 +95,7 @@ static void	check_fa(char *s, t_pl *pl)
 void	parsing_pl(char **argv, int argc, t_pl *pl)
 {
 	if (argc != 4)
-		exit_error("ERROR\nPL CON MAS ARGUMENTOS DE LOS INDICADOS", 1);
+		exit_error("ERROR\nPL CON NUMERO DE ARGUMENTOS INCORRECTO", 1);
 	check_fa(argv[1], pl);
 	check_sa(argv[2], pl);
 	check_ta(argv[3], pl);
