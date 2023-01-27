@@ -52,9 +52,9 @@ t_obj	*ft_last(t_obj **obj)
 void	check_point(char *s)
 
 {
-	int i;
-	int j;
-	int c;
+	int	i;
+	int	j;
+	int	c;
 
 	i = -1;
 	j = 0;
@@ -69,7 +69,8 @@ void	check_point(char *s)
 	{
 		if ((i == 0 && s[i] == '.') || (j > 1))
 			exit_error("ERROR\nCARACTER '.' EN POSICION ERRONEA", 1);
-		else if (s[i] == '.' && (ft_isdigit(s[i - 1]) != 1 || ft_isdigit(s[i + 1]) != 1))
+		else if (s[i] == '.' && (ft_isdigit(s[i - 1]) != 1
+				|| ft_isdigit(s[i + 1]) != 1))
 			exit_error("ERROR\nCARACTER '.' EN POSICION ERRONEA", 1);
 		else if (s[i] == '.')
 			c = i + 4;

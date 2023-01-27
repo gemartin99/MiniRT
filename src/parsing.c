@@ -17,18 +17,18 @@ void	check_id(char *s, char **res, t_mrt *mrt)
 {
 	if (ft_strncmp(s, "A", 2) == 0)
 		init_al(mrt, res);
-	if (ft_strncmp(s, "C", 2) == 0)
+	else if (ft_strncmp(s, "C", 2) == 0)
 		init_cam(&(mrt->cam), res);
-	if (ft_strncmp(s, "L", 2) == 0)
+	else if (ft_strncmp(s, "L", 2) == 0)
 		init_lp(&(mrt->lp), res);
-	if (ft_strncmp(s, "pd", 3) == 0)
-		init_newobj(&(mrt->obj), res, PD);
-	if (ft_strncmp(s, "sp", 3) == 0)
+	else if (ft_strncmp(s, "sp", 3) == 0)
 		init_newobj(&(mrt->obj), res, SP);
-	if (ft_strncmp(s, "pl", 3) == 0)
+	else if (ft_strncmp(s, "pl", 3) == 0)
 		init_newobj(&(mrt->obj), res, PL);
-	if (ft_strncmp(s, "cy", 3) == 0)
+	else if (ft_strncmp(s, "cy", 3) == 0)
 		init_newobj(&(mrt->obj), res, CY);
+	else
+		exit_error("ERROR\nID INCORRECTO", 1);
 }
 
 void	check_valid_arg(char *s, t_mrt *mrt)

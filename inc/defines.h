@@ -135,15 +135,6 @@ typedef struct s_cy
 	float	hgt;
 }								t_cy;
 
-typedef struct s_pd
-{
-	t_point	*point;
-	t_rgb		*rgb;
-	t_point	*vector;	
-	float	scalar;
-	float	hgt;
-}								t_pd;
-
 typedef struct s_mlx
 {
 	void	*mlx;
@@ -166,6 +157,5 @@ typedef struct s_mrt
 # define SP 0
 # define PL 1
 # define CY 2
-# define PD 3
 
 #endif

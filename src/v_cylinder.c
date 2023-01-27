@@ -18,7 +18,7 @@ t_vector	*cy_normal(t_cy *cylinder, t_point inter)
 	t_vector	*normal;
 	t_vector	temp;
 	t_vector	temp2;
-	float			dn;
+	float		dn;
 
 	temp = v_minus(&inter, cylinder->point);
 	dn = v_dot(*cylinder->vector, temp);
@@ -31,11 +31,13 @@ t_vector	*cy_normal(t_cy *cylinder, t_point inter)
 int	cy_caps(t_cy	*cylinder, t_intersection	*i, float *n)
 {
 	t_intersection	*tempi;
-	int	res;
+	int				res;
+
 	res = 0;
 	tempi = new_cpy(i, sizeof(t_intersection));
 	tempi->t = i->t;
-	tempi->ray = new_cpy(i->ray, sizeof(t_ray) + sizeof(t_vector) + sizeof(t_point));
+	tempi->ray = new_cpy(i->ray, sizeof(t_ray)
+			+ sizeof(t_vector) + sizeof(t_point));
 	res += cylinder->bottomcap->intx(tempi, cylinder->bottomcap);
 	res += cylinder->topcap->intx(tempi, cylinder->topcap);
 	if (tempi->t > n[0] && tempi->t > n[1])
@@ -53,11 +55,11 @@ int	cy_caps(t_cy	*cylinder, t_intersection	*i, float *n)
 
 int	cy_inter(t_intersection *i, t_obj	*o)
 {
-	float	n[4];
-	t_cy	*cylinder;
-	float	dotp[2];
+	float		n[4];
+	t_cy		*cylinder;
+	float		dotp[2];
 	t_vector	origin;
-	float	t;
+	float		t;
 
 	t = i->t;
 	cylinder = o->elem;
