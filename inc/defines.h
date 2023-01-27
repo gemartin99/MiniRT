@@ -138,10 +138,10 @@ typedef struct s_cy
 typedef struct s_pd
 {
 	t_point	*point;
-	t_rgb	*rgb;
+	t_rgb		*rgb;
 	t_point	*vector;	
-	float	scalar;
-}								t_pr;
+	float		scalar;
+}								t_pd;
 
 typedef struct s_mlx
 {
