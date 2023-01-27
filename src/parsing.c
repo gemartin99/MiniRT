@@ -56,6 +56,7 @@ void	check_valid_arg(char *s, t_mrt *mrt)
 void	ft_read_file(char *s, t_mrt *mrt)
 {
 	char	*temp;
+	char	*temp2;
 	int		fd;
 
 	fd = open(s, O_RDONLY);
@@ -64,8 +65,10 @@ void	ft_read_file(char *s, t_mrt *mrt)
 	temp = get_next_line(fd);
 	while (temp)
 	{
-		check_valid_arg(temp, mrt);
+		temp2 = ft_strtrim(temp, "\n");
+		check_valid_arg(temp2, mrt);
 		free(temp);
+		free(temp2);
 		temp = get_next_line(fd);
 	}
 	close(fd);
