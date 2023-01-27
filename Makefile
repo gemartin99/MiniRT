@@ -84,7 +84,8 @@ SRC_FILES	=	main.c \
 				v_cylinder.c \
 				colors.c \
 				light.c \
-				shadow.c
+				shadow.c \
+				parsing_pd.c
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ 		=	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))

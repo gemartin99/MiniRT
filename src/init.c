@@ -91,9 +91,9 @@ void	init_newobj(t_obj **obj, char **line, int id)
 	else if (id == PL)
 		temp->elem = (void *)init_pl(line);
 	else if (id == CY)
-	{
 		temp->elem = (void *)init_cy(line);
-	}
+	else if (id == PD)
+		temp->elem = (void *)init_pd(line);
 	if ((*obj))
 		(ft_last(obj))->next = temp;
 	else

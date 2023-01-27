@@ -13,6 +13,21 @@
 #include "../inc/minirt.h"
 #include "../inc/libft/libft.h"
 
+t_pd	*init_pd(char **line)
+{
+	t_pd	*temp;
+	int		i;
+
+	i = -1;
+	while (line[++i])
+		;
+	temp = ft_calloc(sizeof(t_pl), 1);
+	if (!temp)
+		exit_error("Error malloc", 9);
+	parsing_pd(line, i, temp);
+	return (temp);
+}
+
 t_rgb	*init_rgb(int r, int g, int b)
 {
 	t_rgb	*temp;

@@ -140,7 +140,11 @@ typedef struct s_pd
 	t_point	*point;
 	t_rgb		*rgb;
 	t_point	*vector;	
+<<<<<<< HEAD
+	float	scalar;
+=======
 	float		scalar;
+>>>>>>> b9ce4c713ffd9dad7ec3ab2e828594b3e9835202
 }								t_pd;
 
 typedef struct s_mlx
@@ -165,6 +169,6 @@ typedef struct s_mrt
 # define SP 0
 # define PL 1
 # define CY 2
-# define TR 3
+# define PD 3
 
 #endif

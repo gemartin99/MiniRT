@@ -30,12 +30,14 @@ void			parsing_lp(char **argv, int argc, t_lp *lp);
 void			parsing_sp(char **argv, int argc, t_sp *sp);
 void			parsing_pl(char **argv, int argc, t_pl *pl);
 void			parsing_cy(char **argv, int argc, t_cy *cy);
+void			parsing_pd(char **argv, int argc, t_pd *pd);
 
 //INIT
 
 void			init_al(t_mrt *mrt, char **line);
 void			init_cam(t_cam **cam, char **line);
 void			init_lp(t_lp **lp, char **line);
+t_pd			*init_pd(char **line);
 t_img			*new_img(t_mlx	*mlx);
 void			init_newobj(t_obj **obj, char **line, int id);
 void			check_less(char *s);

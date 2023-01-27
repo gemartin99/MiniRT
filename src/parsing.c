@@ -21,6 +21,8 @@ void	check_id(char *s, char **res, t_mrt *mrt)
 		init_cam(&(mrt->cam), res);
 	if (ft_strncmp(s, "L", 2) == 0)
 		init_lp(&(mrt->lp), res);
+	if (ft_strncmp(s, "pd", 3) == 0)
+		init_newobj(&(mrt->obj), res, PD);
 	if (ft_strncmp(s, "sp", 3) == 0)
 		init_newobj(&(mrt->obj), res, SP);
 	if (ft_strncmp(s, "pl", 3) == 0)
