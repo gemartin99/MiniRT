@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../inc/minirt.h"
-#include "../inc/libft/libft.h"
 
 t_vector	*pl_normal(t_vector *vector)
 {

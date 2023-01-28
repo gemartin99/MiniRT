@@ -129,7 +129,6 @@ fclean:		clean
 			@echo "\n${BLUE} ◎ $(RED)All objects and executable cleaned successfully${BLUE} ◎$(DEF_COLOR)\n"
 
 re:			fclean all
-			@echo "$(GREEN)Cleaned and rebuilt everything for fdf!$(DEF_COLOR)"
 
 
 .PHONY:		all clean fclean re norm

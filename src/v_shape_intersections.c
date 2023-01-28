@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../inc/minirt.h"
-#include "../inc/libft/libft.h"
 
 int	cuadratic(t_intersection *i, float *n)
 {

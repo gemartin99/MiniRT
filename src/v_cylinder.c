@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../inc/minirt.h"
-#include "../inc/libft/libft.h"
 
 t_vector	*cy_normal(t_cy *cylinder, t_point inter)
 {

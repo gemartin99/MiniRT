@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../inc/minirt.h"
-#include "../inc/libft/libft.h"
 
 int	sp_inter(t_intersection *i, t_obj	*o)
 {
