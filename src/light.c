@@ -30,7 +30,7 @@ static t_rgb	*specular(t_intersection *i, t_lp *lp)
 	free(io);
 	free(normal);
 	if (dp < 0)
-		dp = 0;
+		return (intensity(&color, 0));
 	return (intensity(&color, pow(dp, 100)));
 }
 

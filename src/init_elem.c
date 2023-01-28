@@ -84,6 +84,7 @@ t_cy	*init_cy(char **line)
 	parsing_cy(line, i, temp);
 	temp->topcap = init_cap(temp, 1);
 	temp->bottomcap = init_cap(temp, 0);
+	v_normalize(&temp->vector);
 	return (temp);
 }
 

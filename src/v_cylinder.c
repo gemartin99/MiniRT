@@ -79,7 +79,6 @@ int	cy_inter(t_intersection *i, t_obj	*o)
 
 	t = i->t;
 	cylinder = o->elem;
-	cylinder->vector = v_normalized(cylinder->vector, 1);
 	origin = v_minus(cylinder->point, i->ray->origin);
 	if (precuadratic(n, i, origin, cylinder) == -1)
 		return (0);
@@ -108,7 +107,6 @@ int	cy_doesinter(t_intersection *i, t_obj	*o)
 
 	t = i->t;
 	cylinder = o->elem;
-	cylinder->vector = v_normalized(cylinder->vector, 1);
 	origin = v_minus(cylinder->point, i->ray->origin);
 	if (precuadratic(n, i, origin, cylinder) == -1)
 		return (0);
