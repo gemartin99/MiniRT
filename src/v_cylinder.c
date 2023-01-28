@@ -53,11 +53,27 @@ int	cy_caps(t_cy	*cylinder, t_intersection	*i, float *n)
 	return (res);
 }
 
+int	precuadratic(float n[4], t_intersection *i, t_vector origin, t_cy *cylinder)
+{
+	float		dotp[2];
+
+	dotp[0] = v_dot(*i->ray->direction, *cylinder->vector);
+	dotp[1] = v_dot(*cylinder->vector, origin);
+	n[0] = v_len2(i->ray->direction) - sqr(dotp[0]);
+	n[1] = 2 * (v_dot(*i->ray->direction, origin) - dotp[0] * dotp[1]);
+	n[2] = v_len2(&origin) - sqr(v_dot(origin, *cylinder->vector))
+		- sqr(cylinder->dia / 2);
+	if (cuadratic(i, n) == -1)
+		return (-1);
+	n[3] = v_dot(*i->ray->direction, *cylinder->vector) * i->t
+		+ v_dot(origin, *cylinder->vector);
+	return (0);
+}
+
 int	cy_inter(t_intersection *i, t_obj	*o)
 {
 	float		n[4];
 	t_cy		*cylinder;
-	float		dotp[2];
 	t_vector	origin;
 	float		t;
 
@@ -65,20 +81,18 @@ int	cy_inter(t_intersection *i, t_obj	*o)
 	cylinder = o->elem;
 	cylinder->vector = v_normalized(cylinder->vector, 1);
 	origin = v_minus(cylinder->point, i->ray->origin);
-	dotp[0] = v_dot(*i->ray->direction, *cylinder->vector);
-	dotp[1] = v_dot(*cylinder->vector, origin);
-	n[0] = v_len2(i->ray->direction) - sqr(dotp[0]);
-	n[1] = 2 * (v_dot(*i->ray->direction, origin) - dotp[0] * dotp[1]);
-	n[2] = v_len2(&origin) - sqr(v_dot(origin, *cylinder->vector)) - sqr(cylinder->dia / 2);
-	if (cuadratic(i, n) == -1)
+	if (precuadratic(n, i, origin, cylinder) == -1)
 		return (0);
-	n[3] = v_dot(*i->ray->direction, *cylinder->vector) * n[0] + v_dot(origin, *cylinder->vector);
+	n[3] = v_dot(*i->ray->direction, *cylinder->vector) * n[0]
+		+ v_dot(origin, *cylinder->vector);
 	if (n[3] <= 0 || n[3] >= cylinder->hgt)
 	{
-		n[2] = v_dot(*i->ray->direction, *cylinder->vector) * n[1] + v_dot(origin, *cylinder->vector);
+		n[2] = v_dot(*i->ray->direction, *cylinder->vector) * n[1]
+			+ v_dot(origin, *cylinder->vector);
 		i->t = t;
-		if ((n[2] < 0 && n[3] < 0) || (n[2] > cylinder->hgt && n[3] > cylinder->hgt))
-				return (0);
+		if ((n[2] < 0 && n[3] < 0) || (n[2] > cylinder->hgt
+				&& n[3] > cylinder->hgt))
+			return (0);
 		return (cy_caps(cylinder, i, n));
 	}
 	i->shape = o;
@@ -87,29 +101,26 @@ int	cy_inter(t_intersection *i, t_obj	*o)
 
 int	cy_doesinter(t_intersection *i, t_obj	*o)
 {
-	float	n[4];
-	t_cy	*cylinder;
-	float	dotp[2];
+	float		n[4];
+	t_cy		*cylinder;
 	t_vector	origin;
-	float	t;
+	float		t;
+
 	t = i->t;
 	cylinder = o->elem;
 	cylinder->vector = v_normalized(cylinder->vector, 1);
 	origin = v_minus(cylinder->point, i->ray->origin);
-	dotp[0] = v_dot(*i->ray->direction, *cylinder->vector);
-	dotp[1] = v_dot(*cylinder->vector, origin);
-	n[0] = v_len2(i->ray->direction) - sqr(dotp[0]);
-	n[1] = 2 * (v_dot(*i->ray->direction, origin) - dotp[0] * dotp[1]);
-	n[2] = v_len2(&origin) - sqr(v_dot(origin, *cylinder->vector)) - sqr(cylinder->dia / 2);
-	if (cuadratic(i, n) == -1)
+	if (precuadratic(n, i, origin, cylinder) == -1)
 		return (0);
-	n[3] = v_dot(*i->ray->direction, *cylinder->vector) * i->t + v_dot(origin, *cylinder->vector);
 	if (n[3] <= 0 || n[3] >= cylinder->hgt)
 	{
-		n[2] = v_dot(*i->ray->direction, *cylinder->vector) * n[0] + v_dot(origin, *cylinder->vector);
-		n[3] = v_dot(*i->ray->direction, *cylinder->vector) * n[1] + v_dot(origin, *cylinder->vector);
+		n[2] = v_dot(*i->ray->direction, *cylinder->vector) * n[0]
+			+ v_dot(origin, *cylinder->vector);
+		n[3] = v_dot(*i->ray->direction, *cylinder->vector) * n[1]
+			+ v_dot(origin, *cylinder->vector);
 		i->t = t;
-		if ((n[2] < 0 && n[3] < 0) || (n[2] > cylinder->hgt && n[3] > cylinder->hgt))
+		if ((n[2] < 0 && n[3] < 0) || (n[2] > cylinder->hgt
+				&& n[3] > cylinder->hgt))
 			return (0);
 		return (cy_caps(cylinder, i, n));
 	}
