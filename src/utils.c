@@ -29,7 +29,7 @@ int	check_wrong_char(char *s)
 	{
 		if (s[i] != '-' && s[i] != '.' && s[i] != ','
 			&& s[i] != ' ' && ft_isdigit(s[i]) == 0 && s[i] != '\n')
-			exit_error("CARACTER INCORRECTO", 1);
+			exit_error("ERROR\nCARACTER INCORRECTO", 1);
 	}
 	return (0);
 }

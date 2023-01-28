@@ -23,6 +23,7 @@ static void	check_fia(char *s, t_cy *cy)
 		if (s[i] == '.')
 			exit_error("ERROR\nCARACTER INCORRECTO", 1);
 	i = 0;
+	check_doble_coma(s);
 	n = ft_split(s, ',');
 	if (!n)
 		exit_error("Error malloc", 5);
@@ -63,6 +64,7 @@ static void	check_sa(char *s, t_cy *cy)
 	char	**n;
 	int		i;
 
+	check_doble_coma(s);
 	n = ft_split(s, ',');
 	if (!n)
 		exit_error("Error malloc", 6);
@@ -91,6 +93,7 @@ static void	check_fa(char *s, t_cy *cy)
 	char	**n;
 	int		i;
 
+	check_doble_coma(s);
 	n = ft_split(s, ',');
 	if (!n)
 		exit_error("Error malloc", 6);

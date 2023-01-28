@@ -13,16 +13,33 @@
 #include "../inc/minirt.h"
 #include "../inc/libft/libft.h"
 
-static int	check_sa(char *s, t_mrt *mrt)
+void	check_doble_coma(char *s)
 {
-	char	**n;
-	int		i;
+	int	i;
 
 	i = -1;
+	while (s[++i])
+	{
+		if (s[i] == ',' && !s[i + 1])
+			exit_error("ERROR\nNO SE PUEDEN PONER COMAS SIN NUMEROS DESPUES", 1);
+		if (s[i] == ',' && s[i + 1] == ',')
+			exit_error("ERROR\nNO SE PUEDEN PONER COMAS SEGUIDAS", 1);
+		if (s[i] == ',' && !ft_isdigit(s[i + 1]) && s[i + 1] != '-')
+			exit_error("ERROR\nNO SE PUEDEN PONER COMAS SIN NUMEROS DESPUES", 1);
+		if (s[i] == ',' && !ft_isdigit(s[i - 1]))
+			exit_error("ERROR\nNO SE PUEDEN PONER COMAS SIN NUMEROS ANTES", 1);
+	}
+}
+
+static int	check_sa(char *s, t_mrt *mrt, int i)
+{
+	char	**n;
+
 	while (s[++i])
 		if (s[i] == '.')
 			exit_error("ERROR\nCARACTER INCORRECTO", 1);
 	i = 0;
+	check_doble_coma(s);
 	n = ft_split(s, ',');
 	if (!n)
 		exit_error("Error malloc", 5);
@@ -69,6 +86,6 @@ void	parsing_la(char **argv, int argc, t_mrt *mrt)
 	mrt->al->ratio = ft_atof(argv[1]);
 	if (mrt->al->ratio > 1 || mrt->al->ratio < 0)
 		exit_error("ERROR\nPARAMETRO INCORRECTO AL", 1);
-	if (ft_strlen(argv[2]) > 12 || check_sa(argv[2], mrt) == -1)
+	if (ft_strlen(argv[2]) > 12 || check_sa(argv[2], mrt, -1) == -1)
 		exit_error("ERROR\nARGUMENTO CON DEMASIADOS CARACTERES", 1);
 }

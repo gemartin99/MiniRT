@@ -54,8 +54,7 @@ static void	check_sa(char *s, t_cam *cam)
 	char	**n;
 	int		i;
 
-	if (ft_strlen(s) > 17)
-		exit_error("ERROR\nC CON MAS PARAMETROS DE LOS INDICADOS", 1);
+	check_doble_coma(s);
 	n = ft_split(s, ',');
 	if (!n)
 		exit_error("Error malloc", 6);
@@ -83,6 +82,7 @@ static void	check_fa(char *s, t_cam *cam)
 	char	**n;
 	int		i;
 
+	check_doble_coma(s);
 	n = ft_split(s, ',');
 	if (!n)
 		exit_error("Error malloc", 6);
@@ -105,8 +105,10 @@ static void	check_fa(char *s, t_cam *cam)
 void	parsing_cam(char **argv, int argc, t_cam *cam)
 {
 	if (argc != 4)
-		exit_error("ERROR\nL CON NUMERO DE ARGUMENTOS INCORRECTO", 1);
+		exit_error("ERROR\nC CON NUMERO DE ARGUMENTOS INCORRECTO", 1);
 	check_fa(argv[1], cam);
+	if (ft_strlen(argv[2]) > 17)
+		exit_error("ERROR\nC CON MAS PARAMETROS DE LOS INDICADOS", 1);
 	check_sa(argv[2], cam);
 	check_ta(argv[3], cam);
 }
