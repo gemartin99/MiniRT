@@ -88,5 +88,7 @@ void	check_less(char *s)
 	{
 		if (s[i] == '-' && i != 0)
 			exit_error("ERROR\nCARACTER '-' EN POSICION ERRONEA", 1);
+		if (s[0] == '-' && !s[1])
+			exit_error("ERROR\nNO HAY CARACTERES NUMERICOS", 1);
 	}
 }

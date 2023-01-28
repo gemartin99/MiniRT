@@ -69,6 +69,7 @@ static void	check_fa(char *s, t_lp *lp)
 	{
 		check_less(n[i]);
 		check_point(n[i]);
+		check_max_float(n[i]);
 	}
 	if (i != 3)
 		exit_error("ERROR\nPARAMETROS INCORRECTOS", 1);

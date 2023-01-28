@@ -49,6 +49,7 @@ static void	check_sa(char *s, t_sp *sp)
 	if (ft_strlen(s) == 1 && ft_isdigit(s[0]) != 0)
 		return ;
 	check_point(s);
+	check_max_float(s);
 	while (s[++i])
 	{
 		if (ft_isdigit(s[i]) == 0 && s[i] != '.')
@@ -70,6 +71,7 @@ static void	check_fa(char *s, t_sp *sp)
 	{
 		check_less(n[i]);
 		check_point(n[i]);
+		check_max_float(n[i]);
 	}
 	if (i != 3)
 		exit_error("ERROR\nPARAMETROS INCORRECTOS", 1);

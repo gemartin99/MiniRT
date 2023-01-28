@@ -13,6 +13,22 @@
 #include "../inc/minirt.h"
 #include "../inc/libft/libft.h"
 
+int	check_max_float(char *s)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	if (s[0] == '-')
+		j++;
+	while (s[i + j] && s[i + j] != '.')
+		i++;
+	if (i > 10)
+		exit_error("ERROR\nMAXIMO 10 DIGITOS EN LOS FLOATS", 1);
+	return (0);
+}
+
 static void	check_ta(char *s, t_cam *cam)
 {
 	int		i;
@@ -75,6 +91,7 @@ static void	check_fa(char *s, t_cam *cam)
 	{
 		check_less(n[i]);
 		check_point(n[i]);
+		check_max_float(n[i]);
 	}
 	if (i != 3)
 		exit_error("ERROR\nPARAMETROS INCORRECTOS", 1);

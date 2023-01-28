@@ -32,7 +32,8 @@ int	is_shadow(t_intersection *i, t_lp *lp, t_obj *o)
 {
 	t_vector		v;
 	t_ray			*lray;
-	t_vector	a;
+	t_vector		a;
+
 	lray = new_calloc(sizeof(t_ray), 1, 101);
 	lray->origin = new_calloc(sizeof(t_point), 1, 102);
 	*lray->origin = i_position(*i);

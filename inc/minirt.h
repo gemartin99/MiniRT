@@ -90,6 +90,7 @@ int				is_shadow(t_intersection *i, t_lp *lp, t_obj *o);
 
 //UTILS
 
+int				check_max_float(char *s);
 int				check_wrong_char(char *s);
 int				ft_isspace(char *s);
 void			exit_error(char *str, int n);
