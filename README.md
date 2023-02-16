@@ -39,3 +39,27 @@ Consiste en la implementación de un motor de renderizado en C que puede mostrar
 <img width="1919" alt="Screen Shot 2023-02-16 at 3 58 07 PM" src="https://user-images.githubusercontent.com/66915274/219420768-64a984a7-19a6-4c4e-9149-867966d8a905.png">
 
 <img width="1921" alt="Screen Shot 2023-02-16 at 3 57 05 PM" src="https://user-images.githubusercontent.com/66915274/219420779-e6413a13-2d50-487b-a0ca-3005dd5e5558.png">
+
+## Partner 👨🏻‍💻
+
+Este proyecto ha sido realizado en colaboración con [sebamiro](https://github.com/sebamiro)
+
+Su perfil en la intranet de 42 ↙️
+
+[AQUÍ](https://profile.intra.42.fr/users/smiro)
+
+
+# Quizás pueda interesarte!
+
+### - Para ver mi progresion en el common core 42 ↙️
+
+[AQUÍ](https://github.com/gemartin99/42cursus)
+
+### - Mi perfil en la intranet de 42 ↙️
+[AQUÍ](https://profile.intra.42.fr/users/gemartin)
+
+### - Contacto 📥
+
+◦ Email: gemartin@student.42barcelona.com
+
+◦ Linkedin: https://www.linkedin.com/in/gemartin99/
